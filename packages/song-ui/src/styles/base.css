@@ -1327,11 +1327,9 @@ pre {
 }
 
 .ses-rating-svg {
+  display: block;
   width: 22px;
   height: 22px;
-  fill: currentColor;
-  stroke: var(--ses-border-gold);
-  stroke-width: 1.1;
 }
 
 .ses-rating--sm .ses-rating-svg {

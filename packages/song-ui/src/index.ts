@@ -39,4 +39,4 @@ export { default as SesDianchaLoader, type SesDianchaLoaderProps } from './compo
 export { default as SesBreadcrumbs, type SesBreadcrumbsProps, type SesBreadcrumbItem } from './components/SesBreadcrumbs.vue';
 export { default as SesUpload, type SesUploadProps } from './components/SesUpload.vue';
 export { default as SesAvatarGroup, type SesAvatarGroupProps, type SesAvatarItem } from './components/SesAvatarGroup.vue';
-export { default as SesRating, type SesRatingProps } from './components/SesRating.vue';
+export { default as SesRating, type SesRatingProps, type SesRatingSymbol } from './components/SesRating.vue';

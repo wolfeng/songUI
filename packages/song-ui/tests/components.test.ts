@@ -404,9 +404,15 @@ describe('@wolfeng/song-ui-vue', () => {
       props: { modelValue: 2 }
     });
     expect(rating.text()).toContain('中品');
+    expect(rating.find('svg').attributes('data-symbol')).toBe('plum');
     const stars = rating.findAll('button[role="radio"]');
     await stars[4].trigger('click');
     expect(rating.emitted('update:modelValue')?.[0]).toEqual([5]);
+
+    const lotusRating = mount(SesRating, {
+      props: { modelValue: 4, symbol: 'lotus' }
+    });
+    expect(lotusRating.find('svg').attributes('data-symbol')).toBe('lotus');
   });
 
   it('supports bilingual locale switching via createSongUI and useLocale', async () => {

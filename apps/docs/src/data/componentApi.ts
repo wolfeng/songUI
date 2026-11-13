@@ -548,7 +548,8 @@ toast.show('已钤盖「双龙小玺」御印');
         { name: 'readonly', type: `boolean`, defaultVal: `false`, desc: '只读展示态', descEn: 'Read-only display mode' },
         { name: 'showLabel', type: `boolean`, defaultVal: `true`, desc: '是否显示右侧品级锦缎签', descEn: 'Shows tier label badge beside stars' },
         { name: 'labels', type: `string[]`, defaultVal: `['凡品','中品','佳品','妙品','神品']`, desc: '各星级对应的品鉴评语', descEn: 'Custom tier labels per star level' },
-        { name: 'size', type: `'sm' | 'md' | 'lg'`, defaultVal: `'md'`, desc: '星标尺寸', descEn: 'Star icon size' }
+        { name: 'size', type: `'sm' | 'md' | 'lg'`, defaultVal: `'md'`, desc: '星标尺寸', descEn: 'Symbol icon size' },
+        { name: 'symbol', type: `'plum' | 'lotus' | 'coin' | 'jade'`, defaultVal: `'plum'`, desc: '北宋器物纹样（寒梅/莲瓣/通宝/玉璧）', descEn: 'Northern Song motif (plum / lotus / coin / jade)' }
       ],
       events: [
         { name: 'update:modelValue', payload: `(value: number)`, desc: '星等变化时更新', descEn: 'Emitted when rating changes' },

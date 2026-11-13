@@ -870,10 +870,19 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
                   size="lg"
                   @change="(val) => toast.show(isEn ? `Rated Tier ${val}` : `已品定为第 ${val} 等`)"
                 />
+                <span class="ses-text-caption">{{ isEn ? 'Plum Blossom (default)' : '五瓣寒梅（默认 plum）' }}</span>
               </div>
               <div class="docs-demo-row">
-                <SesRating :model-value="5" size="md" readonly />
-                <span class="ses-text-caption">{{ isEn ? 'Readonly' : '只读御览（readonly）' }}</span>
+                <SesRating :model-value="4" symbol="lotus" size="md" readonly />
+                <span class="ses-text-caption">{{ isEn ? 'Lotus (symbol="lotus")' : '仰覆莲瓣（symbol="lotus"）' }}</span>
+              </div>
+              <div class="docs-demo-row">
+                <SesRating :model-value="4" symbol="coin" size="md" readonly />
+                <span class="ses-text-caption">{{ isEn ? 'Song Coin (symbol="coin")' : '瘦金通宝（symbol="coin"）' }}</span>
+              </div>
+              <div class="docs-demo-row">
+                <SesRating :model-value="5" symbol="jade" size="md" readonly />
+                <span class="ses-text-caption">{{ isEn ? 'Jade Bi-Disc (symbol="jade")' : '如意玉璧（symbol="jade"）' }}</span>
               </div>
               <div class="docs-demo-row">
                 <SesRating :model-value="3" size="sm" :show-label="false" readonly />

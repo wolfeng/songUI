@@ -3,6 +3,8 @@ import { ref, computed } from 'vue';
 import { useSound } from '../composables/useSound.js';
 import { useLocale } from '../composables/useLocale.js';
 
+export type SesRatingSymbol = 'plum' | 'lotus' | 'coin' | 'jade';
+
 export interface SesRatingProps {
   modelValue: number;
   max?: number;
@@ -10,6 +12,7 @@ export interface SesRatingProps {
   showLabel?: boolean;
   labels?: string[];
   size?: 'sm' | 'md' | 'lg';
+  symbol?: SesRatingSymbol;
 }
 
 const props = withDefaults(defineProps<SesRatingProps>(), {
@@ -17,7 +20,8 @@ const props = withDefaults(defineProps<SesRatingProps>(), {
   readonly: false,
   showLabel: true,
   labels: undefined,
-  size: 'md'
+  size: 'md',
+  symbol: 'plum'
 });
 
 const emit = defineEmits<{
@@ -87,10 +91,120 @@ function onKeydown(e: KeyboardEvent) {
         @mouseenter="!readonly && (hoverVal = n)"
         @click="selectRating(n)"
       >
-        <svg viewBox="0 0 24 24" class="ses-rating-svg" aria-hidden="true">
-          <path
-            d="M12 2.4L14.85 8.55L21.5 9.35L16.55 13.95L17.9 20.55L12 17.25L6.1 20.55L7.45 13.95L2.5 9.35L9.15 8.55L12 2.4Z"
-          />
+        <svg viewBox="0 0 24 24" class="ses-rating-svg" :data-symbol="symbol" aria-hidden="true">
+          <!-- 1. 五瓣寒梅 (plum, default) -->
+          <template v-if="symbol === 'plum'">
+            <g
+              :fill="n <= displayValue ? 'var(--ses-gold)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.35"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="6.6" r="3.4" />
+              <circle cx="17.1" cy="10.3" r="3.4" />
+              <circle cx="15.2" cy="16.3" r="3.4" />
+              <circle cx="8.8" cy="16.3" r="3.4" />
+              <circle cx="6.9" cy="10.3" r="3.4" />
+            </g>
+            <circle
+              cx="12"
+              cy="12.2"
+              r="2.2"
+              :fill="n <= displayValue ? 'var(--ses-cinnabar)' : 'var(--ses-bg-canvas)'"
+              :stroke="n <= displayValue ? 'var(--ses-bg-canvas)' : 'var(--ses-ink-light)'"
+              stroke-width="1"
+            />
+          </template>
+
+          <!-- 2. 仰覆莲瓣 (lotus) -->
+          <template v-else-if="symbol === 'lotus'">
+            <path
+              d="M12 3.2C9.6 7.4 9.2 12.2 12 18.8C14.8 12.2 14.4 7.4 12 3.2Z"
+              :fill="n <= displayValue ? 'var(--ses-gold)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.4"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 18.8C8.2 17.8 5.2 14.6 4.4 9.8C7.4 10.6 9.8 12.8 12 18.8Z"
+              :fill="n <= displayValue ? 'var(--ses-celadon)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.35"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 18.8C15.8 17.8 18.8 14.6 19.6 9.8C16.6 10.6 14.2 12.8 12 18.8Z"
+              :fill="n <= displayValue ? 'var(--ses-celadon)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.35"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7.5 19.8H16.5"
+              fill="none"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.4"
+              stroke-linecap="round"
+            />
+          </template>
+
+          <!-- 4. 瘦金通宝 (coin) -->
+          <template v-else-if="symbol === 'coin'">
+            <circle
+              cx="12"
+              cy="12"
+              r="8.6"
+              :fill="n <= displayValue ? 'var(--ses-gold)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.5"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              r="6.4"
+              fill="none"
+              :stroke="n <= displayValue ? 'var(--ses-bg-canvas)' : 'var(--ses-ink-light)'"
+              stroke-width="0.9"
+              stroke-opacity="0.7"
+            />
+            <rect
+              x="9.3"
+              y="9.3"
+              width="5.4"
+              height="5.4"
+              :fill="n <= displayValue ? 'var(--ses-bg-canvas)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-bg-canvas)' : 'var(--ses-ink-light)'"
+              stroke-width="1.3"
+            />
+          </template>
+
+          <!-- 5. 如意玉璧 (jade) -->
+          <template v-else>
+            <circle
+              cx="12"
+              cy="12"
+              r="8.5"
+              :fill="n <= displayValue ? 'var(--ses-celadon)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.5"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              r="3.1"
+              :fill="n <= displayValue ? 'var(--ses-bg-canvas)' : 'none'"
+              :stroke="n <= displayValue ? 'var(--ses-gold)' : 'var(--ses-ink-light)'"
+              stroke-width="1.35"
+            />
+            <path
+              d="M12 5.4A6.6 6.6 0 0 1 18.6 12M12 18.6A6.6 6.6 0 0 1 5.4 12"
+              fill="none"
+              :stroke="n <= displayValue ? 'var(--ses-bg-canvas)' : 'var(--ses-ink-light)'"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-opacity="0.75"
+            />
+          </template>
         </svg>
       </button>
     </div>
