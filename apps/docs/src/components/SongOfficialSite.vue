@@ -334,11 +334,11 @@ function replayLoading() {
                   汴京门户
                 </span>
               </div>
-              <div class="ses-text-caption" style="margin-top: 2px">建隆至宣和 · 兴文教、通百货、重格物</div>
+              <div class="ses-text-caption song-site-brand-sub" style="margin-top: 2px">建隆至宣和 · 兴文教、通百货、重格物</div>
             </div>
           </div>
 
-          <div class="ses-flex ses-items-center ses-gap-2 ses-flex-wrap">
+          <div class="ses-flex ses-items-center ses-gap-2 song-site-actions">
             <SesButton size="sm" variant="outline" :sound-freq="659.25" @click="replayLoading">
               ↻ 刷新加载
             </SesButton>
@@ -923,23 +923,56 @@ function replayLoading() {
 }
 
 @media (max-width: 720px) {
+  .song-site-header {
+    position: static;
+  }
   .song-site-header-inner {
-    padding: var(--ses-space-3) var(--ses-space-4) 0;
+    padding: var(--ses-space-2) var(--ses-space-3) 0;
+    gap: var(--ses-space-2);
   }
   .song-site-top-row {
     gap: var(--ses-space-2);
   }
+  .song-site-brand-sub,
   .song-site-sep,
   .song-site-motto {
     display: none;
   }
+  .song-site-actions {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .song-site-actions > * {
+    flex-shrink: 0;
+  }
+  .song-site-nav-row {
+    gap: 0;
+  }
   .song-site-nav-row :deep(.ses-tabs) {
+    width: 100%;
     max-width: 100%;
+    flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
+  .song-site-nav-row :deep(.ses-tab) {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.82rem;
+  }
   .song-site-main {
-    padding: var(--ses-space-5) var(--ses-space-4) var(--ses-space-10);
+    padding: var(--ses-space-4) var(--ses-space-3) var(--ses-space-10);
+  }
+  .song-site-main :deep(.ses-card.ses-pa-8) {
+    padding: var(--ses-space-4) !important;
+  }
+  .song-site-main :deep(.ses-text-display) {
+    font-size: 1.55rem;
+    line-height: 1.38;
   }
   .song-site-grid-2 {
     gap: var(--ses-space-4);
