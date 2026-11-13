@@ -44,6 +44,7 @@ const sound = useSound();
 const toast = useToast();
 
 const activePage = ref<PageId>('home');
+const shellRef = ref<HTMLElement | null>(null);
 const siteLoading = ref(true);
 const loadPct = ref(8);
 const isMobile = ref(typeof window !== 'undefined' ? window.innerWidth <= 720 : false);
@@ -319,6 +320,7 @@ function goPage(id: PageId) {
 watch(
   activePage,
   () => {
+    shellRef.value?.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -333,7 +335,7 @@ function replayLoading() {
 </script>
 
 <template>
-  <div class="song-site-shell">
+  <div ref="shellRef" class="song-site-shell">
     <div class="ses-paper-grain" aria-hidden="true" />
 
     <!-- 开屏 / 刷新 建盏点茶加载过渡 -->
