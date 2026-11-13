@@ -948,9 +948,6 @@ function replayLoading() {
 }
 
 @media (max-width: 720px) {
-  .song-site-header {
-    position: static;
-  }
   .song-site-header-inner {
     padding: var(--ses-space-2) var(--ses-space-3) 0;
     gap: var(--ses-space-2);
