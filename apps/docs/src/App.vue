@@ -1596,8 +1596,8 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
     justify-content: flex-start;
   }
   .docs-layout {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto;
+    display: flex;
+    flex-direction: column;
     overflow: visible;
     padding: var(--ses-space-2) var(--ses-space-4) 2rem;
     gap: var(--ses-space-3);
