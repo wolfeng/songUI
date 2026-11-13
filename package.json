@@ -1,0 +1,23 @@
+{
+  "name": "song-ui-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build:tokens": "npm run build --workspace=@song-ui/tokens",
+    "build:core": "npm run build --workspace=@song-ui/core",
+    "build:ui": "npm run build --workspace=@song-ui/vue",
+    "build": "npm run build:tokens && npm run build:core && npm run build:ui",
+    "test": "npm run test --workspaces --if-present",
+    "dev:docs": "npm run dev --workspace=@song-ui/docs",
+    "build:docs": "npm run build --workspace=@song-ui/docs"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

@@ -1,0 +1,4 @@
+module SongUI {
+header "SongUI-Swift.h"
+export *
+}

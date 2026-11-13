@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Song Elegance UI (@song-ui/vue) — 宋韵样式库 (Typography, Spacing & Layout)
+   ========================================================================== */
+
+/* 1. 排版文字层级 (Typography Hierarchy) */
+.ses-text-display {
+  font-family: var(--ses-font-serif);
+  font-size: var(--ses-text-display);
+  line-height: var(--ses-leading-tight);
+  letter-spacing: var(--ses-tracking-wide);
+  color: var(--ses-ink);
+  font-weight: 400;
+}
+
+.ses-text-h1 {
+  font-family: var(--ses-font-serif);
+  font-size: var(--ses-text-h1);
+  line-height: var(--ses-leading-tight);
+  letter-spacing: var(--ses-tracking-wide);
+  color: var(--ses-ink);
+  font-weight: 500;
+}
+
+.ses-text-h2 {
+  font-family: var(--ses-font-serif);
+  font-size: var(--ses-text-h2);
+  line-height: var(--ses-leading-tight);
+  letter-spacing: var(--ses-tracking-normal);
+  color: var(--ses-ink);
+  font-weight: 500;
+}
+
+.ses-text-h3 {
+  font-family: var(--ses-font-serif);
+  font-size: var(--ses-text-h3);
+  line-height: var(--ses-leading-normal);
+  letter-spacing: var(--ses-tracking-normal);
+  color: var(--ses-ink);
+  font-weight: 500;
+}
+
+.ses-text-body {
+  font-family: var(--ses-font-serif);
+  font-size: var(--ses-text-body);
+  line-height: var(--ses-leading-normal);
+  letter-spacing: var(--ses-tracking-tight);
+  color: var(--ses-ink);
+}
+
+.ses-text-caption {
+  font-family: var(--ses-font-serif);
+  font-size: var(--ses-text-caption);
+  line-height: var(--ses-leading-normal);
+  letter-spacing: var(--ses-tracking-wide);
+  color: var(--ses-ink-muted);
+}
+
+.ses-text-mono {
+  font-family: var(--ses-font-mono);
+  font-size: var(--ses-text-mono);
+  line-height: var(--ses-leading-normal);
+  color: var(--ses-ink-muted);
+}
+
+/* 2. 内外边距与间距工具类 (Spacing Utilities) */
+.ses-pa-0 { padding: var(--ses-space-0); }
+.ses-pa-1 { padding: var(--ses-space-1); }
+.ses-pa-2 { padding: var(--ses-space-2); }
+.ses-pa-3 { padding: var(--ses-space-3); }
+.ses-pa-4 { padding: var(--ses-space-4); }
+.ses-pa-5 { padding: var(--ses-space-5); }
+.ses-pa-6 { padding: var(--ses-space-6); }
+.ses-pa-8 { padding: var(--ses-space-8); }
+.ses-pa-10 { padding: var(--ses-space-10); }
+.ses-pa-12 { padding: var(--ses-space-12); }
+
+.ses-px-0 { padding-left: var(--ses-space-0); padding-right: var(--ses-space-0); }
+.ses-px-1 { padding-left: var(--ses-space-1); padding-right: var(--ses-space-1); }
+.ses-px-2 { padding-left: var(--ses-space-2); padding-right: var(--ses-space-2); }
+.ses-px-3 { padding-left: var(--ses-space-3); padding-right: var(--ses-space-3); }
+.ses-px-4 { padding-left: var(--ses-space-4); padding-right: var(--ses-space-4); }
+.ses-px-5 { padding-left: var(--ses-space-5); padding-right: var(--ses-space-5); }
+.ses-px-6 { padding-left: var(--ses-space-6); padding-right: var(--ses-space-6); }
+.ses-px-8 { padding-left: var(--ses-space-8); padding-right: var(--ses-space-8); }
+
+.ses-py-0 { padding-top: var(--ses-space-0); padding-bottom: var(--ses-space-0); }
+.ses-py-1 { padding-top: var(--ses-space-1); padding-bottom: var(--ses-space-1); }
+.ses-py-2 { padding-top: var(--ses-space-2); padding-bottom: var(--ses-space-2); }
+.ses-py-3 { padding-top: var(--ses-space-3); padding-bottom: var(--ses-space-3); }
+.ses-py-4 { padding-top: var(--ses-space-4); padding-bottom: var(--ses-space-4); }
+.ses-py-5 { padding-top: var(--ses-space-5); padding-bottom: var(--ses-space-5); }
+.ses-py-6 { padding-top: var(--ses-space-6); padding-bottom: var(--ses-space-6); }
+.ses-py-8 { padding-top: var(--ses-space-8); padding-bottom: var(--ses-space-8); }
+
+.ses-ma-0 { margin: var(--ses-space-0); }
+.ses-ma-1 { margin: var(--ses-space-1); }
+.ses-ma-2 { margin: var(--ses-space-2); }
+.ses-ma-3 { margin: var(--ses-space-3); }
+.ses-ma-4 { margin: var(--ses-space-4); }
+.ses-ma-6 { margin: var(--ses-space-6); }
+.ses-ma-8 { margin: var(--ses-space-8); }
+
+.ses-mt-0 { margin-top: var(--ses-space-0); }
+.ses-mt-1 { margin-top: var(--ses-space-1); }
+.ses-mt-2 { margin-top: var(--ses-space-2); }
+.ses-mt-3 { margin-top: var(--ses-space-3); }
+.ses-mt-4 { margin-top: var(--ses-space-4); }
+.ses-mt-5 { margin-top: var(--ses-space-5); }
+.ses-mt-6 { margin-top: var(--ses-space-6); }
+.ses-mt-8 { margin-top: var(--ses-space-8); }
+
+.ses-mb-0 { margin-bottom: var(--ses-space-0); }
+.ses-mb-1 { margin-bottom: var(--ses-space-1); }
+.ses-mb-2 { margin-bottom: var(--ses-space-2); }
+.ses-mb-3 { margin-bottom: var(--ses-space-3); }
+.ses-mb-4 { margin-bottom: var(--ses-space-4); }
+.ses-mb-5 { margin-bottom: var(--ses-space-5); }
+.ses-mb-6 { margin-bottom: var(--ses-space-6); }
+.ses-mb-8 { margin-bottom: var(--ses-space-8); }
+
+.ses-gap-0 { gap: var(--ses-space-0); }
+.ses-gap-1 { gap: var(--ses-space-1); }
+.ses-gap-2 { gap: var(--ses-space-2); }
+.ses-gap-3 { gap: var(--ses-space-3); }
+.ses-gap-4 { gap: var(--ses-space-4); }
+.ses-gap-5 { gap: var(--ses-space-5); }
+.ses-gap-6 { gap: var(--ses-space-6); }
+.ses-gap-8 { gap: var(--ses-space-8); }
+.ses-gap-10 { gap: var(--ses-space-10); }
+.ses-gap-12 { gap: var(--ses-space-12); }
+
+/* 3. 布局、圆角与分隔线 (Layout, Radius & Divider Helpers) */
+.ses-flex { display: flex; }
+.ses-flex-col { display: flex; flex-direction: column; }
+.ses-flex-wrap { flex-wrap: wrap; }
+.ses-items-center { align-items: center; }
+.ses-justify-between { justify-content: space-between; }
+
+.ses-rounded-none { border-radius: var(--ses-radius-none); }
+.ses-rounded-xs { border-radius: var(--ses-radius-xs); }
+.ses-rounded-sm { border-radius: var(--ses-radius-sm); }
+.ses-rounded-md { border-radius: var(--ses-radius-md); }
+.ses-rounded-lg { border-radius: var(--ses-radius-lg); }
+.ses-rounded-pill { border-radius: var(--ses-radius-pill); }
+
+.ses-divider {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ses-gold-dim), transparent);
+  margin: var(--ses-space-6) 0;
+}

@@ -1,0 +1,7 @@
+Target dependency graph (3 targets)
+Target 'AllExcludingTests' in project 'Aggregate'
+➜ Explicit dependency on target 'SongUI-product' in project 'SongUI'
+➜ Explicit dependency on target 'SongUI' in project 'SongUI'
+Target 'SongUI-product' in project 'SongUI'
+➜ Explicit dependency on target 'SongUI' in project 'SongUI'
+Target 'SongUI' in project 'SongUI' (no dependencies)

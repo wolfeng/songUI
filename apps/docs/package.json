@@ -1,0 +1,21 @@
+{
+  "name": "@song-ui/docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@song-ui/core": "0.1.0",
+    "@song-ui/tokens": "0.1.0",
+    "@song-ui/vue": "0.1.0",
+    "vue": "^3.5.12"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.4",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  }
+}

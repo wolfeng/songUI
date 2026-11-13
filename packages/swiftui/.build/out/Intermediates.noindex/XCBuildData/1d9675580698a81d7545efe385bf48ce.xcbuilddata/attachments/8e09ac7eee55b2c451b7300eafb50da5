@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests-primary.dia",
+    "emit-module-dependencies" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests-primary-emit-module.dia",
+    "pch" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests-primary.swiftdeps"
+  },
+  "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/DerivedSources/test_entry_point.swift" : {
+    "const-values" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point.swiftconstvalues",
+    "dependencies" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point.d",
+    "diagnostics" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point.dia",
+    "index-unit-output-path" : "/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point.o",
+    "llvm-bc" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point.bc",
+    "object" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point.o",
+    "swift-dependencies" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point.swiftdeps",
+    "swiftmodule" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/test_entry_point~partial.swiftmodule"
+  },
+  "/Users/woolf/antigravityProjects/songUI/packages/swiftui/Tests/SongUITests/SongUITests.swift" : {
+    "const-values" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests.swiftconstvalues",
+    "dependencies" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests.d",
+    "diagnostics" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests.dia",
+    "index-unit-output-path" : "/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests.o",
+    "llvm-bc" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests.bc",
+    "object" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests.o",
+    "swift-dependencies" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests.swiftdeps",
+    "swiftmodule" : "/Users/woolf/antigravityProjects/songUI/packages/swiftui/.build/out/Intermediates.noindex/SongUI.build/Debug/SongUITests-p.build/Objects-normal/arm64/SongUITests~partial.swiftmodule"
+  }
+}

@@ -1,0 +1,679 @@
+[
+  {
+    "isFramework" : true,
+    "moduleName" : "Accessibility",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Accessibility-AYMCP0DIRFV.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "AppKit",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/AppKit-5BUH4OU2PMKO.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "ColorSync",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ColorSync-9B32V3BXXDD3.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "Combine",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Combine-3FNFXAPGP9GS5.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "CoreAudio",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreAudio-3M0RKS7L4W6SF.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "CoreData",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreData-2YY55F9ATIVHX.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "CoreFoundation",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreFoundation-2ATHZBR5LV8JN.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "CoreGraphics",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreGraphics-NUXTB8RV05ZM.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "CoreImage",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreImage-1BW5LY9TKT3NQ.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "CoreMedia",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreMedia-3UW02E65YZTOI.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "CoreText",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreText-1B2YPTWQSOOZY.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "CoreTransferable",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreTransferable-1EYJXKPBOLKN9.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "CoreVideo",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreVideo-20Z4OIJNE41XC.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "Darwin",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Darwin-1AG8XPPLUB83P.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "DataDetection",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/DataDetection-1HVU21RS5GQOP.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "DeveloperToolsSupport",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/DeveloperToolsSupport-3OKUT33Y3WMSK.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "Dispatch",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Dispatch-28OB7YGNRL2QW.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "Foundation",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Foundation-1XRD2YA1N5N9.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "IOKit",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/IOKit-3LA1JAXRKAZZW.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "ImageIO",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ImageIO-1MSPFWOSKDLI0.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "Metal",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Metal-3N1LRJTC0IC0R.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "OSLog",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/OSLog-20PRXIQ3XLJOI.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "ObjectiveC",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ObjectiveC-3V64JK66RR4EK.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "Observation",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Observation-4VO8Z2XL9CV.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "QuartzCore",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/QuartzCore-1F8JXGOVO9Y81.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "Spatial",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Spatial-3DUPOSIJ0PCKH.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "Swift",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Swift-1FW6RM1XMLJZY.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "SwiftOnoneSupport",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftOnoneSupport-1JUEL20L06IQJ.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "SwiftUI",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUI-1DCF5096OWQZH.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "SwiftUICore",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUICore-115TDB82B5OCZ.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "Symbols",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Symbols-1GETK7DMHI696.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "Synchronization",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Synchronization-UM3NQW9DUW7F.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "System",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/System-39PWGE8Z8XCA9.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "UniformTypeIdentifiers",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/UniformTypeIdentifiers-1QS9O0L2RIB5F.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "XPC",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/XPC-2NQ6BA7T4X3D6.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "_Builtin_float",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_float-3ACRLF0SUU79I.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "_Concurrency",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Concurrency-291MTF3AHC161.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "_DarwinFoundation1",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation1-1HX4XY2XWICWQ.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "_DarwinFoundation2",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation2-1WGA5W93YDWMJ.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "_DarwinFoundation3",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation3-3HO8PI7FDW613.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "_StringProcessing",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_StringProcessing-30Q6XT1B6WPTC.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "os",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/os-2LTB7XZWOY84G.swiftmodule"
+  },
+  {
+    "isFramework" : false,
+    "moduleName" : "simd",
+    "modulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/simd-25SMC3VJ6F485.swiftmodule"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/Accessibility.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Accessibility-DXG3LZKDTTMPWXD6KJTCT8JBK.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Accessibility"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/AppKit.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/AppKit-60W6HXWEO6IZA36JFDLRI4619.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "AppKit"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/ApplicationServices.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ApplicationServices-23OSB3KX2B45B5S4LY6KJ80JP.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "ApplicationServices"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CFNetwork.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CFNetwork-473V1KZ58M3HY8JFB90QUDFAP.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CFNetwork"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/cups.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CUPS-OHD2ZFJ9PDL6U5083Z9ZXRWN.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CUPS"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/ColorSync.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ColorSync-9K07Z4YRIBYDZESADXYM5RZ2I.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "ColorSync"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreAudio.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreAudio-15PB8ZAD3LKZJFXCP0AIS73OA.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreAudio"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreAudioTypes.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreAudioTypes-E7TVAX1TM33BLPTQ3HSP1JST7.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreAudioTypes"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreData.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreData-3YOLPXSCD90VDV2T7263Q6XLI.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreData"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreFoundation.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreFoundation-9XD0I4ICVTXBYPWLTPFCGESLH.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreFoundation"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreGraphics.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreGraphics-5MJNW2ZWLBP3W6X5XYTJL5L33.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreGraphics"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreImage.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreImage-4MCMMC9OUV4C3EBTGZ53RSDQZ.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreImage"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreMedia.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreMedia-3607LNRRG6FXW6EW8TEG4TH6X.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreMedia"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreServices.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreServices-22SGTTBQGDFAP75IUQDZVYYMP.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreServices"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreText.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreText-97C9AIDT5ERP947YUH2ZQZBDM.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreText"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreTransferable.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreTransferable-AG34U2Q59MI7VOGOUO778MB2.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreTransferable"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/CoreVideo.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/CoreVideo-8O8NVNGVRW5342HRD9ENM5IWB.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "CoreVideo"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/Darwin.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Darwin-6VR84U6A1A6CFS2BTUCJE2STI.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Darwin"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/DataDetection.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/DataDetection-BGGRH1JQN3J62S87IOHU9HG0C.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "DataDetection"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/DeveloperToolsSupport.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/DeveloperToolsSupport-1MCVL3FJPIPIJJCWYK0APQ9D3.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "DeveloperToolsSupport"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/DiskArbitration.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/DiskArbitration-3OILCK96KMIGVMU1ZCFNRJ8LM.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "DiskArbitration"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/dispatch.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Dispatch-H5DWKK4RI4QZJ447I0IC8Q8S.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Dispatch"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/Foundation.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Foundation-CJ4UBLDXA1XKQUVQ0UTPCQMFU.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Foundation"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/IOKit.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/IOKit-4CZRGHHAW2F9T17LW26GM97YW.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "IOKit"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/IOSurface.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/IOSurface-55NVW7CJ9J30BMGRDEW25HFEJ.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "IOSurface"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/ImageIO.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ImageIO-9Z9AVBLZKUONKLDFIYO8HOYP6.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "ImageIO"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/DarwinBasic.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/MachO-3WRNZ9FLM7F9KQCZHA3T7HWFA.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "MachO"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/Metal.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Metal-5YDVPT8V5YXACU8T8R7VURZZ0.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Metal"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/OSLog.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/OSLog-86ZWETTVFBSNQ6DWO6NVZUI0H.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "OSLog"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/ObjectiveC.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ObjectiveC-PJO3KLUI2S455M8ZASB0BWB8.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "ObjectiveC"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/OpenGL.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/OpenGL-DSFFF0O196BZ4RMXSIC9K3O3B.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "OpenGL"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/QuartzCore.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/QuartzCore-BYLAYBBOISLFON01Z21PISFR7.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "QuartzCore"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/Security.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Security-8DW70SHUZWUJ49M21IP6YWNZ1.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Security"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/Spatial\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Spatial-499JDHCRTJA855VXP4AHNI4C5.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Spatial"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/lib\/swift\/shims\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftShims-CVWMX4FIWRG63HT3O21A7KX1M.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "SwiftShims"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/SwiftUI.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUI-3TXQPH23PV2ZZVA30NE9KW02W.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "SwiftUI"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/SwiftUICore.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUICore-1GSS5R5URZETPTVOPIRRVF6L3.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "SwiftUICore"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/Symbols.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/Symbols-D7VVTBVB5T2RM31EHOIUWO0EM.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "Symbols"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/System\/Library\/Frameworks\/UniformTypeIdentifiers.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/UniformTypeIdentifiers-73P8L92EVH3366QACHW3NLAQU.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "UniformTypeIdentifiers"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/xpc.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/XPC-1954C4M272VL4QR17EWNCB56S.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "XPC"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/DarwinFoundation1.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_AvailabilityInternal-7IGUEMVE0FH319HEK4GGV9Q3N.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_AvailabilityInternal"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_float-34ODHKFC5MWA8KWBV2VZA8DTT.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_float"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_intrinsics-4BH23GATFW8T2JJ0GKAAS32H.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_intrinsics"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_inttypes-A6SQ7S9D7IXYAEMM9NWH5GAW2.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_inttypes"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_limits-5ALBF0SVK61G91CKZZU9I80NQ.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_limits"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdarg-BRYV20W1YEUHZCPQMJIUDM2GP.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_stdarg"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdatomic-9KNP8KSJX8KFCYUXTJG79BD0W.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_stdatomic"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdbool-CSK3XR7A3WS7GBKIBAZJNGU3W.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_stdbool"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stddef-D0RSDD6S0ZY4TFJK65VMRVKCL.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_stddef"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdint-4E6BE8KFSI7XLTG1R0KXNJKV.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_stdint"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_tgmath-BZT7EUFN13R13C68JXA7II5VY.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_Builtin_tgmath"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/DarwinFoundation1.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation1-AOK9ISIWAAVFTBTAM0QLFP98W.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_DarwinFoundation1"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/DarwinFoundation2.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation2-81ZYQOEFPHWUUUTGDO7XGBECC.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_DarwinFoundation2"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/DarwinFoundation3.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation3-45XJHJN0SCNANS3IOR8ERQXA3.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_DarwinFoundation3"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/lib\/swift\/shims\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/_SwiftConcurrencyShims-F4A2T5BOIU8O2W84BLFBX8661.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "_SwiftConcurrencyShims"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/launch.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/launch-CE5NKPYGIDMKRJQ00WXBL8E6W.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "launch"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/libDER\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/libDER-L5KSJO1DJFHGZPJ1M0C81OE0.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "libDER"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/libkern.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/libkern-9N9PQBYMVZN34Y0C2E9XNSA6N.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "libkern"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/os.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/os-BN692W3ENLF6NZ04A8FBV81E9.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "os"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/os.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/os_object-28GYIYFUJ00KSOARUCQFVKO4L.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "os_object"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/os.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/os_workgroup-30HEUJZARDOIJXIL82EERMYSM.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "os_workgroup"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ptrauth-21KI672GD5AJCE7F1F4741ZNC.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "ptrauth"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/usr\/lib\/clang\/21\/include\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/ptrcheck-8P11Y3OFAS34QGF2VVWNSH024.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "ptrcheck"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/simd\/module.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/simd-23EAEJFIP7PUE9NGHZXOJ1U2V.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "simd"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/c_standard_library.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/string_h-3V5GBS8GKYJLQDXYHSQTNSFG2.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "string_h"
+  },
+  {
+    "clangModuleMapPath" : "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX27.2.sdk\/usr\/include\/DarwinFoundation2.modulemap",
+    "clangModulePath" : "\/Users\/woolf\/antigravityProjects\/songUI\/packages\/swiftui\/.build\/out\/SDKExplicitPrecompiledModules\/sys_types-5IWIL34QG3LLWR6IIDJ8FB77W.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "sys_types"
+  }
+]

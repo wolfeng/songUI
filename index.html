@@ -1,0 +1,3306 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大宋·清晖美学设计系统 | Song Elegance UI System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       一、 视觉底层与灵魂：Design Tokens (暗夜青瓷 & 澄心昼景双境自适应)
+       ========================================================================== */
+    :root, [data-theme="dark"] {
+      --ses-bg-sidebar: #1B201C;               /* 侧边栏/顶栏深底：幽篁墨绿 */
+      --ses-bg-canvas: #232924;                /* 主画布底色：暗夜松烟 */
+      --ses-bg-elevated: rgba(46, 53, 47, 0.88); /* 青苔石阶卡片浮层 */
+      --ses-bg-subtle: rgba(46, 53, 47, 0.55);   /* 次级石阶衬底 */
+      --ses-celadon: #8FA08B;                  /* 秘色豆青（主强调） */
+      --ses-celadon-deep: #A6B8A2;             /* 亮青瓷 */
+      --ses-moon-white: #2E352F;
+      --ses-ink-heavy: #E5E7DF;                /* 素宣月白主字 */
+      --ses-ink-medium: #B6BEB4;               /* 温润银灰正文 */
+      --ses-ink-light: #7D867C;                /* 远山灰绿注释 */
+      --ses-cinnabar: #A85346;                 /* 古窑朱砂 */
+      --ses-malachite: #6F9176;                /* 矿物石绿 */
+      --ses-azurite: #527B99;                  /* 矿物石青 */
+      --ses-gold: #C8A86B;                     /* 泥金描边 */
+      --ses-border-hairline: rgba(229, 231, 223, 0.12);
+      --ses-border-gold: rgba(200, 168, 107, 0.55);
+      --ses-grid-line: rgba(143, 160, 139, 0.16);
+      --ses-shadow-ink: 0 10px 32px -8px rgba(0, 0, 0, 0.45);
+      --ses-jade-grad: linear-gradient(145deg, rgba(54, 63, 56, 0.95), rgba(143, 160, 139, 0.28));
+      --ses-brocade-pattern: radial-gradient(circle at 50% 50%, rgba(200, 168, 107, 0.14) 1px, transparent 1px);
+      /* 日晷盘面 Tokens（暗夜青石盘） */
+      --sundial-disc-inner: #2E3630;
+      --sundial-disc-outer: #1E241F;
+      --sundial-text: #E5E7DF;
+      --sundial-tick: rgba(200, 168, 107, 0.45);
+      --sundial-ray: rgba(229, 231, 223, 0.12);
+      --sundial-shadow: rgba(10, 14, 11, 0.72);
+    }
+
+    [data-theme="light"] {
+      --ses-bg-sidebar: #EFECE3;               /* 澄心宣纸边栏 */
+      --ses-bg-canvas: #F7F4EC;                /* 澄心堂生宣米白 */
+      --ses-bg-elevated: rgba(252, 250, 245, 0.9);
+      --ses-bg-subtle: rgba(232, 238, 240, 0.55);
+      --ses-celadon: #9EB3B8;                  /* 汝窑天青 */
+      --ses-celadon-deep: #6D888E;             /* 秘色深青 */
+      --ses-moon-white: #E8EEF0;
+      --ses-ink-heavy: #232321;                /* 徽墨重彩 */
+      --ses-ink-medium: #4A4945;               /* 松烟淡墨 */
+      --ses-ink-light: #8C8A82;                /* 宿墨浅灰 */
+      --ses-cinnabar: #B83B3A;                 /* 远山朱砂 */
+      --ses-malachite: #4E7254;                /* 矿物石绿 */
+      --ses-azurite: #3B5E78;                  /* 矿物石青 */
+      --ses-gold: #C8A86B;                     /* 泥金描边 */
+      --ses-border-hairline: rgba(35, 35, 33, 0.16);
+      --ses-border-gold: rgba(200, 168, 107, 0.75);
+      --ses-grid-line: rgba(158, 179, 184, 0.25);
+      --ses-shadow-ink: 0 8px 30px -10px rgba(35, 35, 33, 0.08);
+      --ses-jade-grad: linear-gradient(145deg, rgba(232, 238, 240, 0.95), rgba(158, 179, 184, 0.42));
+      --ses-brocade-pattern: radial-gradient(circle at 50% 50%, rgba(200, 168, 107, 0.14) 1px, transparent 1px);
+      /* 日晷盘面 Tokens（汉白玉/汝窑浅青石盘） */
+      --sundial-disc-inner: #F7F5EE;
+      --sundial-disc-outer: #E3EAE8;
+      --sundial-text: #2C2C2A;
+      --sundial-tick: rgba(74, 73, 69, 0.35);
+      --sundial-ray: rgba(35, 35, 33, 0.11);
+      --sundial-shadow: rgba(35, 35, 33, 0.32);
+    }
+
+    :root {
+      --ses-ease-scroll: cubic-bezier(0.22, 1, 0.36, 1);
+      /* 主字体：宋刻版雕版风骨字体栈（刀刻顿角、横细竖粗、字怀内敛） */
+      --ses-font-serif: "FZBoYaSongKanBenK", "FZSongKeBenXiuKaiS-R-GB", "STSongti-SC-Regular", "Songti SC", "Noto Serif SC", "SimSun", serif;
+      /* 特殊题铭：宣和瘦金体（铁画银钩、锋芒孤高，用于卷首大题、徽章极值、令牌与雅集铭文） */
+      --ses-font-slender: "FZSJ-HZXKJW", "FZShouJinShu-S10S", "ThinGold", "STFangsong", "FangSong", "Noto Serif SC", serif;
+      --ses-font-calligraphy: "Ma Shan Zheng", "KaiTi", "STKaiti", serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    /* 泥金双线无障碍键盘焦点环 (A11y Focus Ring) */
+    :focus-visible {
+      outline: 1.5px solid var(--ses-gold) !important;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 3px rgba(200, 168, 107, 0.22) !important;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--ses-bg-canvas);
+      color: var(--ses-ink-medium);
+      font-family: var(--ses-font-serif);
+      font-feature-settings: "palt" 1, "kern" 1;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.75s var(--ses-ease-scroll), color 0.75s var(--ses-ease-scroll);
+      overflow-x: hidden;
+      line-height: 1.78;
+      letter-spacing: 0.03em;
+      position: relative;
+    }
+
+    /* 暗夜青瓷远山剪影背景层（仅在 dark 模式下显现温润山影） */
+    .ses-mountain-backdrop {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      width: 68vw;
+      height: 55vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    [data-theme="dark"] .ses-mountain-backdrop {
+      opacity: 1;
+    }
+
+    /* 生宣纸张微肌理全局覆层 */
+    .ses-paper-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.45;
+      filter: url(#ses-xuan-paper);
+      will-change: opacity;
+    }
+
+    /* 宋刻本主标题与正文字体特征 */
+    .ses-songke-text {
+      font-family: var(--ses-font-serif);
+      letter-spacing: 0.06em;
+    }
+
+    /* 特殊之处：宣和瘦金体（铁画银钩、孤高锋锐） */
+    .ses-slender-gold {
+      font-family: var(--ses-font-slender);
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      color: var(--ses-ink-heavy);
+      /* 利用极细描边与微斜切模拟瘦金体鹤膝铁丝笔意 */
+      -webkit-text-stroke: 0.15px currentColor;
+      text-shadow: 0.35px 0.35px 0px rgba(200, 168, 107, 0.18);
+    }
+
+    /* 瘦金体特写铭牌（用于特殊章节号、御批与极峰数字） */
+    .ses-slender-display {
+      font-family: var(--ses-font-slender);
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      transform: skewX(-1.5deg);
+      display: inline-block;
+      color: var(--ses-ink-heavy);
+    }
+
+    .ses-calligraphy {
+      font-family: var(--ses-font-calligraphy);
+      letter-spacing: 0.12em;
+    }
+
+    /* ==========================================================================
+       新增 V2.0 六大宋韵补全组件样式（牙签书帙/筹算纵横/金字牌/经折装/胶泥活字/乌丝栏竖排）
+       ========================================================================== */
+    /* 1. 《牙签书帙》下拉选择器 (Ivory Tag Select) */
+    .ses-yaqian-option {
+      position: relative;
+      padding: 0.6rem 1rem 0.6rem 1.8rem;
+      border-bottom: 0.5px solid var(--ses-border-hairline);
+      cursor: pointer;
+      transition: all 0.3s var(--ses-ease-scroll);
+    }
+    .ses-yaqian-option::before {
+      content: "❖";
+      position: absolute;
+      left: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.65rem;
+      color: var(--ses-gold);
+      opacity: 0.5;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .ses-yaqian-option:hover {
+      background: rgba(200, 168, 107, 0.15);
+      padding-left: 2.1rem;
+      color: var(--ses-ink-heavy);
+    }
+    .ses-yaqian-option:hover::before {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.2);
+    }
+
+    /* 2. 《急脚递金字牌》系统警示框 (Gold-Inscribed Cinnabar Alert) */
+    .ses-jinzipai-alert {
+      position: relative;
+      background: linear-gradient(135deg, #8F2D27 0%, #681D18 100%);
+      border: 1px solid #DFB870;
+      border-radius: 3px;
+      color: #F3D999;
+      padding: 0.85rem 1.25rem;
+      box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.35), 0 6px 20px -6px rgba(168, 83, 70, 0.45);
+    }
+    .ses-jinzipai-alert::before {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border: 0.5px solid rgba(223, 184, 112, 0.45);
+      pointer-events: none;
+    }
+
+    /* 3. 《毕昇胶泥活字》分页器 (Movable Clay Type Pagination) */
+    .ses-clay-type {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 34px;
+      padding: 0 0.55rem;
+      background: linear-gradient(145deg, var(--ses-bg-elevated), var(--ses-bg-canvas));
+      border: 1px solid var(--ses-border-hairline);
+      border-bottom: 2.5px solid rgba(0, 0, 0, 0.35);
+      border-right: 2px solid rgba(0, 0, 0, 0.25);
+      border-radius: 2px;
+      font-family: var(--ses-font-serif);
+      font-size: 0.82rem;
+      color: var(--ses-ink-medium);
+      cursor: pointer;
+      transition: all 0.2s var(--ses-ease-scroll);
+      user-select: none;
+    }
+    .ses-clay-type:hover {
+      border-color: var(--ses-gold);
+      color: var(--ses-ink-heavy);
+      transform: translateY(-1px);
+    }
+    .ses-clay-type.active {
+      background: var(--ses-cinnabar);
+      color: #F7F4EC;
+      border-color: var(--ses-gold);
+      border-bottom: 2.5px solid #5E1B16;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+
+    /* 4. 《经折装册页》折叠手风琴 (Sutra Folded Accordion) */
+    .ses-sutra-fold {
+      border: 0.5px solid var(--ses-border-hairline);
+      background: linear-gradient(180deg, var(--ses-bg-elevated) 0%, var(--ses-bg-subtle) 100%);
+      transition: all 0.45s var(--ses-ease-scroll);
+    }
+    .ses-sutra-fold.open {
+      border-color: var(--ses-border-gold);
+      box-shadow: inset 0 6px 14px -8px rgba(0, 0, 0, 0.25);
+    }
+
+    /* 5. 《宋刻善本·乌丝栏竖排夹批》阅读器 */
+    .ses-woodblock-reader {
+      position: relative;
+      background-color: var(--ses-bg-canvas);
+      border: 2px solid var(--ses-ink-heavy);
+      outline: 0.5px solid var(--ses-ink-heavy);
+      outline-offset: -5px;
+      padding: 1.5rem;
+      transition: all 0.5s var(--ses-ease-scroll);
+    }
+    .ses-woodblock-reader.vertical-mode {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      height: 300px;
+      width: 100%;
+      overflow-x: auto;
+      padding: 20px 24px;
+      /* 严格以 42px 为单列乌丝栏周期，从 content-box 右侧起算，使每列文字精准居中于两线之间 */
+      background-origin: content-box;
+      background-clip: content-box;
+      background-image: repeating-linear-gradient(
+        to left,
+        var(--ses-grid-line) 0px,
+        var(--ses-grid-line) 1px,
+        transparent 1px,
+        transparent 42px
+      );
+      font-size: 15px;
+      line-height: 42px;
+      letter-spacing: 0.16em;
+    }
+    .ses-woodblock-reader.vertical-mode .ses-woodblock-title {
+      display: inline-block;
+      line-height: 42px;
+      font-size: 15px;
+      margin: 0 0 0 42px; /* 标题后空出一整列（42px）乌丝栏，确保后续正文严格对齐网格 */
+      transform: none;
+    }
+    .ses-woodblock-reader:not(.vertical-mode) .ses-woodblock-title {
+      margin-bottom: 0.65rem;
+      font-size: 1rem;
+    }
+    .ses-judou-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      border: 1.2px solid var(--ses-cinnabar);
+      margin: 1px 0;
+      vertical-align: middle;
+    }
+    .ses-interlinear-note {
+      font-size: 12px;
+      line-height: 42px;
+      color: var(--ses-ink-light);
+      letter-spacing: 0.08em;
+      vertical-align: baseline;
+    }
+
+    .ses-slender-gold {
+      font-family: var(--ses-font-serif);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--ses-ink-heavy);
+    }
+
+    .ses-calligraphy {
+      font-family: var(--ses-font-calligraphy);
+      letter-spacing: 0.12em;
+    }
+
+    /* 宣纸压凹与描金容器 */
+    .ses-card {
+      background-color: var(--ses-bg-elevated);
+      border: 0.5px solid var(--ses-border-hairline);
+      border-radius: 4px;
+      box-shadow: var(--ses-shadow-ink), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      transition: border-color 0.5s var(--ses-ease-scroll), background-color 0.75s var(--ses-ease-scroll);
+      position: relative;
+      z-index: 1;
+    }
+    .ses-card:hover { border-color: var(--ses-border-gold); }
+    .ses-card::before, .ses-card::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-color: var(--ses-gold);
+      opacity: 0.45;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .ses-card::before { top: 5px; left: 5px; border-top: 1px solid; border-left: 1px solid; }
+    .ses-card::after { bottom: 5px; right: 5px; border-bottom: 1px solid; border-right: 1px solid; }
+    .ses-card:hover::before, .ses-card:hover::after { opacity: 0.9; }
+
+    /* ==========================================================================
+       二、 核心组件样式
+       ========================================================================== */
+    /* 1. 玉质玲珑钮 */
+    .ses-btn-jade {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.55rem;
+      background: var(--ses-jade-grad);
+      border: 0.5px solid var(--ses-border-hairline);
+      border-radius: 3px 12px 3px 12px;
+      color: var(--ses-ink-heavy);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.45s var(--ses-ease-scroll);
+      user-select: none;
+    }
+    .ses-btn-jade:hover {
+      border-color: var(--ses-border-gold);
+      transform: translateY(-1px);
+    }
+    .ses-btn-jade:active { transform: translateY(0) scale(0.98); }
+
+    .ses-ripple-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--ses-gold);
+      background: radial-gradient(circle, rgba(200, 168, 107, 0.22) 0%, transparent 70%);
+      transform: scale(0);
+      animation: sesTeaRipple 0.75s var(--ses-ease-scroll) forwards;
+      pointer-events: none;
+    }
+    @keyframes sesTeaRipple {
+      0% { transform: scale(0); opacity: 0.9; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+
+    /* 朱砂印章 */
+    .ses-seal-stamp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.55rem;
+      background-color: var(--ses-cinnabar);
+      color: #F7F4EC;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      border-radius: 2px;
+      filter: url(#ses-seal-edge);
+      box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.25);
+      transition: transform 0.35s var(--ses-ease-scroll);
+      user-select: none;
+    }
+    .ses-seal-stamp:hover { transform: scale(1.04) rotate(-1deg); }
+
+    /* 2. 榫卯滑闩开关 (Mortise & Tenon Switch) */
+    .ses-mortise-switch {
+      position: relative;
+      width: 68px;
+      height: 30px;
+      border-radius: 3px;
+      background: var(--ses-bg-canvas);
+      border: 1px solid var(--ses-border-hairline);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      transition: all 0.45s var(--ses-ease-scroll);
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.18);
+      user-select: none;
+    }
+    .ses-mortise-switch[aria-checked="true"] {
+      border-color: var(--ses-gold);
+      background: rgba(143, 160, 139, 0.22);
+    }
+    .ses-mortise-bolt {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 28px;
+      height: 22px;
+      border-radius: 2px;
+      background: linear-gradient(145deg, #6E4B32, #462E1D);
+      border: 0.5px solid var(--ses-gold);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: transform 0.45s var(--ses-ease-scroll), background 0.45s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ses-mortise-bolt::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ses-gold);
+    }
+    .ses-mortise-switch[aria-checked="true"] .ses-mortise-bolt {
+      transform: translateX(32px);
+      background: linear-gradient(145deg, var(--ses-celadon-deep), var(--ses-celadon));
+    }
+
+    /* 3. 四艺书签选项卡 */
+    .ses-bookmark-tab {
+      position: relative;
+      padding: 0.7rem 1.1rem 1.05rem;
+      background: var(--ses-bg-subtle);
+      border: 0.5px solid var(--ses-border-hairline);
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      color: var(--ses-ink-medium);
+      cursor: pointer;
+      transform-origin: top center;
+      transition: all 0.5s var(--ses-ease-scroll);
+    }
+    .ses-bookmark-tab:hover {
+      animation: sesWindSway 2.4s ease-in-out infinite;
+      border-color: var(--ses-border-gold);
+      color: var(--ses-ink-heavy);
+    }
+    .ses-bookmark-tab.active {
+      background: var(--ses-jade-grad);
+      border-color: var(--ses-gold);
+      color: var(--ses-ink-heavy);
+      padding-bottom: 1.4rem;
+      box-shadow: 0 6px 16px -6px rgba(143, 160, 139, 0.35);
+    }
+    .ses-bookmark-tab::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 1px;
+      height: 10px;
+      background: var(--ses-cinnabar);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .ses-bookmark-tab.active::after { opacity: 0.85; }
+
+    .ses-incense-smoke {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 14px;
+      height: 22px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .ses-bookmark-tab.active .ses-incense-smoke { opacity: 0.75; }
+
+    @keyframes sesWindSway {
+      0%, 100% { transform: rotate(0deg); }
+      30% { transform: rotate(1.6deg); }
+      70% { transform: rotate(-1.3deg); }
+    }
+    @keyframes sesSmokeRise {
+      0% { transform: translate(-50%, 4px) scaleX(0.9); opacity: 0; }
+      40% { opacity: 0.7; }
+      100% { transform: translate(-50%, -14px) scaleX(1.25); opacity: 0; }
+    }
+    .ses-smoke-path { animation: sesSmokeRise 3.2s ease-in-out infinite; }
+
+    /* 4. 素笺留痕输入框 */
+    .ses-xuan-input-wrap {
+      position: relative;
+      background-color: var(--ses-bg-canvas);
+      background-image: repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent 31px,
+        var(--ses-grid-line) 31px,
+        var(--ses-grid-line) 32px
+      );
+      border: 0.5px solid var(--ses-border-hairline);
+      border-radius: 3px;
+      padding: 0.75rem 1rem 0.75rem 2.4rem;
+      transition: all 0.45s var(--ses-ease-scroll);
+    }
+    .ses-xuan-input-wrap:focus-within {
+      border-color: var(--ses-cinnabar);
+      box-shadow: inset 0 0 12px rgba(143, 160, 139, 0.14);
+    }
+    .ses-xuan-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--ses-ink-heavy);
+      font-family: var(--ses-font-serif);
+      font-size: 0.96rem;
+      letter-spacing: 0.14em;
+      caret-color: var(--ses-cinnabar);
+    }
+    .ses-xuan-input::placeholder { color: var(--ses-ink-light); font-style: italic; }
+
+    /* 5. 宋锦锦标标签 */
+    .ses-brocade-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.85rem;
+      background-color: var(--ses-bg-subtle);
+      background-image: var(--ses-brocade-pattern);
+      background-size: 8px 8px;
+      border: 0.5px solid var(--ses-border-gold);
+      clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 50%, calc(100% - 6px) 100%, 6px 100%, 0% 50%);
+      color: var(--ses-ink-heavy);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      transition: all 0.35s ease;
+    }
+    .ses-brocade-tag:hover { background-color: rgba(200, 168, 107, 0.18); }
+
+    /* 6. 古卷徐开模态框 & 折枝屏风抽屉 */
+    .ses-scroll-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 22, 19, 0.55);
+      backdrop-filter: blur(8px) saturate(85%);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s var(--ses-ease-scroll);
+    }
+    .ses-scroll-backdrop.open { opacity: 1; pointer-events: auto; }
+    .ses-scroll-container {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      max-width: 92vw;
+      width: 640px;
+      transform: scaleX(0.04);
+      opacity: 0.2;
+      transition: transform 0.75s var(--ses-ease-scroll), opacity 0.55s ease;
+    }
+    .ses-scroll-backdrop.open .ses-scroll-container { transform: scaleX(1); opacity: 1; }
+    .ses-scroll-roller {
+      width: 16px;
+      flex-shrink: 0;
+      background: linear-gradient(90deg, #3A2518 0%, #63422E 45%, #2B1A10 100%);
+      border-radius: 4px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+    .ses-scroll-roller::before, .ses-scroll-roller::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      width: 12px;
+      height: 10px;
+      background: var(--ses-gold);
+      border-radius: 2px;
+    }
+    .ses-scroll-roller::before { top: -8px; }
+    .ses-scroll-roller::after { bottom: -8px; }
+    .ses-scroll-body {
+      flex: 1;
+      background-color: var(--ses-bg-canvas);
+      border-top: 1px solid var(--ses-gold);
+      border-bottom: 1px solid var(--ses-gold);
+      padding: 2rem 2.25rem;
+      box-shadow: inset 0 0 40px rgba(143, 160, 139, 0.14);
+    }
+
+    .ses-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 22, 19, 0.45);
+      backdrop-filter: blur(4px);
+      z-index: 60;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+    }
+    .ses-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+    .ses-screen-drawer {
+      position: fixed;
+      top: 12px;
+      bottom: 12px;
+      right: 12px;
+      width: 400px;
+      max-width: calc(100vw - 24px);
+      background-color: var(--ses-bg-canvas);
+      border: 1px solid var(--ses-gold);
+      border-left: 6px solid #4A3020;
+      border-radius: 4px;
+      padding: 1.75rem;
+      z-index: 61;
+      transform: translateX(110%);
+      transition: transform 0.65s var(--ses-ease-scroll);
+      box-shadow: -12px 0 36px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+    }
+    .ses-screen-drawer.open { transform: translateX(0); }
+
+    /* 7. 七弦琴轸滑块 */
+    .ses-guqin-track {
+      position: relative;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .ses-guqin-thumb {
+      position: absolute;
+      width: 18px;
+      height: 26px;
+      background: radial-gradient(circle at 35% 35%, #E3C78A, #9A7B3E);
+      border: 1px solid var(--ses-ink-heavy);
+      border-radius: 3px 3px 8px 8px;
+      transform: translateX(-50%);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.15s ease;
+    }
+    .ses-guqin-thumb:hover { transform: translateX(-50%) scale(1.1); }
+
+    /* 8. 鱼鳞图册乌丝栏表格 */
+    .ses-fishscale-table { width: 100%; border-collapse: collapse; }
+    .ses-fishscale-table th {
+      background-color: var(--ses-bg-subtle);
+      color: var(--ses-ink-heavy);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      padding: 0.75rem 1rem;
+      border-top: 1.5px solid var(--ses-ink-heavy);
+      border-bottom: 1.5px solid var(--ses-ink-heavy);
+      border-right: 0.5px solid var(--ses-border-hairline);
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    .ses-fishscale-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 0.5px solid var(--ses-border-hairline);
+      border-right: 0.5px solid var(--ses-border-hairline);
+      font-size: 0.88rem;
+      transition: background-color 0.3s ease;
+    }
+    .ses-fishscale-table tr:hover td { background-color: rgba(143, 160, 139, 0.14); }
+
+    /* 刻漏水滴动画 */
+    @keyframes sesWaterDrop {
+      0% { transform: translateY(-6px) scale(0.7); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(8px) scale(1.05); opacity: 0; }
+    }
+    .ses-water-drop { animation: sesWaterDrop 1.8s infinite ease-in; }
+
+    /* 线香微缩余烬呼吸动画 */
+    @keyframes sesEmberPulse {
+      0%, 100% { opacity: 0.82; }
+      50% { opacity: 1; }
+    }
+    .ses-ember-glow { animation: sesEmberPulse 2.4s ease-in-out infinite; }
+
+    /* ==========================================================================
+       昼晷·夜漏双生司辰动画与样式
+       ========================================================================== */
+    .ses-celestial-stage {
+      transition: opacity 0.65s var(--ses-ease-scroll), transform 0.65s var(--ses-ease-scroll);
+    }
+    [data-theme="dark"] .ses-sundial-view {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+    [data-theme="dark"] .ses-clepsydra-view {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+    [data-theme="light"] .ses-sundial-view {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+    [data-theme="light"] .ses-clepsydra-view {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    @keyframes clepsydraFall {
+      0% { transform: translateY(0px) scale(0.65); opacity: 0; }
+      18% { transform: translateY(4px) scale(1); opacity: 0.95; }
+      82% { transform: translateY(62px) scale(0.92, 1.15); opacity: 0.9; }
+      100% { transform: translateY(72px) scale(0.4); opacity: 0; }
+    }
+    @keyframes clepsydraRipple {
+      0% { rx: 3; ry: 1; opacity: 0; }
+      15% { opacity: 0.85; }
+      100% { rx: 24; ry: 4.5; opacity: 0; }
+    }
+    .clepsydra-falling-drop {
+      transform-box: fill-box;
+      transform-origin: center top;
+      animation: clepsydraFall 2.4s cubic-bezier(0.45, 0.05, 0.85, 0.4) infinite;
+    }
+    .clepsydra-surface-ripple {
+      animation: clepsydraRipple 2.4s ease-out infinite;
+      animation-delay: 1.95s;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#8FA08B]/30">
+
+  <!-- 全局生宣纸张微肌理覆层 -->
+  <div class="ses-paper-grain" aria-hidden="true"></div>
+
+  <!-- 暗夜青瓷三层青墨远山与残月剪影背景（仅暗色模式呈现） -->
+  <svg class="ses-mountain-backdrop" viewBox="0 0 800 500" preserveAspectRatio="none" aria-hidden="true">
+    <circle cx="670" cy="110" r="26" fill="#323A33" opacity="0.65" />
+    <path d="M120 500 L310 260 L440 360 L580 180 L740 330 L800 280 L800 500 Z" fill="#1D231E" opacity="0.7" />
+    <path d="M40 500 L220 320 L380 410 L530 230 L690 380 L800 330 L800 500 Z" fill="#2A322B" opacity="0.6" />
+    <path d="M260 500 L450 370 L610 430 L760 340 L800 370 L800 500 Z" fill="#313A32" opacity="0.45" />
+  </svg>
+
+  <!-- 隐形 SVG 滤镜库 -->
+  <svg width="0" height="0" class="hidden" aria-hidden="true">
+    <defs>
+      <filter id="ses-xuan-paper" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" result="noise" />
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.042 0" in="noise" result="coloredNoise" />
+        <feComposite operator="in" in2="SourceGraphic" />
+      </filter>
+
+      <filter id="ses-seal-edge" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.16" numOctaves="2" result="turbulence" />
+        <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="1.9" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+
+      <filter id="sundialShadowBlur" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="2.2" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ==========================================================================
+       顶部导航栏：宋代建筑斗拱单线 + 四艺书签选项卡 + 昼夜/雅音控制
+       ========================================================================== -->
+  <header class="sticky top-0 z-40 backdrop-blur-md border-b border-[var(--ses-border-hairline)] bg-[var(--ses-bg-sidebar)]/90 transition-colors duration-700">
+    <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-[var(--ses-gold)] to-transparent opacity-70"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-wrap items-center justify-between gap-3">
+      <!-- 左侧：朱砂闲章与系统题名 -->
+      <div class="flex items-center gap-3.5 py-3">
+        <div class="ses-seal-stamp text-base px-2.5 py-1.5 leading-none tracking-widest shadow-sm">
+          大宋<br>清晖
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="ses-slender-gold text-lg sm:text-xl font-semibold">
+              清晖美学设计系统
+            </h1>
+            <span class="text-[10px] px-1.5 py-0.5 rounded-sm border border-[var(--ses-gold)]/60 text-[var(--ses-gold)] ses-slender-display">宣和瘦金 · 宋刻善本</span>
+          </div>
+          <p class="text-[11px] tracking-[0.25em] text-[var(--ses-ink-light)] uppercase">
+            Song Elegance UI System v2.0 · 格物致知
+          </p>
+        </div>
+      </div>
+
+      <!-- 中部：五篇雅集书签导航 -->
+      <nav aria-label="雅集章节导航" class="flex items-start gap-1.5 sm:gap-2.5 -mt-[1px] overflow-x-auto max-w-full">
+        <button onclick="switchArtTab('incense', this)" class="ses-bookmark-tab active text-xs sm:text-sm tracking-[0.16em] shrink-0" data-tab="incense">
+          <svg class="ses-incense-smoke" viewBox="0 0 20 30">
+            <path class="ses-smoke-path" d="M10 28 Q 5 20, 10 14 T 10 2" fill="none" stroke="var(--ses-celadon-deep)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          焚香·器物
+        </button>
+        <button onclick="switchArtTab('tea', this)" class="ses-bookmark-tab text-xs sm:text-sm tracking-[0.16em] shrink-0" data-tab="tea">
+          <svg class="ses-incense-smoke" viewBox="0 0 20 30">
+            <path class="ses-smoke-path" d="M10 28 Q 15 20, 10 14 T 10 2" fill="none" stroke="var(--ses-celadon-deep)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          点茶·声律
+        </button>
+        <button onclick="switchArtTab('sundial', this)" class="ses-bookmark-tab text-xs sm:text-sm tracking-[0.16em] shrink-0" data-tab="sundial">
+          <svg class="ses-incense-smoke" viewBox="0 0 20 30">
+            <path class="ses-smoke-path" d="M10 28 Q 5 20, 10 14 T 10 2" fill="none" stroke="var(--ses-celadon-deep)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          司辰·日晷香篆
+        </button>
+        <button onclick="switchArtTab('painting', this)" class="ses-bookmark-tab text-xs sm:text-sm tracking-[0.16em] shrink-0" data-tab="painting">
+          <svg class="ses-incense-smoke" viewBox="0 0 20 30">
+            <path class="ses-smoke-path" d="M10 28 Q 15 20, 10 14 T 10 2" fill="none" stroke="var(--ses-celadon-deep)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          挂画·图谱
+        </button>
+        <button onclick="switchArtTab('flower', this)" class="ses-bookmark-tab text-xs sm:text-sm tracking-[0.16em] shrink-0" data-tab="flower">
+          <svg class="ses-incense-smoke" viewBox="0 0 20 30">
+            <path class="ses-smoke-path" d="M10 28 Q 5 20, 10 14 T 10 2" fill="none" stroke="var(--ses-celadon-deep)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          插花·汴京
+        </button>
+      </nav>
+
+      <!-- 右侧：昼夜光影切换 & 瓷器/古琴音效开关 -->
+      <div class="flex items-center gap-2.5 py-2">
+        <button id="audioToggleBtn" onclick="toggleSound()" class="ses-btn-jade !px-3 !py-1.5 text-xs" title="开启或关闭汝窑瓷器与古琴泛音反馈">
+          <span id="audioIcon">🎵</span>
+          <span id="audioLabel">雅音：开</span>
+        </button>
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="ses-btn-jade !px-3 !py-1.5 text-xs" title="切换暗夜青瓷与澄心堂宣纸昼景">
+          <span id="themeIcon">🌙</span>
+          <span id="themeLabel">暗夜青瓷</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       主画布
+       ========================================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-12 relative z-10">
+
+    <!-- 卷首导言横幅 -->
+    <section class="ses-card p-6 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+      <div class="space-y-3 max-w-2xl">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="ses-brocade-tag ses-slender-display">雨过天青云破处</span>
+          <span class="text-xs tracking-[0.2em] text-[var(--ses-ink-light)]">主字体：宋刻善本版刻体 · 特写：宣和瘦金体</span>
+        </div>
+        <h2 class="ses-slender-gold text-2xl sm:text-3xl leading-relaxed">
+          铁画银钩瘦金骨，刀刻乌丝善本魂，<br class="hidden sm:inline" />于方寸屏幕间重现大宋风雅。
+        </h2>
+        <p class="text-sm text-[var(--ses-ink-medium)] leading-7 ses-songke-text">
+          全站正文与器物名录采用古朴端严的<strong>宋刻雕版字体</strong>，卷首大题、金字牌与极峰铭文则饰以孤高凌厉的<strong>宣和瘦金体</strong>；升级版完备收录牙签下拉、筹算步进、经折装册页、毕昇活字分页与乌丝栏竖排善本容器。
+        </p>
+      </div>
+
+      <!-- 六大东方矿物色谱展示 -->
+      <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 gap-3 w-full lg:w-auto shrink-0">
+        <button onclick="copyColorToken('#232924', '暗夜松烟', 523.25)" class="group p-2.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-canvas)] text-left hover:border-[var(--ses-gold)] transition">
+          <div class="w-full h-8 rounded-sm mb-1.5 border border-white/10" style="background:#232924;"></div>
+          <div class="text-xs font-semibold text-[var(--ses-ink-heavy)]">暗夜松烟</div>
+          <div class="text-[10px] text-[var(--ses-ink-light)] font-mono">#232924</div>
+        </button>
+        <button onclick="copyColorToken('#8FA08B', '秘色豆青', 587.33)" class="group p-2.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-canvas)] text-left hover:border-[var(--ses-gold)] transition">
+          <div class="w-full h-8 rounded-sm mb-1.5" style="background:#8FA08B;"></div>
+          <div class="text-xs font-semibold text-[var(--ses-ink-heavy)]">秘色豆青</div>
+          <div class="text-[10px] text-[var(--ses-ink-light)] font-mono">#8FA08B</div>
+        </button>
+        <button onclick="copyColorToken('#9EB3B8', '汝窑天青', 659.25)" class="group p-2.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-canvas)] text-left hover:border-[var(--ses-gold)] transition">
+          <div class="w-full h-8 rounded-sm mb-1.5" style="background:#9EB3B8;"></div>
+          <div class="text-xs font-semibold text-[var(--ses-ink-heavy)]">汝窑天青</div>
+          <div class="text-[10px] text-[var(--ses-ink-light)] font-mono">#9EB3B8</div>
+        </button>
+        <button onclick="copyColorToken('#B83B3A', '远山朱砂', 783.99)" class="group p-2.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-canvas)] text-left hover:border-[var(--ses-gold)] transition">
+          <div class="w-full h-8 rounded-sm mb-1.5" style="background:#B83B3A;"></div>
+          <div class="text-xs font-semibold text-[var(--ses-ink-heavy)]">远山朱砂</div>
+          <div class="text-[10px] text-[var(--ses-ink-light)] font-mono">#B83B3A</div>
+        </button>
+        <button onclick="copyColorToken('#C8A86B', '泥金描边', 880.00)" class="group p-2.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-canvas)] text-left hover:border-[var(--ses-gold)] transition">
+          <div class="w-full h-8 rounded-sm mb-1.5" style="background:#C8A86B;"></div>
+          <div class="text-xs font-semibold text-[var(--ses-ink-heavy)]">泥金描边</div>
+          <div class="text-[10px] text-[var(--ses-ink-light)] font-mono">#C8A86B</div>
+        </button>
+        <button onclick="copyColorToken('#F7F4EC', '澄心生宣', 1046.50)" class="group p-2.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-canvas)] text-left hover:border-[var(--ses-gold)] transition">
+          <div class="w-full h-8 rounded-sm mb-1.5 border border-black/15" style="background:#F7F4EC;"></div>
+          <div class="text-xs font-semibold text-[var(--ses-ink-heavy)]">澄心生宣</div>
+          <div class="text-[10px] text-[var(--ses-ink-light)] font-mono">#F7F4EC</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         第一篇：【焚香·基础器物】按钮、榫卯滑闩 Switch、素笺输入、螺钿单选、茶百戏多选
+         ========================================================================== -->
+    <section id="section-incense" class="ses-tab-panel space-y-6">
+      <div class="flex items-center justify-between border-b border-[var(--ses-border-hairline)] pb-3">
+        <div class="flex items-center gap-3">
+          <span class="ses-seal-stamp">壹</span>
+          <h3 class="ses-slender-gold text-xl">焚香 · 基础文房器物组件</h3>
+        </div>
+        <span class="text-xs text-[var(--ses-ink-light)] tracking-widest">玉质玲珑钮 / 榫卯滑闩开关 / 素笺留痕 / 螺钿与茶百戏</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="ses-card p-6 lg:col-span-6 space-y-6">
+          <div>
+            <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em] mb-1">玉质玲珑钮 (Jade Celadon Button)</h4>
+            <p class="text-xs text-[var(--ses-ink-light)] mb-4">随形玉佩微弧切角，点击时伴随茶盏水波涟漪与汝窑叩瓷声。</p>
+            <div class="flex flex-wrap items-center gap-3">
+              <button onclick="triggerJadeRipple(event, this); playCeladonChime(660);" class="ses-btn-jade">
+                <span>天青主钮</span>
+              </button>
+              <button onclick="triggerJadeRipple(event, this); playCeladonChime(784);" class="ses-btn-jade !border-[var(--ses-gold)]">
+                <span class="text-[var(--ses-gold)]">✦</span>
+                <span>描金御赐</span>
+              </button>
+              <button onclick="triggerJadeRipple(event, this); playCeladonChime(523);" class="ses-btn-jade !bg-none !bg-transparent">
+                <span>素宣线框</span>
+              </button>
+              <button onclick="playSealThud(); showToast('已钤盖「御书之宝」朱砂闲章');" class="ses-seal-stamp px-4 py-2 text-sm cursor-pointer">
+                钤印确认
+              </button>
+            </div>
+          </div>
+
+          <!-- 榫卯滑闩开关 (Mortise & Tenon Switch) -->
+          <div class="pt-4 border-t border-[var(--ses-border-hairline)]">
+            <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em] mb-1">榫卯滑闩开关 (Mortise Switch)</h4>
+            <p class="text-xs text-[var(--ses-ink-light)] mb-3">模拟宋代木构窗棂插销滑闩，嵌有泥金玉珠机括。</p>
+            <div class="flex flex-wrap items-center gap-6">
+              <div class="flex items-center gap-3">
+                <button type="button" role="switch" aria-checked="true" onclick="toggleMortiseSwitch(this, '焚香静室')" class="ses-mortise-switch">
+                  <span class="text-[10px] text-[var(--ses-ink-heavy)] font-semibold">启</span>
+                  <span class="text-[10px] text-[var(--ses-ink-light)]">闭</span>
+                  <span class="ses-mortise-bolt"></span>
+                </button>
+                <span class="text-xs text-[var(--ses-ink-heavy)]">焚香静室 · 已启</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button" role="switch" aria-checked="false" onclick="toggleMortiseSwitch(this, '夜观星象')" class="ses-mortise-switch">
+                  <span class="text-[10px] text-[var(--ses-ink-heavy)] font-semibold">启</span>
+                  <span class="text-[10px] text-[var(--ses-ink-light)]">闭</span>
+                  <span class="ses-mortise-bolt"></span>
+                </button>
+                <span class="text-xs text-[var(--ses-ink-medium)]">夜观星象 · 已闭</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 螺钿印章单选 & 茶百戏多选 -->
+          <div class="pt-4 border-t border-[var(--ses-border-hairline)] grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em] mb-3">螺钿印章单选 (Radio)</h4>
+              <div class="space-y-2.5" id="radioGroup">
+                <label onclick="selectSongRadio(this, '定窑白瓷')" class="flex items-center gap-3 cursor-pointer group">
+                  <span class="ses-radio-dot w-5 h-5 rounded-full border border-[var(--ses-ink-medium)] flex items-center justify-center transition-all bg-[var(--ses-cinnabar)] border-[var(--ses-cinnabar)]">
+                    <span class="w-2 h-2 rounded-full bg-[#F7F4EC]"></span>
+                  </span>
+                  <span class="text-sm text-[var(--ses-ink-heavy)] group-hover:text-[var(--ses-cinnabar)] transition">定窑白瓷 · 印花</span>
+                </label>
+                <label onclick="selectSongRadio(this, '钧窑玫瑰紫')" class="flex items-center gap-3 cursor-pointer group">
+                  <span class="ses-radio-dot w-5 h-5 rounded-full border border-[var(--ses-ink-medium)] flex items-center justify-center transition-all">
+                    <span class="w-2 h-2 rounded-full bg-transparent"></span>
+                  </span>
+                  <span class="text-sm text-[var(--ses-ink-medium)] group-hover:text-[var(--ses-cinnabar)] transition">钧窑窑变 · 玫瑰紫</span>
+                </label>
+                <label onclick="selectSongRadio(this, '建窑兔毫盏')" class="flex items-center gap-3 cursor-pointer group">
+                  <span class="ses-radio-dot w-5 h-5 rounded-full border border-[var(--ses-ink-medium)] flex items-center justify-center transition-all">
+                    <span class="w-2 h-2 rounded-full bg-transparent"></span>
+                  </span>
+                  <span class="text-sm text-[var(--ses-ink-medium)] group-hover:text-[var(--ses-cinnabar)] transition">建窑黑釉 · 兔毫盏</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em] mb-3">茶百戏多选 (Checkbox)</h4>
+              <div class="space-y-2.5">
+                <label onclick="toggleTeaCheck(this)" class="flex items-center gap-3 cursor-pointer select-none" data-checked="true">
+                  <span class="ses-tea-box w-5 h-5 rounded-sm border border-[var(--ses-celadon-deep)] bg-[var(--ses-celadon)]/30 flex items-center justify-center transition">
+                    <svg class="w-3.5 h-3.5 text-[var(--ses-ink-heavy)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M4 13c3 0 4-4 7-4s4 6 9 2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span class="text-sm text-[var(--ses-ink-heavy)]">汤花拂面（水丹青）</span>
+                </label>
+                <label onclick="toggleTeaCheck(this)" class="flex items-center gap-3 cursor-pointer select-none" data-checked="true">
+                  <span class="ses-tea-box w-5 h-5 rounded-sm border border-[var(--ses-celadon-deep)] bg-[var(--ses-celadon)]/30 flex items-center justify-center transition">
+                    <svg class="w-3.5 h-3.5 text-[var(--ses-ink-heavy)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M4 13c3 0 4-4 7-4s4 6 9 2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span class="text-sm text-[var(--ses-ink-heavy)]">龙凤团茶（研膏）</span>
+                </label>
+                <label onclick="toggleTeaCheck(this)" class="flex items-center gap-3 cursor-pointer select-none" data-checked="false">
+                  <span class="ses-tea-box w-5 h-5 rounded-sm border border-[var(--ses-border-hairline)] flex items-center justify-center transition">
+                    <svg class="w-3.5 h-3.5 text-transparent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M4 13c3 0 4-4 7-4s4 6 9 2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span class="text-sm text-[var(--ses-ink-medium)]">七汤点茶法</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 素笺留痕竖向水印网格宣纸输入框 -->
+        <div class="ses-card p-6 lg:col-span-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">素笺留痕 (Xuan Paper Input)</h4>
+              <span class="text-[11px] text-[var(--ses-cinnabar)]">✒ 毫端落纸，暗格自显</span>
+            </div>
+            <p class="text-xs text-[var(--ses-ink-light)] mb-4">内置仿古籍乌丝栏竖向水印网格，输入时自动触发微弱毛笔落纸声律。</p>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs text-[var(--ses-ink-medium)] tracking-[0.2em] mb-1.5">题跋卷名</label>
+                <div class="ses-xuan-input-wrap">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ses-cinnabar)] text-sm">🖌</span>
+                  <input type="text" oninput="playBrushStroke()" value="宣和丙午岁清明上河图跋" placeholder="请于素笺之上题写卷名……" class="ses-xuan-input" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs text-[var(--ses-ink-medium)] tracking-[0.2em] mb-1.5">格物手札正文</label>
+                <div class="ses-xuan-input-wrap !py-3">
+                  <span class="absolute left-3 top-3.5 text-[var(--ses-ink-light)] text-sm">✒</span>
+                  <textarea rows="4" oninput="playBrushStroke()" placeholder="雨过天青云破处，这般颜色做将来……" class="ses-xuan-input resize-none leading-8">建盏兔毫，宜用建溪灵芽，候汤眼如蟹目鱼眼，七汤点拂，盏面乳雾汹涌，咬盏不散。</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-3 border-t border-[var(--ses-border-hairline)]">
+            <span class="text-xs text-[var(--ses-ink-light)]">纸本：澄心堂重浆宣 · 竖格 32px</span>
+            <button onclick="triggerJadeRipple(event, this); playCeladonChime(880); showToast('手札已封存至《藏经百宝嵌》');" class="ses-btn-jade !py-1.5 !px-5 text-xs">
+              落款封存
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 新增 V2.0 补全器物行：《牙签书帙》下拉选择器 + 《筹算纵横》算筹步进器 + 《急脚递金字牌》告警 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+        <!-- 1. 牙签书帙下拉选择器 (Ivory Book-Tag Select) -->
+        <div class="ses-card p-6 lg:col-span-4 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《牙签书帙》下拉选择器</h4>
+              <span class="text-[11px] text-[var(--ses-gold)] ses-slender-display">Select</span>
+            </div>
+            <p class="text-xs text-[var(--ses-ink-light)] mt-1">宋人藏书以象牙签题名垂于书衣之外，点选时牙签垂落并伴清脆叩击声。</p>
+          </div>
+
+          <div class="relative" id="yaqianSelectWrap">
+            <button type="button" onclick="toggleYaqianDropdown()" class="w-full px-4 py-2.5 rounded bg-[var(--ses-bg-canvas)] border border-[var(--ses-border-gold)] flex items-center justify-between text-left text-sm text-[var(--ses-ink-heavy)] hover:border-[var(--ses-gold)] transition cursor-pointer">
+              <span class="flex items-center gap-2">
+                <span class="text-[var(--ses-gold)]">🔖</span>
+                <span id="yaqianSelectedText">崇文总目 · 经部易类</span>
+              </span>
+              <span id="yaqianArrow" class="text-xs text-[var(--ses-gold)] transition-transform duration-300">▾</span>
+            </button>
+
+            <div id="yaqianDropdownMenu" class="hidden absolute left-0 right-0 top-full mt-1.5 z-30 rounded bg-[var(--ses-bg-sidebar)] border border-[var(--ses-gold)] shadow-2xl overflow-hidden text-xs">
+              <div onclick="selectYaqianItem('崇文总目 · 经部易类', '卷一 · 秘书省校定')" class="ses-yaqian-option">崇文总目 · 经部易类（秘书省校）</div>
+              <div onclick="selectYaqianItem('营造法式 · 大木作制度', '卷四 · 李诫奉敕编修')" class="ses-yaqian-option">营造法式 · 大木作制度（李诫编）</div>
+              <div onclick="selectYaqianItem('梦溪笔谈 · 象数器用', '卷七 · 沈括撰')" class="ses-yaqian-option">梦溪笔谈 · 象数器用（沈括撰）</div>
+              <div onclick="selectYaqianItem('宣和画谱 · 山水门', '卷十 · 内府秘藏')" class="ses-yaqian-option !border-b-0">宣和画谱 · 山水门（内府秘藏）</div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-[var(--ses-ink-light)] pt-2 border-t border-[var(--ses-border-hairline)]">
+            <span>书衣材质：八答晕宋锦</span>
+            <span id="yaqianMetaNote" class="text-[var(--ses-cinnabar)]">卷一 · 秘书省校定</span>
+          </div>
+        </div>
+
+        <!-- 2. 筹算纵横数字步进器 (Counting Rods Stepper) -->
+        <div class="ses-card p-6 lg:col-span-4 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《筹算纵横》算筹步进器</h4>
+              <span class="text-[11px] text-[var(--ses-gold)] ses-slender-display">Stepper</span>
+            </div>
+            <p class="text-xs text-[var(--ses-ink-light)] mt-1">实时将数值化为北宋“纵横算筹”竹策排布（个位纵式、十位横式）。</p>
+          </div>
+
+          <div class="p-3.5 rounded bg-[var(--ses-bg-canvas)] border border-[var(--ses-border-hairline)] flex items-center justify-between">
+            <button type="button" onclick="stepCountingRods(-1)" class="ses-btn-jade !px-3.5 !py-1.5 text-sm font-bold">−</button>
+            <div class="text-center">
+              <div id="rodGlyphDisplay" class="text-2xl tracking-[0.25em] text-[var(--ses-gold)] font-semibold h-8 flex items-center justify-center">
+                〢〧
+              </div>
+              <div class="text-[11px] text-[var(--ses-ink-light)] mt-0.5">
+                大衍筹策：<strong id="rodNumberDisplay" class="text-[var(--ses-ink-heavy)] font-mono">27</strong> 策
+              </div>
+            </div>
+            <button type="button" onclick="stepCountingRods(1)" class="ses-btn-jade !px-3.5 !py-1.5 text-sm font-bold">+</button>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-[var(--ses-ink-light)] pt-2 border-t border-[var(--ses-border-hairline)]">
+            <span>纵式：〡〢〣〤〥〦〧〨〩</span>
+            <span>秦九韶《数书九章》制</span>
+          </div>
+        </div>
+
+        <!-- 3. 急脚递金字牌警示框 (Gold-Inscribed Cinnabar Alert) -->
+        <div class="ses-card p-6 lg:col-span-4 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《急脚递金字牌》系统警示</h4>
+              <span class="text-[11px] text-[var(--ses-gold)] ses-slender-display">Alert Banner</span>
+            </div>
+            <p class="text-xs text-[var(--ses-ink-light)] mt-1">宋代枢密院最高急件用“朱漆木牌泥金字”，日行五百里，以瘦金体题写告警。</p>
+          </div>
+
+          <div class="ses-jinzipai-alert">
+            <div class="flex items-center justify-between border-b border-[#DFB870]/30 pb-1.5 mb-2">
+              <span class="ses-slender-display text-sm font-bold tracking-[0.26em] text-[#F7DF9C]">⚡ 御前急脚递 · 金字牌</span>
+              <span class="text-[10px] px-1.5 py-0.5 bg-black/30 rounded text-[#F3D999] font-mono">日行五百里</span>
+            </div>
+            <p class="text-xs leading-relaxed text-[#F7EFE0]/90">
+              汴河桃花汛水位已逾岸标三尺，请即刻启闭汴口水门，调拨漕船入避风澳。
+            </p>
+          </div>
+
+          <div class="flex justify-end">
+            <button type="button" onclick="playBronzeBell(); showToast('已奉领金字牌军令，汴口水门已下闸！');" class="ses-seal-stamp text-xs cursor-pointer">
+              奉敕领牌
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         第二篇：【点茶·声律】建盏斗茶加载器、七弦琴轸滑块、古卷徐开弹窗、折枝屏风抽屉
+         ========================================================================== -->
+    <section id="section-tea" class="ses-tab-panel space-y-6">
+      <div class="flex items-center justify-between border-b border-[var(--ses-border-hairline)] pb-3">
+        <div class="flex items-center gap-3">
+          <span class="ses-seal-stamp">贰</span>
+          <h3 class="ses-slender-gold text-xl">点茶 · 器物动态与声律交互</h3>
+        </div>
+        <span class="text-xs text-[var(--ses-ink-light)] tracking-widest">建盏斗茶 / 七弦琴轸 / 古卷徐开 / 折枝屏风</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="ses-card p-6 lg:col-span-5 flex flex-col items-center justify-between text-center space-y-4">
+          <div class="w-full text-left">
+            <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">建盏斗茶加载器 (Tea Whisking Loader)</h4>
+            <p class="text-xs text-[var(--ses-ink-light)] mt-1">模拟宋代兔毫黑釉盏注水击拂，白色盏沫渐盈。</p>
+          </div>
+
+          <div class="relative w-44 h-44 flex items-center justify-center my-2">
+            <svg viewBox="0 0 180 180" class="w-full h-full drop-shadow-md">
+              <defs>
+                <radialGradient id="jianzhanGlaze" cx="50%" cy="45%" r="50%">
+                  <stop offset="0%" stop-color="#2D2622" />
+                  <stop offset="70%" stop-color="#191615" />
+                  <stop offset="92%" stop-color="#4A3525" />
+                  <stop offset="100%" stop-color="#12100F" />
+                </radialGradient>
+                <radialGradient id="teaFoamGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.98" />
+                  <stop offset="65%" stop-color="#F2EFE6" stop-opacity="0.92" />
+                  <stop offset="100%" stop-color="#D5D8CE" stop-opacity="0.7" />
+                </radialGradient>
+              </defs>
+              <circle cx="90" cy="90" r="78" fill="url(#jianzhanGlaze)" stroke="var(--ses-gold)" stroke-width="1.5" />
+              <circle cx="90" cy="90" r="72" fill="none" stroke="#6B4D36" stroke-width="0.6" stroke-dasharray="2 3" />
+              <circle id="teaFoamCircle" cx="90" cy="90" r="48" fill="url(#teaFoamGrad)" style="transition: r 0.3s ease;" />
+              <path id="teaSwirlPath" d="M90 60 C 110 60, 118 82, 102 98 C 88 112, 68 102, 72 84 C 75 70, 92 68, 96 80" fill="none" stroke="#B8B5A8" stroke-width="1.2" stroke-linecap="round" opacity="0.65" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              <span id="teaProgressText" class="text-lg font-bold text-[#232321] tracking-widest">68%</span>
+              <span id="teaStageText" class="text-[10px] text-[#5A574F] tracking-widest">四汤·乳雾</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 w-full justify-center">
+            <button onclick="startTeaWhisking(); playCeladonChime(784);" class="ses-btn-jade !py-1.5 !px-5 text-xs">
+              重注沸水击拂
+            </button>
+          </div>
+        </div>
+
+        <div class="ses-card p-6 lg:col-span-7 flex flex-col justify-between space-y-6">
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">七弦琴轸滑块 (Guqin String Slider)</h4>
+              <span id="guqinNoteDisplay" class="ses-brocade-tag text-xs">徵音 · 元祐元年 (64%)</span>
+            </div>
+            <p class="text-xs text-[var(--ses-ink-light)] mb-4">拖动古铜琴轸调节数值，琴弦随张力产生实时弧度形变并拨响五声音阶（宫商角徵羽）。</p>
+
+            <div class="p-4 rounded bg-[var(--ses-bg-subtle)] border border-[var(--ses-border-hairline)]">
+              <div id="guqinTrack" class="ses-guqin-track">
+                <svg id="guqinStringSvg" class="w-full h-full overflow-visible" preserveAspectRatio="none">
+                  <line x1="0" y1="6" x2="0" y2="30" stroke="var(--ses-ink-heavy)" stroke-width="3" />
+                  <line x1="100%" y1="6" x2="100%" y2="30" stroke="var(--ses-ink-heavy)" stroke-width="3" />
+                  <path id="guqinStringPath" d="M 0 18 Q 200 18 400 18" fill="none" stroke="var(--ses-gold)" stroke-width="1.8" />
+                </svg>
+                <div id="guqinThumb" class="ses-guqin-thumb" style="left: 64%;" title="左右拖动琴轸"></div>
+              </div>
+              <div class="flex justify-between text-[11px] text-[var(--ses-ink-light)] tracking-widest mt-1 px-1">
+                <span>建隆 (宫)</span>
+                <span>景德 (商)</span>
+                <span>熙宁 (角)</span>
+                <span>元祐 (徵)</span>
+                <span>宣和 (羽)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-[var(--ses-border-hairline)]">
+            <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em] mb-1">空间画卷与屏风 (Spatial Overlays)</h4>
+            <p class="text-xs text-[var(--ses-ink-light)] mb-4">突破传统居中黑框弹窗，还原卷轴左右徐展与紫檀独扇屏风侧滑意境。</p>
+            <div class="flex flex-wrap gap-4">
+              <button onclick="openScrollModal()" class="ses-btn-jade">
+                <span>📜 展阅《千里江山》古卷弹窗</span>
+              </button>
+              <button onclick="openScreenDrawer()" class="ses-btn-jade !border-[var(--ses-celadon-deep)]">
+                <span>🪟 推开《折枝山水》屏风抽屉</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         第三篇：【司辰·日晷香篆】昼晷·夜漏双生司辰 & 极简无炉丝绢一柱香
+         ========================================================================== -->
+    <section id="section-sundial" class="ses-tab-panel space-y-6">
+      <div class="flex items-center justify-between border-b border-[var(--ses-border-hairline)] pb-3">
+        <div class="flex items-center gap-3">
+          <span class="ses-seal-stamp">叁</span>
+          <h3 class="ses-slender-gold text-xl">司辰 · 昼晷夜漏与一柱香计时</h3>
+        </div>
+        <span class="text-xs text-[var(--ses-ink-light)] tracking-widest">澄心昼景用日晷 · 暗夜青瓷用夜漏 · 无炉丝绢燃香</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- 1. 昼晷·夜漏双生司辰 (Sundial & Clepsydra Dual Timepiece) -->
+        <div class="ses-card p-6 lg:col-span-6 flex flex-col justify-between space-y-4" onmouseenter="isHoveringTimepiece=true" onmouseleave="isHoveringTimepiece=false">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 id="timepieceTitle" class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">浮箭莲花刻漏 (Night Clepsydra)</h4>
+                <span id="timepieceModeBadge" class="text-[10px] px-1.5 py-0.5 rounded border border-[var(--ses-gold)]/50 text-[var(--ses-gold)]">暗夜司辰</span>
+              </div>
+              <p id="timepieceDesc" class="text-xs text-[var(--ses-ink-light)] mt-1">暗夜青瓷启用北宋浮箭刻漏，悬停此处可闻空灵滴水入壶声，浮箭随水位升沉报五更百刻。</p>
+            </div>
+            <span id="sundialTimeTag" class="ses-brocade-tag text-xs shrink-0">三更二点 · 子正 00:00</span>
+          </div>
+
+          <!-- 司辰双生舞台：严格隔离在 h-72 独立容器内 -->
+          <div class="relative flex items-center justify-center my-1 h-72 w-full overflow-hidden">
+            <!-- A. 澄心昼景：赤道式日晷时钟 (Equatorial Sundial) -->
+            <div class="ses-celestial-stage ses-sundial-view absolute inset-0 flex items-center justify-center">
+              <svg id="sundialSvg" viewBox="0 0 280 280" class="w-64 h-64 sm:w-72 sm:h-72 drop-shadow-md">
+                <defs>
+                  <radialGradient id="sundialStoneGrad" cx="42%" cy="38%" r="62%">
+                    <stop offset="0%" stop-color="var(--sundial-disc-inner)" />
+                    <stop offset="100%" stop-color="var(--sundial-disc-outer)" />
+                  </radialGradient>
+                  <linearGradient id="bronzeGnomonGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#E5C886" />
+                    <stop offset="50%" stop-color="#B8924A" />
+                    <stop offset="100%" stop-color="#6B5022" />
+                  </linearGradient>
+                </defs>
+
+                <!-- 日晷外圈石盘与双层刻线 -->
+                <circle cx="140" cy="140" r="130" fill="url(#sundialStoneGrad)" stroke="var(--ses-gold)" stroke-width="1.8" />
+                <circle cx="140" cy="140" r="121" fill="none" stroke="var(--ses-border-hairline)" stroke-width="0.8" />
+                <circle cx="140" cy="140" r="95" fill="none" stroke="var(--ses-gold)" stroke-width="0.9" opacity="0.7" />
+                <circle cx="140" cy="140" r="56" fill="none" stroke="var(--ses-border-hairline)" stroke-width="0.7" stroke-dasharray="2 3" />
+
+                <!-- 十二地支铭文与百刻细刻度（JS 动态生成） -->
+                <g id="sundialTicksGroup"></g>
+
+                <!-- 动态投射晷影层 -->
+                <g id="sundialShadowGroup" transform="rotate(0 140 140)" style="transition: transform 0.25s ease-out;">
+                  <polygon id="sundialShadowPoly" points="136.5,140 143.5,140 140.9,62 139.1,62" fill="var(--sundial-shadow)" filter="url(#sundialShadowBlur)" />
+                </g>
+
+                <!-- 中心立体青铜晷针底座与斜向立针 -->
+                <circle cx="140" cy="140" r="13" fill="var(--ses-bg-canvas)" stroke="var(--ses-gold)" stroke-width="1.2" />
+                <circle cx="140" cy="140" r="8" fill="url(#bronzeGnomonGrad)" stroke="#3A2810" stroke-width="0.8" />
+                <line x1="140" y1="140" x2="127" y2="118" stroke="#3A2810" stroke-width="3.6" stroke-linecap="round" />
+                <line x1="140" y1="140" x2="127" y2="118" stroke="url(#bronzeGnomonGrad)" stroke-width="2.2" stroke-linecap="round" />
+                <circle cx="140" cy="140" r="2.5" fill="#F7F4EC" />
+              </svg>
+            </div>
+
+            <!-- B. 暗夜青瓷：北宋浮箭莲花刻漏 (Clepsydra) -->
+            <div class="ses-celestial-stage ses-clepsydra-view absolute inset-0 flex items-center justify-center">
+              <svg id="clepsydraSvg" viewBox="0 0 280 280" class="w-64 h-64 sm:w-72 sm:h-72 drop-shadow-md">
+                <defs>
+                  <linearGradient id="clepsydraWaterGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#8FA08B" stop-opacity="0.58" />
+                    <stop offset="45%" stop-color="#567264" stop-opacity="0.42" />
+                    <stop offset="100%" stop-color="#1E2823" stop-opacity="0.75" />
+                  </linearGradient>
+                  <linearGradient id="clepsydraVesselGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#8FA08B" stop-opacity="0.22" />
+                    <stop offset="25%" stop-color="#2E352F" stop-opacity="0.1" />
+                    <stop offset="75%" stop-color="#2E352F" stop-opacity="0.1" />
+                    <stop offset="100%" stop-color="#C8A86B" stop-opacity="0.24" />
+                  </linearGradient>
+                  <linearGradient id="floatArrowWoodGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#5C3D28" />
+                    <stop offset="50%" stop-color="#825A3C" />
+                    <stop offset="100%" stop-color="#3E2819" />
+                  </linearGradient>
+                  <clipPath id="clepsydraChamberClip">
+                    <rect x="96" y="112" width="88" height="132" rx="8" />
+                  </clipPath>
+                </defs>
+
+                <!-- 背景浑天星轨虚线环 -->
+                <circle cx="140" cy="155" r="112" fill="none" stroke="var(--ses-gold)" stroke-width="0.6" stroke-dasharray="2 6" opacity="0.35" />
+
+                <!-- 1. 上方青铜渴乌滴漏器（移至右侧 x=162，避开中央浮箭标尺） -->
+                <g transform="translate(0, -2)">
+                  <path d="M84 36 L196 36" stroke="var(--ses-gold)" stroke-width="1.2" opacity="0.6" />
+                  <path d="M118 20 L162 20 Q 170 20, 170 28 L170 44 Q 170 52, 162 54 L162 60" fill="none" stroke="var(--ses-gold)" stroke-width="2.4" stroke-linecap="round" />
+                  <path d="M155 56 Q 162 64, 169 56 Z" fill="#8FA08B" stroke="var(--ses-gold)" stroke-width="1" />
+                </g>
+
+                <!-- 2. 凝结滴落的晶莹水珠（严格沿 x=162 垂直坠入下壶水面） -->
+                <path class="clepsydra-falling-drop" d="M162 62 C162 62, 165.5 67.5, 165.5 70 A3.5 3.5 0 1 1 158.5 70 C158.5 67.5, 162 62, 162 62 Z" fill="#B8D4C8" />
+
+                <!-- 3. 下方受水壶外轮廓 -->
+                <rect x="94" y="110" width="92" height="136" rx="10" fill="url(#clepsydraVesselGrad)" stroke="var(--ses-gold)" stroke-width="1.4" />
+                <path d="M88 110 L192 110" stroke="var(--ses-gold)" stroke-width="2.2" stroke-linecap="round" />
+                <path d="M84 246 L196 246 L188 256 L92 256 Z" fill="#2A322B" stroke="var(--ses-gold)" stroke-width="1.2" />
+
+                <!-- 壶身左侧昼夜百刻与五更铭文对照 -->
+                <g id="clepsydraSideLabels" font-size="9.5" fill="var(--ses-ink-light)" letter-spacing="1">
+                  <text x="84" y="232" text-anchor="end">一更·戌</text>
+                  <text x="84" y="206" text-anchor="end">二更·亥</text>
+                  <text x="84" y="180" text-anchor="end">三更·子</text>
+                  <text x="84" y="154" text-anchor="end">四更·丑</text>
+                  <text x="84" y="128" text-anchor="end">五更·寅</text>
+                </g>
+
+                <!-- 4. 受水壶内部动态水位与涟漪 -->
+                <g clip-path="url(#clepsydraChamberClip)">
+                  <rect id="clepsydraWaterRect" x="96" y="180" width="88" height="64" fill="url(#clepsydraWaterGrad)" style="transition: y 0.35s ease-out, height 0.35s ease-out;" />
+                  <line id="clepsydraWaterLine" x1="96" y1="180" x2="184" y2="180" stroke="#C5DED3" stroke-width="1.4" opacity="0.85" style="transition: y1 0.35s ease-out, y2 0.35s ease-out;" />
+                  <ellipse id="clepsydraRippleEl" class="clepsydra-surface-ripple" cx="162" cy="180" rx="4" ry="1.2" fill="none" stroke="var(--ses-gold)" stroke-width="1.1" />
+                </g>
+
+                <!-- 5. 浮箭标尺 -->
+                <g id="clepsydraFloatArrow" transform="translate(0, 0)" style="transition: transform 0.35s ease-out;">
+                  <ellipse cx="140" cy="180" rx="16" ry="4.5" fill="#8FA08B" stroke="var(--ses-gold)" stroke-width="1" />
+                  <rect x="136.5" y="76" width="7" height="104" rx="1.5" fill="url(#floatArrowWoodGrad)" stroke="var(--ses-gold)" stroke-width="0.9" />
+                  <polygon points="140,68 134,77 146,77" fill="var(--ses-cinnabar)" stroke="var(--ses-gold)" stroke-width="0.8" />
+                  <g stroke="var(--ses-gold)" stroke-width="0.8" opacity="0.9">
+                    <line x1="137" y1="88" x2="141" y2="88" />
+                    <line x1="137" y1="100" x2="142.5" y2="100" />
+                    <line x1="137" y1="112" x2="141" y2="112" />
+                    <line x1="137" y1="124" x2="142.5" y2="124" />
+                    <line x1="137" y1="136" x2="141" y2="136" />
+                    <line x1="137" y1="148" x2="142.5" y2="148" />
+                    <line x1="137" y1="160" x2="141" y2="160" />
+                  </g>
+                </g>
+
+                <!-- 壶口司辰朱砂读数指针 -->
+                <polygon points="124,110 133,106.5 133,113.5" fill="var(--ses-cinnabar)" />
+                <polygon points="156,110 147,106.5 147,113.5" fill="var(--ses-cinnabar)" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- 时辰/夜漏模拟滑轨 & 同步真实时刻 -->
+          <div class="space-y-2 pt-3 border-t border-[var(--ses-border-hairline)]">
+            <div class="flex items-center justify-between text-xs">
+              <span id="sundialSliderHint" class="text-[var(--ses-ink-light)]">夜漏模拟（拖动观察受水壶水位与浮箭升沉）</span>
+              <button onclick="syncSundialRealtime()" class="text-[var(--ses-cinnabar)] hover:underline cursor-pointer">↺ 同步此刻真实时辰</button>
+            </div>
+            <input id="sundialSlider" type="range" min="0" max="1439" value="720" oninput="onSundialSliderInput(this.value)" class="w-full accent-[var(--ses-gold)] cursor-pointer h-1.5 bg-[var(--ses-bg-subtle)] rounded-lg" />
+          </div>
+        </div>
+
+        <!-- 2. 一柱香倒计时器 (无香炉极简留白 + 点燃前无红点无烟 + 丝绢线性青烟) -->
+        <div class="ses-card p-6 lg:col-span-6 flex flex-col justify-between space-y-4">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">一柱香倒计时器 (Incense Stick Timer)</h4>
+              <p class="text-xs text-[var(--ses-ink-light)] mt-1">无炉留白意境，点燃前素静无烟；引火后微烬明灭，三缕丝绢青烟袅袅升腾。</p>
+            </div>
+            <span id="incenseRemainTag" class="ses-brocade-tag text-xs font-mono shrink-0">00:15</span>
+          </div>
+
+          <!-- 极简线香画布 -->
+          <div class="relative flex flex-col items-center justify-center my-1 h-72 rounded bg-[var(--ses-bg-canvas)]/60 border border-[var(--ses-border-hairline)] overflow-hidden">
+            <svg id="incenseCanvasSvg" viewBox="0 0 260 250" class="w-full h-full">
+              <defs>
+                <!-- 青烟竖向渐隐渐变 -->
+                <linearGradient id="silkSmokeGrad1" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="var(--ses-celadon-deep)" stop-opacity="0.72" />
+                  <stop offset="55%" stop-color="var(--ses-celadon)" stop-opacity="0.35" />
+                  <stop offset="100%" stop-color="var(--ses-celadon)" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="silkSmokeGrad2" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="var(--ses-ink-light)" stop-opacity="0.55" />
+                  <stop offset="65%" stop-color="var(--ses-celadon-deep)" stop-opacity="0.22" />
+                  <stop offset="100%" stop-color="var(--ses-celadon-deep)" stop-opacity="0" />
+                </linearGradient>
+                <!-- 沉香木质感渐变 -->
+                <linearGradient id="agarwoodGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#5C4938" />
+                  <stop offset="50%" stop-color="#856B52" />
+                  <stop offset="100%" stop-color="#4A3A2C" />
+                </linearGradient>
+                <!-- 乌丝地平线渐隐 -->
+                <linearGradient id="horizonLineGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="var(--ses-gold)" stop-opacity="0" />
+                  <stop offset="50%" stop-color="var(--ses-gold)" stop-opacity="0.55" />
+                  <stop offset="100%" stop-color="var(--ses-gold)" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <!-- 极简留白地平线与微小青玉立香承托点（无香炉） -->
+              <line x1="36" y1="226" x2="224" y2="226" stroke="url(#horizonLineGrad)" stroke-width="1" />
+              <ellipse cx="130" cy="224" rx="10" ry="2.6" fill="var(--ses-celadon)" stroke="var(--ses-gold)" stroke-width="0.8" />
+              <ellipse id="incenseAshPile" cx="130" cy="224.5" rx="0" ry="0" fill="#B6BEB4" opacity="0.6" />
+
+              <!-- 挺拔沉香线香本体 -->
+              <rect id="incenseStickBody" x="128.4" y="94" width="3.2" height="128" rx="1" fill="url(#agarwoodGrad)" />
+              <!-- 点燃前素净平切断面（点燃后自动隐藏） -->
+              <rect id="incenseRawTop" x="128.4" y="94" width="3.2" height="1.8" fill="#A68B6D" />
+
+              <!-- 点燃后的微缩余烬（严格居中于 x=130，点燃前隐藏） -->
+              <g id="incenseBurnHead" style="opacity: 0; transition: opacity 0.3s ease;">
+                <rect id="incenseCharBand" x="128.4" y="94" width="3.2" height="2.4" fill="#2A2623" />
+                <circle id="incenseEmberCore" class="ses-ember-glow" cx="130" cy="94" r="1.8" fill="#E04F3E" />
+              </g>
+
+              <!-- 三缕丝绢线性青烟（三次贝塞尔曲线） -->
+              <g id="incenseSilkSmokeGroup" style="opacity: 0; transition: opacity 0.6s ease;">
+                <path id="smokeRibbon1" d="M 130 92 C 135 68, 122 40, 134 10" fill="none" stroke="url(#silkSmokeGrad1)" stroke-width="1.35" stroke-linecap="round" />
+                <path id="smokeRibbon2" d="M 130 92 C 124 64, 138 34, 126 4" fill="none" stroke="url(#silkSmokeGrad2)" stroke-width="1.05" stroke-linecap="round" />
+                <path id="smokeRibbon3" d="M 130 92 C 132 72, 128 46, 131 20" fill="none" stroke="url(#silkSmokeGrad1)" stroke-width="0.75" stroke-linecap="round" opacity="0.75" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- 时长预设与引火/熄香控制 -->
+          <div class="space-y-3 pt-2 border-t border-[var(--ses-border-hairline)]">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap gap-1.5">
+                <button onclick="selectIncenseDuration(15, '十息演示')" class="ses-btn-jade !py-1 !px-2.5 text-[11px]">十息演示 (15s)</button>
+                <button onclick="selectIncenseDuration(300, '半盏茶')" class="ses-btn-jade !py-1 !px-2.5 text-[11px]">半盏茶 (5m)</button>
+                <button onclick="selectIncenseDuration(900, '一盏茶')" class="ses-btn-jade !py-1 !px-2.5 text-[11px]">一盏茶 (15m)</button>
+                <button onclick="selectIncenseDuration(1800, '一柱香')" class="ses-btn-jade !py-1 !px-2.5 text-[11px]">一柱香 (30m)</button>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="incenseActionBtn" onclick="toggleIncenseBurn()" class="ses-seal-stamp px-3.5 py-1.5 text-xs cursor-pointer">
+                  🔥 引火燃香
+                </button>
+                <button onclick="resetIncenseTimer()" class="ses-btn-jade !py-1 !px-3 text-xs">
+                  换新香
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         第四篇：【挂画·数据图谱】千里江山青绿叠嶂图、司南浑天仪仪表盘、鱼鳞图册、斗拱树、刻漏步骤
+         ========================================================================== -->
+    <section id="section-painting" class="ses-tab-panel space-y-6">
+      <div class="flex items-center justify-between border-b border-[var(--ses-border-hairline)] pb-3">
+        <div class="flex items-center gap-3">
+          <span class="ses-seal-stamp">肆</span>
+          <h3 class="ses-slender-gold text-xl">挂画 · 高阶数据图谱与营建控件</h3>
+        </div>
+        <span class="text-xs text-[var(--ses-ink-light)] tracking-widest">青绿叠嶂图 / 司南浑天仪 / 鱼鳞图册 / 营造斗拱 / 莲花刻漏</span>
+      </div>
+
+      <!-- 刻漏滴水步骤条 -->
+      <div class="ses-card p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+          <div>
+            <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">刻漏滴水步骤条 (Lotus Clepsydra Steps)</h4>
+            <p class="text-xs text-[var(--ses-ink-light)]">取意北宋苏颂“莲花漏”，点击任意青铜受水壶切换当前修撰进程。</p>
+          </div>
+          <span id="clepsydraStatusText" class="ses-brocade-tag text-xs">当前辰时：校勘设色</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="clepsydraSteps">
+          <div onclick="setClepsydraStep(1, '择纸研墨')" class="clepsydra-step cursor-pointer p-3.5 rounded border border-[var(--ses-malachite)] bg-[var(--ses-malachite)]/10 transition">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-[var(--ses-malachite)]">壹 · 蓄水已满</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[var(--ses-malachite)]"></span>
+            </div>
+            <div class="text-sm font-semibold text-[var(--ses-ink-heavy)]">择纸研墨</div>
+            <div class="text-[11px] text-[var(--ses-ink-light)] mt-0.5">澄心堂纸与松烟徽墨已备</div>
+          </div>
+          <div onclick="setClepsydraStep(2, '起草勾勒')" class="clepsydra-step cursor-pointer p-3.5 rounded border border-[var(--ses-malachite)] bg-[var(--ses-malachite)]/10 transition">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-[var(--ses-malachite)]">贰 · 蓄水已满</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[var(--ses-malachite)]"></span>
+            </div>
+            <div class="text-sm font-semibold text-[var(--ses-ink-heavy)]">起草勾勒</div>
+            <div class="text-[11px] text-[var(--ses-ink-light)] mt-0.5">界画斗拱比例校定无误</div>
+          </div>
+          <div onclick="setClepsydraStep(3, '校勘设色')" class="clepsydra-step cursor-pointer p-3.5 rounded border border-[var(--ses-cinnabar)] bg-[var(--ses-cinnabar)]/10 transition relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-[var(--ses-cinnabar)]">叁 · 滴水注壶</span>
+              <span class="inline-block w-2 h-2 rounded-full bg-[var(--ses-cinnabar)] ses-water-drop"></span>
+            </div>
+            <div class="text-sm font-semibold text-[var(--ses-ink-heavy)]">校勘设色</div>
+            <div class="text-[11px] text-[var(--ses-ink-light)] mt-0.5">石青石绿层层晕染中</div>
+          </div>
+          <div onclick="setClepsydraStep(4, '钤印装裱')" class="clepsydra-step cursor-pointer p-3.5 rounded border border-[var(--ses-border-hairline)] opacity-70 hover:opacity-100 transition">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-[var(--ses-ink-light)]">肆 · 虚壶待注</span>
+              <span class="w-2.5 h-2.5 rounded-full border border-[var(--ses-ink-light)]"></span>
+            </div>
+            <div class="text-sm font-semibold text-[var(--ses-ink-heavy)]">钤印装裱</div>
+            <div class="text-[11px] text-[var(--ses-ink-light)] mt-0.5">宋锦包首紫檀轴装池</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 千里江山青绿叠嶂面积图 + 司南与浑天仪仪表盘 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="ses-card p-6 lg:col-span-8 flex flex-col justify-between">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <div>
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《千里江山·青绿叠嶂》数据画卷</h4>
+              <p class="text-xs text-[var(--ses-ink-light)]">师法王希孟青绿设色：赭石山脚、石绿山腰、石青峰顶，移步换景可观十二月令详数。</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="updateMountainChart('grain')" id="btnChartGrain" class="ses-btn-jade !py-1 !px-3 text-xs !border-[var(--ses-gold)]">汴京漕粮</button>
+              <button onclick="updateMountainChart('kiln')" id="btnChartKiln" class="ses-btn-jade !py-1 !px-3 text-xs">官窑岁贡</button>
+            </div>
+          </div>
+
+          <div id="mountainChartContainer" class="relative w-full h-72 rounded border border-[var(--ses-border-gold)]/60 bg-[var(--ses-bg-canvas)] overflow-hidden cursor-crosshair select-none" onmousemove="onMountainHover(event)" onmouseleave="hideMountainTooltip()">
+            <svg id="mountainChartSvg" viewBox="0 0 600 240" class="w-full h-full" preserveAspectRatio="none">
+              <defs>
+                <!-- 1. 远黛烟岚渐变 -->
+                <linearGradient id="distantMistMountain" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#527B99" stop-opacity="0.32" />
+                  <stop offset="60%" stop-color="#8FA08B" stop-opacity="0.14" />
+                  <stop offset="100%" stop-color="#232924" stop-opacity="0" />
+                </linearGradient>
+                <!-- 2. 中景石青主峰渐变 -->
+                <linearGradient id="azuriteMainPeak" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2E5A78" stop-opacity="0.92" />
+                  <stop offset="48%" stop-color="#4A7A68" stop-opacity="0.72" />
+                  <stop offset="85%" stop-color="#9E7B4F" stop-opacity="0.35" />
+                  <stop offset="100%" stop-color="#232924" stop-opacity="0.04" />
+                </linearGradient>
+                <!-- 3. 前景石绿坡脚 + 赭石染底渐变（王希孟经典青绿叠晕） -->
+                <linearGradient id="malachiteOchreSlope" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#4E7D5B" stop-opacity="0.88" />
+                  <stop offset="55%" stop-color="#769671" stop-opacity="0.62" />
+                  <stop offset="88%" stop-color="#B08954" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#8A663B" stop-opacity="0.15" />
+                </linearGradient>
+                <!-- 4. 山间云气白练渐变 -->
+                <linearGradient id="valleyCloudMist" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#F7F4EC" stop-opacity="0" />
+                  <stop offset="35%" stop-color="#F7F4EC" stop-opacity="0.16" />
+                  <stop offset="65%" stop-color="#F7F4EC" stop-opacity="0.22" />
+                  <stop offset="100%" stop-color="#F7F4EC" stop-opacity="0" />
+                </linearGradient>
+                <!-- 5. 泥金水波微光 -->
+                <linearGradient id="riverRippleGold" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="var(--ses-gold)" stop-opacity="0" />
+                  <stop offset="50%" stop-color="var(--ses-gold)" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="var(--ses-gold)" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <!-- 绢本乌丝暗格参考线 -->
+              <g stroke="var(--ses-border-hairline)" stroke-width="0.6" stroke-dasharray="2 4">
+                <line x1="0" y1="55" x2="600" y2="55" />
+                <line x1="0" y1="105" x2="600" y2="105" />
+                <line x1="0" y1="155" x2="600" y2="155" />
+              </g>
+
+              <!-- 远景：烟岚重峦（圆润三次贝塞尔弧线） -->
+              <path id="mountainFarPath" d="" fill="url(#distantMistMountain)" style="transition: d 0.85s var(--ses-ease-scroll);" />
+
+              <!-- 中景：石青主峰叠嶂（Catmull-Rom 浑厚山峰曲线 + 浅青高光山脊线） -->
+              <path id="mountainBackPath" d="" fill="url(#azuriteMainPeak)" stroke="#7EA8BE" stroke-width="0.95" stroke-linecap="round" style="transition: d 0.85s var(--ses-ease-scroll);" />
+
+              <!-- 山腰流云烟霭带 -->
+              <path d="M40 148 Q 180 134, 320 146 T 580 138 L 580 156 Q 340 164, 190 152 T 40 162 Z" fill="url(#valleyCloudMist)" />
+
+              <!-- 前景：石绿坡脚 + 赭石山麓 + 泥金勾勒圆润山脊 -->
+              <path id="mountainFrontPath" d="" fill="url(#malachiteOchreSlope)" stroke="var(--ses-gold)" stroke-width="1.35" stroke-linejoin="round" style="transition: d 0.85s var(--ses-ease-scroll);" />
+
+              <!-- 山脚平湖水波与一叶扁舟 -->
+              <line x1="20" y1="212" x2="580" y2="212" stroke="url(#riverRippleGold)" stroke-width="0.9" />
+              <path d="M120 216 Q 160 214, 200 216" fill="none" stroke="var(--ses-gold)" stroke-width="0.7" opacity="0.5" />
+              <g transform="translate(472, 209)" opacity="0.85">
+                <path d="M-9 2 Q 0 5, 9 2 L 6 0 L -6 0 Z" fill="var(--ses-gold)" />
+                <line x1="0" y1="0" x2="0" y2="-5" stroke="var(--ses-gold)" stroke-width="0.8" />
+                <polygon points="0,-5 4,-2 0,-1" fill="var(--ses-cinnabar)" />
+              </g>
+
+              <!-- 交互游标垂线与高光山峰点（随鼠标移动） -->
+              <g id="mountainCursorGroup" style="opacity: 0; transition: opacity 0.2s ease;">
+                <line id="mountainCursorLine" x1="300" y1="24" x2="300" y2="215" stroke="var(--ses-gold)" stroke-width="0.9" stroke-dasharray="3 3" />
+                <circle id="mountainCursorDotBack" cx="300" cy="80" r="3.5" fill="#7EA8BE" stroke="#1B201C" stroke-width="1.2" />
+                <circle id="mountainCursorDotFront" cx="300" cy="110" r="4.2" fill="var(--ses-cinnabar)" stroke="#F7F4EC" stroke-width="1.3" />
+              </g>
+            </svg>
+
+            <!-- 极值朱砂印章标注（HTML 弹性胶囊印章，彻底不受 SVG 宽屏横向拉伸影响，左右留白永远充裕） -->
+            <div id="peakSealMarker" style="left: 45.5%; top: 18px; transform: translateX(-50%); transition: left 0.85s var(--ses-ease-scroll), top 0.85s var(--ses-ease-scroll);" class="pointer-events-none absolute z-10 inline-flex items-center justify-center px-3.5 py-1 rounded-[3px] bg-[var(--ses-cinnabar)] border border-[var(--ses-gold)] text-[#F7F4EC] text-[11px] ses-slender-display tracking-[0.18em] whitespace-nowrap shadow-md">
+              极峰 · 六百万石
+            </div>
+
+            <!-- 随动山岚浮签 Tooltip（修复 --ses-bg-sidebar 变量名，适配昼夜双境） -->
+            <div id="mountainHoverTooltip" class="pointer-events-none absolute top-3 left-3 z-20 px-3 py-2 rounded bg-[var(--ses-bg-sidebar)]/95 border border-[var(--ses-gold)]/70 backdrop-blur-md shadow-lg transition-opacity duration-200 opacity-0">
+              <div class="flex items-center gap-2 text-[11px] font-semibold text-[var(--ses-gold)]">
+                <span id="mTipMonth">五月 · 芒种</span>
+                <span class="text-[var(--ses-ink-light)]">|</span>
+                <span id="mTipDataset" class="text-[var(--ses-ink-heavy)]">汴京漕粮岁运</span>
+              </div>
+              <div class="mt-1 space-y-0.5 text-[11px]">
+                <div class="flex items-center justify-between gap-4">
+                  <span class="text-[#7EA8BE]">● 石青主峰（总入库）：</span>
+                  <span id="mTipValBack" class="font-mono font-bold text-[var(--ses-ink-heavy)]">612 万石</span>
+                </div>
+                <div class="flex items-center justify-between gap-4">
+                  <span class="text-[var(--ses-cinnabar)]">● 石绿前坡（御仓留存）：</span>
+                  <span id="mTipValFront" class="font-mono font-bold text-[var(--ses-ink-heavy)]">485 万石</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 底部十二月令刻度 -->
+            <div class="absolute bottom-1.5 inset-x-3 flex justify-between text-[10px] text-[var(--ses-ink-light)] tracking-wider">
+              <span>正月</span>
+              <span>二月</span>
+              <span>三月</span>
+              <span>四月</span>
+              <span>五月</span>
+              <span>六月</span>
+              <span>七月</span>
+              <span>八月</span>
+              <span>九月</span>
+              <span>十月</span>
+              <span>十一月</span>
+              <span>腊月</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ses-card p-6 lg:col-span-4 flex flex-col items-center justify-between text-center">
+          <div class="w-full text-left">
+            <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">司南与浑天仪盘 (Astrolabe Gauge)</h4>
+            <p class="text-xs text-[var(--ses-ink-light)]">二十四节气青铜罗盘刻度，司南磁勺阻尼指向。</p>
+          </div>
+
+          <div class="relative w-44 h-44 my-2">
+            <svg viewBox="0 0 180 180" class="w-full h-full">
+              <circle cx="90" cy="90" r="80" fill="none" stroke="var(--ses-gold)" stroke-width="1.5" />
+              <circle cx="90" cy="90" r="68" fill="none" stroke="var(--ses-border-hairline)" stroke-width="6" stroke-dasharray="2 7.5" />
+              <circle cx="90" cy="90" r="52" fill="var(--ses-bg-subtle)" stroke="var(--ses-celadon-deep)" stroke-width="0.8" />
+              <text x="90" y="24" text-anchor="middle" font-size="9" fill="var(--ses-cinnabar)" font-weight="bold">午·离</text>
+              <text x="90" y="163" text-anchor="middle" font-size="9" fill="var(--ses-ink-medium)">子·坎</text>
+              <text x="20" y="93" text-anchor="middle" font-size="9" fill="var(--ses-ink-medium)">卯·震</text>
+              <text x="160" y="93" text-anchor="middle" font-size="9" fill="var(--ses-ink-medium)">酉·兑</text>
+              <g id="sinanNeedle" transform="rotate(42 90 90)" style="transition: transform 0.9s var(--ses-ease-scroll);">
+                <path d="M90 36 L95 85 C98 95, 82 95, 85 85 Z" fill="var(--ses-cinnabar)" />
+                <circle cx="90" cy="90" r="7" fill="var(--ses-gold)" stroke="var(--ses-ink-heavy)" stroke-width="1" />
+                <path d="M90 135 L87 96 L93 96 Z" fill="var(--ses-ink-heavy)" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="flex items-center justify-between w-full pt-2 border-t border-[var(--ses-border-hairline)]">
+            <span id="sinanValueLabel" class="text-xs font-semibold text-[var(--ses-ink-heavy)]">谷雨 · 雅韵度 84%</span>
+            <button onclick="rotateSinanGauge()" class="ses-btn-jade !py-1 !px-3 text-xs">拨动司南</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 营造法式·斗拱结构树 & 鱼鳞图册乌丝栏数据表 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="ses-card p-6 lg:col-span-4 space-y-4">
+          <div>
+            <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《营造法式·斗拱结构》树</h4>
+            <p class="text-xs text-[var(--ses-ink-light)]">父节点为“栌斗”，子节点以榫卯华拱线条承托展开。</p>
+          </div>
+
+          <div class="space-y-2 text-sm select-none">
+            <div class="border border-[var(--ses-border-gold)] rounded p-2.5 bg-[var(--ses-bg-subtle)]">
+              <div onclick="toggleDougongNode('node1')" class="flex items-center justify-between cursor-pointer font-semibold text-[var(--ses-ink-heavy)]">
+                <span>⛩ 栌斗 · 大木作总纲</span>
+                <span id="node1-icon" class="text-xs text-[var(--ses-cinnabar)]">▾</span>
+              </div>
+              <div id="node1" class="mt-2.5 pl-4 border-l border-[var(--ses-gold)] space-y-2">
+                <div class="flex items-center gap-2 text-xs text-[var(--ses-ink-medium)]">
+                  <span class="text-[var(--ses-gold)]">├─</span>
+                  <span>第一跳 · 华拱（材分八等）</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-[var(--ses-ink-medium)]">
+                  <span class="text-[var(--ses-gold)]">├─</span>
+                  <span>第二跳 · 泥道拱与慢拱</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-[var(--ses-cinnabar)] font-medium">
+                  <span class="text-[var(--ses-gold)]">└─</span>
+                  <span>耍头 · 昂嘴批竹制式</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="border border-[var(--ses-border-hairline)] rounded p-2.5">
+              <div onclick="toggleDougongNode('node2')" class="flex items-center justify-between cursor-pointer font-semibold text-[var(--ses-ink-heavy)]">
+                <span>🏛 彩画作 · 五彩遍装</span>
+                <span id="node2-icon" class="text-xs text-[var(--ses-ink-light)]">▸</span>
+              </div>
+              <div id="node2" class="hidden mt-2.5 pl-4 border-l border-[var(--ses-celadon)] space-y-2">
+                <div class="flex items-center gap-2 text-xs text-[var(--ses-ink-medium)]">
+                  <span class="text-[var(--ses-celadon-deep)]">├─</span>
+                  <span>碾玉装（青绿叠晕）</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-[var(--ses-ink-medium)]">
+                  <span class="text-[var(--ses-celadon-deep)]">└─</span>
+                  <span>解绿装（素雅清晖）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ses-card p-6 lg:col-span-8 space-y-4 overflow-x-auto">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《鱼鳞图册》乌丝栏数据表</h4>
+              <p class="text-xs text-[var(--ses-ink-light)]">双线乌丝栏竖向分隔，悬停浮现蝉翼笺透光质感。</p>
+            </div>
+            <button onclick="sortFishscaleTable()" class="ses-btn-jade !py-1 !px-3 text-xs">
+              算筹排序（按岁入）
+            </button>
+          </div>
+
+          <table class="ses-fishscale-table" id="fishscaleTable">
+            <thead>
+              <tr>
+                <th>州府名号</th>
+                <th>主产雅物</th>
+                <th>贡赋评级</th>
+                <th>岁入（贯）</th>
+                <th>御批钤印</th>
+              </tr>
+            </thead>
+            <tbody id="fishscaleBody">
+              <tr data-val="92000">
+                <td class="font-semibold text-[var(--ses-ink-heavy)]">汝州 · 清凉寺</td>
+                <td>天青釉裹足支烧瓷</td>
+                <td><span class="ses-brocade-tag !py-0.5 !px-2 text-[11px]">御用甲等</span></td>
+                <td class="font-mono">92,000</td>
+                <td><span class="ses-seal-stamp !text-[10px]">宣和御览</span></td>
+              </tr>
+              <tr data-val="78500">
+                <td class="font-semibold text-[var(--ses-ink-heavy)]">建州 · 北苑</td>
+                <td>龙凤团茶·小龙团</td>
+                <td><span class="ses-brocade-tag !py-0.5 !px-2 text-[11px]">贡茶首品</span></td>
+                <td class="font-mono">78,500</td>
+                <td><span class="ses-seal-stamp !bg-[var(--ses-malachite)] !text-[10px]">已验入库</span></td>
+              </tr>
+              <tr data-val="114000">
+                <td class="font-semibold text-[var(--ses-ink-heavy)]">苏州 · 织造局</td>
+                <td>八答晕宋锦·青绿</td>
+                <td><span class="ses-brocade-tag !py-0.5 !px-2 text-[11px]">内府特供</span></td>
+                <td class="font-mono">114,000</td>
+                <td><span class="ses-seal-stamp !text-[10px]">宣和御览</span></td>
+              </tr>
+              <tr data-val="64200">
+                <td class="font-semibold text-[var(--ses-ink-heavy)]">歙州 · 龙尾山</td>
+                <td>罗纹金星砚·徽墨</td>
+                <td><span class="ses-brocade-tag !py-0.5 !px-2 text-[11px]">文房上品</span></td>
+                <td class="font-mono">64,200</td>
+                <td><span class="ses-seal-stamp !bg-[var(--ses-malachite)] !text-[10px]">已验入库</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 新增：《毕昇胶泥活字》分页器 (Movable Clay Type Pagination) -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[var(--ses-border-hairline)]">
+            <span id="clayPageStatus" class="text-xs text-[var(--ses-ink-light)]">毕昇胶泥活字印版 · 当前第 <strong class="text-[var(--ses-ink-heavy)]">壹</strong> 版（共肆版）</span>
+            <div class="flex items-center gap-1.5" id="clayPaginationGroup">
+              <button type="button" onclick="switchClayPage('prev')" class="ses-clay-type text-xs" title="上一印版">◁</button>
+              <button type="button" onclick="switchClayPage(1)" class="ses-clay-type active" data-page="1">壹</button>
+              <button type="button" onclick="switchClayPage(2)" class="ses-clay-type" data-page="2">贰</button>
+              <button type="button" onclick="switchClayPage(3)" class="ses-clay-type" data-page="3">叁</button>
+              <button type="button" onclick="switchClayPage(4)" class="ses-clay-type" data-page="4">肆</button>
+              <button type="button" onclick="switchClayPage('next')" class="ses-clay-type text-xs" title="下一印版">▷</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 新增：《经折装册页》折叠手风琴 + 《宋刻善本·乌丝栏竖排夹批》阅读容器 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+        <!-- 1. 经折装册页折叠面板 (Sutra Folded Accordion) -->
+        <div class="ses-card p-6 lg:col-span-5 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《经折装册页》折叠面板</h4>
+              <span class="text-[11px] text-[var(--ses-gold)] ses-slender-display">Accordion</span>
+            </div>
+            <p class="text-xs text-[var(--ses-ink-light)] mt-1 mb-3">取法宋代经折装长卷反复折叠制式，兼顾检索与卷轴仪式感。</p>
+
+            <div class="space-y-2.5" id="sutraAccordionGroup">
+              <div class="ses-sutra-fold open rounded p-3.5">
+                <button type="button" onclick="toggleSutraFold(0)" class="w-full flex items-center justify-between text-left text-xs font-semibold text-[var(--ses-ink-heavy)] cursor-pointer">
+                  <span>第一折 · 宋刻本刀法与字怀特征</span>
+                  <span class="sutra-icon text-[var(--ses-cinnabar)]">▾</span>
+                </button>
+                <div class="sutra-body mt-2.5 pt-2.5 border-t border-[var(--ses-border-hairline)] text-xs text-[var(--ses-ink-medium)] leading-6">
+                  北宋国子监刻本崇尚欧阳询、颜真卿楷法，横画收笔有顿角，竖画雄健挺拔。本系统以宋刻体统摄正文，久读温润不伤目。
+                </div>
+              </div>
+
+              <div class="ses-sutra-fold rounded p-3.5">
+                <button type="button" onclick="toggleSutraFold(1)" class="w-full flex items-center justify-between text-left text-xs font-semibold text-[var(--ses-ink-heavy)] cursor-pointer">
+                  <span>第二折 · 宣和瘦金体之铁画银钩</span>
+                  <span class="sutra-icon text-[var(--ses-ink-light)]">▸</span>
+                </button>
+                <div class="sutra-body hidden mt-2.5 pt-2.5 border-t border-[var(--ses-border-hairline)] text-xs text-[var(--ses-ink-medium)] leading-6">
+                  宋徽宗赵佶独创“瘦金书”，运笔疾速如鹤膝竹节，锋芒毕露。系统于大题、御赐徽章与金字牌处点睛使用，与宋刻体刚柔相济。
+                </div>
+              </div>
+
+              <div class="ses-sutra-fold rounded p-3.5">
+                <button type="button" onclick="toggleSutraFold(2)" class="w-full flex items-center justify-between text-left text-xs font-semibold text-[var(--ses-ink-heavy)] cursor-pointer">
+                  <span>第三折 · 昼晷夜漏的天文历法同构</span>
+                  <span class="sutra-icon text-[var(--ses-ink-light)]">▸</span>
+                </button>
+                <div class="sutra-body hidden mt-2.5 pt-2.5 border-t border-[var(--ses-border-hairline)] text-xs text-[var(--ses-ink-medium)] leading-6">
+                  突破现代 UI 仅换背景色的表层暗黑模式：白昼仰赖日光投射赤道石晷，入夜则启用苏颂水运浮箭莲花漏，器道合一。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 宋刻善本·乌丝栏竖排夹批阅读器 (Vertical Woodblock Reader) -->
+        <div class="ses-card p-6 lg:col-span-7 flex flex-col justify-between space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h4 class="text-sm font-semibold text-[var(--ses-ink-heavy)] tracking-[0.18em]">《宋刻善本·乌丝栏竖排夹批》阅读容器</h4>
+              <p class="text-xs text-[var(--ses-ink-light)] mt-0.5">还原北宋建安刻本“四周双栏、白口、黑鱼尾、朱砂句读圈点与双行夹批”，支持横竖一键流转。</p>
+            </div>
+            <button type="button" id="woodblockToggleBtn" onclick="toggleWoodblockOrientation()" class="ses-btn-jade !py-1 !px-3.5 text-xs !border-[var(--ses-gold)]">
+              <span>📜 切换为现代横排</span>
+            </button>
+          </div>
+
+          <div id="woodblockReader" class="ses-woodblock-reader vertical-mode rounded-sm text-sm text-[var(--ses-ink-heavy)] select-text">
+            <div class="ses-woodblock-title font-bold text-[var(--ses-cinnabar)] ses-slender-display">
+              钦定宣和博古图录·汝窑青瓷说
+            </div>
+            <p class="m-0">
+              汝州新窑器<span class="ses-judou-dot"></span>出北地清凉寺<span class="ses-judou-dot"></span>
+              <span class="ses-interlinear-note">〔臣谨按：玛瑙末为釉，唯供御拣退方许出卖〕</span>
+              色若雨过天青云破之处<span class="ses-judou-dot"></span>汁水莹厚如堆脂<span class="ses-judou-dot"></span>汁中棕眼隐若蟹爪<span class="ses-judou-dot"></span>底有细小芝麻挣针<span class="ses-judou-dot"></span>
+              <span class="ses-interlinear-note">〔原注：裹足支烧，釉面开冰裂蟹爪纹者尤贵〕</span>
+              凡立器、饮器、花囊、水仙盆之属<span class="ses-judou-dot"></span>皆温润静穆<span class="ses-judou-dot"></span>无一毫烟火燥气<span class="ses-judou-dot"></span>诚本朝诸窑之冠冕也<span class="ses-judou-dot"></span>
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-[var(--ses-ink-light)]">
+            <span>版心制式：四周双边 · 朱砂句读（<span class="ses-judou-dot"></span>）</span>
+            <span class="ses-slender-display text-[var(--ses-gold)]">秘阁善本雕版</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         第五篇：【插花·汴京格物志】全栈合成场景看板
+         ========================================================================== -->
+    <section id="section-flower" class="ses-tab-panel space-y-6">
+      <div class="flex items-center justify-between border-b border-[var(--ses-border-hairline)] pb-3">
+        <div class="flex items-center gap-3">
+          <span class="ses-seal-stamp">伍</span>
+          <h3 class="ses-slender-gold text-xl">插花 · 《汴京格物志》实战场景合成</h3>
+        </div>
+        <span class="text-xs text-[var(--ses-ink-light)] tracking-widest">堪舆舆图锚点 (GIS Map Pin) / 留白空状态 (Empty State)</span>
+      </div>
+
+      <div class="ses-card p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <!-- 左侧：北宋《东京城坊堪舆舆图》空间锚点与浮签检视器 (Map Pin & Popover Card) -->
+        <div class="lg:col-span-7 relative rounded border border-[var(--ses-border-gold)] bg-[var(--ses-bg-canvas)] p-5 flex flex-col justify-between overflow-hidden">
+          <!-- 顶部控件说明栏 -->
+          <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[var(--ses-border-hairline)]">
+            <div class="flex items-center gap-2.5">
+              <span class="ses-brocade-tag">东京梦华录 · 汴京城坊舆图</span>
+              <span class="text-[11px] text-[var(--ses-gold)] ses-slender-display">GIS Map Pin &amp; Popover</span>
+            </div>
+            <span id="landmarkCoord" class="text-xs font-mono text-[var(--ses-ink-light)]">北纬 34°47′12″ · 东经 114°20′36″</span>
+          </div>
+
+          <!-- 中部：可交互的北宋汴京城垣与汴河水系 SVG 舆图画布 -->
+          <div class="relative my-3 w-full h-56 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-subtle)]/40 overflow-hidden select-none">
+            <svg viewBox="0 0 600 240" class="w-full h-full">
+              <defs>
+                <!-- 汴河水系渐变 -->
+                <linearGradient id="bianRiverGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="var(--ses-celadon)" stop-opacity="0.15" />
+                  <stop offset="50%" stop-color="var(--ses-celadon-deep)" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="var(--ses-celadon)" stop-opacity="0.15" />
+                </linearGradient>
+                <!-- 锚点呼吸波纹动画 -->
+                <radialGradient id="pinGlowGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="var(--ses-cinnabar)" stop-opacity="0.55" />
+                  <stop offset="100%" stop-color="var(--ses-cinnabar)" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+
+              <!-- 1. 舆图经纬方格网（宋代“计里画方”制图法） -->
+              <g stroke="var(--ses-border-hairline)" stroke-width="0.5" stroke-dasharray="2 3">
+                <line x1="100" y1="0" x2="100" y2="240" />
+                <line x1="200" y1="0" x2="200" y2="240" />
+                <line x1="300" y1="0" x2="300" y2="240" />
+                <line x1="400" y1="0" x2="400" y2="240" />
+                <line x1="500" y1="0" x2="500" y2="240" />
+                <line x1="0" y1="60" x2="600" y2="60" />
+                <line x1="0" y1="120" x2="600" y2="120" />
+                <line x1="0" y1="180" x2="600" y2="180" />
+              </g>
+
+              <!-- 2. 三重城垣轮廓：外城（罗城）、内城（阙城）、大内（皇城） -->
+              <rect x="46" y="18" width="508" height="204" rx="2" fill="none" stroke="var(--ses-gold)" stroke-width="1.2" opacity="0.45" />
+              <rect x="135" y="42" width="330" height="156" rx="1" fill="none" stroke="var(--ses-gold)" stroke-width="0.9" stroke-dasharray="6 3" opacity="0.5" />
+              <rect x="235" y="54" width="110" height="68" fill="var(--ses-bg-canvas)" fill-opacity="0.55" stroke="var(--ses-cinnabar)" stroke-width="1" opacity="0.75" />
+              <text x="290" y="92" text-anchor="middle" font-size="10" fill="var(--ses-ink-light)" letter-spacing="3" opacity="0.7">大内皇城</text>
+
+              <!-- 3. 御街千步廊中轴线（自宣德门直通州桥、朱雀门） -->
+              <line x1="290" y1="122" x2="290" y2="222" stroke="var(--ses-gold)" stroke-width="1.8" stroke-dasharray="3 2" opacity="0.7" />
+              <text x="278" y="198" text-anchor="end" font-size="8.5" fill="var(--ses-gold)" opacity="0.75">御街中轴</text>
+
+              <!-- 4. 汴河（自西向东横贯东京城）与金水河水系 -->
+              <path d="M 0 142 Q 140 132, 290 156 T 600 164" fill="none" stroke="url(#bianRiverGrad)" stroke-width="12" stroke-linecap="round" />
+              <path d="M 0 142 Q 140 132, 290 156 T 600 164" fill="none" stroke="var(--ses-celadon-deep)" stroke-width="1.2" stroke-dasharray="5 3" />
+              <text x="88" y="130" font-size="9" fill="var(--ses-celadon-deep)" letter-spacing="2">汴河漕道</text>
+
+              <!-- 5. 激活态堪舆巡游连线 -->
+              <path id="mapActiveRoute" d="M 290 156 L 412 66 L 448 162 L 178 140" fill="none" stroke="var(--ses-cinnabar)" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.55" />
+
+              <!-- 6. 四处交互式堪舆地标锚点 (Interactive Map Pins) -->
+              <!-- 锚点 A：州桥夜市 (290, 156) -->
+              <g class="map-pin-node cursor-pointer" data-id="zhouqiao" onclick="selectBianjingLandmark('zhouqiao', '州桥夜市', '位于御街与汴河交汇处，水门灯火通明，车马阗拥，煎茶斗浆、旋切羊头百戏杂陈。', '元祐三年 · 御街津梁', '北纬 34°47′02″ · 东经 114°20′18″', 290, 156)">
+                <circle class="pin-ring" cx="290" cy="156" r="14" fill="url(#pinGlowGrad)" opacity="0" />
+                <circle class="pin-outer" cx="290" cy="156" r="6" fill="var(--ses-bg-canvas)" stroke="var(--ses-gold)" stroke-width="1.5" />
+                <circle class="pin-core" cx="290" cy="156" r="2.8" fill="var(--ses-gold)" />
+                <rect x="252" y="166" width="76" height="18" rx="2" fill="var(--ses-bg-sidebar)" fill-opacity="0.9" stroke="var(--ses-border-gold)" stroke-width="0.6" />
+                <text x="290" y="178" text-anchor="middle" font-size="9.5" fill="var(--ses-ink-heavy)" letter-spacing="1">州桥夜市</text>
+              </g>
+
+              <!-- 锚点 B：水运仪象台 (448, 162) —— 默认激活 -->
+              <g class="map-pin-node cursor-pointer" data-id="shuiyun" onclick="selectBianjingLandmark('shuiyun', '水运仪象台', '苏颂与韩公廉奉敕造于司天监，上设浑仪测日星、中置浑象、下设枢轮刻漏报时，乃世界天文钟鼻祖。', '元祐七年 · 司天格物', '北纬 34°47′12″ · 东经 114°20′36″', 448, 162)">
+                <circle class="pin-ring" cx="448" cy="162" r="18" fill="url(#pinGlowGrad)" opacity="1" />
+                <circle class="pin-outer" cx="448" cy="162" r="7" fill="var(--ses-cinnabar)" stroke="#F7F4EC" stroke-width="1.5" />
+                <circle class="pin-core" cx="448" cy="162" r="2.8" fill="#F7F4EC" />
+                <rect x="404" y="132" width="88" height="19" rx="2" fill="var(--ses-cinnabar)" stroke="var(--ses-gold)" stroke-width="0.8" />
+                <text x="448" y="145" text-anchor="middle" font-size="9.5" fill="#F7F4EC" font-weight="600" letter-spacing="1">水运仪象台</text>
+              </g>
+
+              <!-- 锚点 C：艮岳万岁山 (412, 66) -->
+              <g class="map-pin-node cursor-pointer" data-id="genyue" onclick="selectBianjingLandmark('genyue', '艮岳万岁山', '筑于景龙门内大内东北隅，括天下太湖灵璧奇石，叠峰峦洞壑、引金水成溪涧，集宋代写意园林之大成。', '政和七年 · 皇家园林', '北纬 34°48′05″ · 东经 114°21′09″', 412, 66)">
+                <circle class="pin-ring" cx="412" cy="66" r="14" fill="url(#pinGlowGrad)" opacity="0" />
+                <circle class="pin-outer" cx="412" cy="66" r="6" fill="var(--ses-bg-canvas)" stroke="var(--ses-gold)" stroke-width="1.5" />
+                <circle class="pin-core" cx="412" cy="66" r="2.8" fill="var(--ses-gold)" />
+                <rect x="370" y="38" width="84" height="18" rx="2" fill="var(--ses-bg-sidebar)" fill-opacity="0.9" stroke="var(--ses-border-gold)" stroke-width="0.6" />
+                <text x="412" y="50" text-anchor="middle" font-size="9.5" fill="var(--ses-ink-heavy)" letter-spacing="1">艮岳万岁山</text>
+              </g>
+
+              <!-- 锚点 D：大相国寺 (178, 140) -->
+              <g class="map-pin-node cursor-pointer" data-id="xiangguosi" onclick="selectBianjingLandmark('xiangguosi', '大相国寺瓦肆', '京师最大皇家寺院，每月五次开放万姓交易，书画古玩、文房四宝、说书傀儡汇聚于两廊。', '崇宁二年 · 瓦舍雅集', '北纬 34°47′28″ · 东经 114°19′44″', 178, 140)">
+                <circle class="pin-ring" cx="178" cy="140" r="14" fill="url(#pinGlowGrad)" opacity="0" />
+                <circle class="pin-outer" cx="178" cy="140" r="6" fill="var(--ses-bg-canvas)" stroke="var(--ses-gold)" stroke-width="1.5" />
+                <circle class="pin-core" cx="178" cy="140" r="2.8" fill="var(--ses-gold)" />
+                <rect x="138" y="112" width="80" height="18" rx="2" fill="var(--ses-bg-sidebar)" fill-opacity="0.9" stroke="var(--ses-border-gold)" stroke-width="0.6" />
+                <text x="178" y="124" text-anchor="middle" font-size="9.5" fill="var(--ses-ink-heavy)" letter-spacing="1">大相国寺</text>
+              </g>
+
+              <!-- 右下角宋代罗盘方位标 -->
+              <g transform="translate(558, 42)" opacity="0.75">
+                <circle cx="0" cy="0" r="15" fill="var(--ses-bg-canvas)" stroke="var(--ses-gold)" stroke-width="0.8" />
+                <polygon points="0,-12 3,0 0,-3 -3,0" fill="var(--ses-cinnabar)" />
+                <polygon points="0,12 2.5,0 0,3 -2.5,0" fill="var(--ses-ink-light)" />
+                <text x="0" y="-17" text-anchor="middle" font-size="8" fill="var(--ses-cinnabar)">北·坎</text>
+              </g>
+            </svg>
+
+            <!-- 左下角计里画方比例尺 -->
+            <div class="absolute bottom-2 left-3 flex items-center gap-2 text-[10px] text-[var(--ses-ink-light)] bg-[var(--ses-bg-sidebar)]/80 px-2 py-0.5 rounded border border-[var(--ses-border-hairline)]">
+              <span>计里画方：每方百步</span>
+              <span class="inline-block w-8 h-1 border-b border-l border-r border-[var(--ses-gold)]"></span>
+            </div>
+          </div>
+
+          <!-- 底部：与所选地标联动的奏疏浮签详情卡 (Popover Detail Inspector) -->
+          <div id="landmarkDetailCard" class="relative z-10 p-4 rounded bg-[var(--ses-bg-elevated)] border border-[var(--ses-border-gold)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all duration-300">
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[var(--ses-cinnabar)]"></span>
+                <span id="landmarkTitle" class="font-bold text-sm text-[var(--ses-ink-heavy)]">水运仪象台</span>
+                <span id="landmarkEra" class="text-[11px] px-1.5 py-0.5 rounded bg-[var(--ses-cinnabar)]/15 text-[var(--ses-cinnabar)]">元祐七年 · 司天格物</span>
+                <span class="text-[11px] text-[var(--ses-ink-light)]">（点击上方舆图红印切换地标）</span>
+              </div>
+              <p id="landmarkDesc" class="text-xs text-[var(--ses-ink-medium)] leading-relaxed">
+                苏颂与韩公廉奉敕造于司天监，上设浑仪测日星、中置浑象、下设枢轮刻漏报时，乃世界天文钟鼻祖。
+              </p>
+            </div>
+            <button onclick="openScrollModal()" class="ses-seal-stamp shrink-0 cursor-pointer">
+              批阅奏疏
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 rounded border border-dashed border-[var(--ses-border-hairline)] p-6 min-h-[280px] flex flex-col justify-between relative bg-[var(--ses-bg-canvas)]/60">
+          <div class="text-right">
+            <p class="ses-calligraphy text-2xl text-[var(--ses-ink-heavy)]">此间尚无墨迹</p>
+            <p class="text-xs text-[var(--ses-ink-light)] tracking-[0.2em] mt-1">马远“边角之景”空状态美学示范</p>
+          </div>
+
+          <div class="flex items-end justify-between mt-6">
+            <svg width="140" height="110" viewBox="0 0 140 110" class="overflow-visible">
+              <path d="M5 105 Q 45 75, 85 45 T 130 15" fill="none" stroke="var(--ses-ink-heavy)" stroke-width="2" stroke-linecap="round" />
+              <path d="M55 68 Q 75 65, 98 72" fill="none" stroke="var(--ses-ink-heavy)" stroke-width="1.2" stroke-linecap="round" />
+              <circle cx="88" cy="42" r="4" fill="var(--ses-cinnabar)" />
+              <circle cx="126" cy="17" r="3.5" fill="var(--ses-cinnabar)" />
+              <circle cx="96" cy="71" r="3" fill="var(--ses-cinnabar)" />
+            </svg>
+
+            <button onclick="triggerJadeRipple(event, this); playCeladonChime(660); showToast('已铺展新宣纸，可随时落墨');" class="ses-btn-jade !py-1.5 !px-4 text-xs">
+              + 研墨起笔
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-8 py-8 mt-8 border-t border-[var(--ses-border-hairline)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--ses-ink-light)] relative z-10">
+    <div class="flex items-center gap-3">
+      <span class="ses-seal-stamp !py-0.5 !px-2 text-[11px]">大宋清晖</span>
+      <span>Song Elegance UI System · 暗夜青瓷与澄心堂宣纸数字美学体系</span>
+    </div>
+    <div class="tracking-[0.2em]">
+      岁次丙午 · 汴京文房雅集制
+    </div>
+  </footer>
+
+  <!-- 古卷徐开模态框 -->
+  <div id="scrollModalBackdrop" class="ses-scroll-backdrop" onclick="if(event.target===this) closeScrollModal()">
+    <div class="ses-scroll-container" role="dialog" aria-modal="true" aria-labelledby="scrollModalTitle">
+      <div class="ses-scroll-roller"></div>
+      <div class="ses-scroll-body space-y-5">
+        <div class="flex items-start justify-between border-b border-[var(--ses-border-hairline)] pb-3">
+          <div>
+            <span class="text-[11px] text-[var(--ses-cinnabar)] tracking-[0.25em]">宣和御览 · 秘阁珍藏</span>
+            <h3 id="scrollModalTitle" class="ses-slender-gold text-xl font-bold mt-1">《千里江山图》卷跋批阅</h3>
+          </div>
+          <button onclick="closeScrollModal()" class="text-[var(--ses-ink-light)] hover:text-[var(--ses-cinnabar)] text-lg px-2 cursor-pointer" title="收卷">✕</button>
+        </div>
+        <p class="text-sm leading-7 text-[var(--ses-ink-medium)]">
+          政和三年闰四月八日赐。希孟年十八岁，昔在画学为生徒，召入禁中文书库，数以画献，未甚工。上知其性可教，遂诲谕之，亲授其法，不逾半岁，乃以此图进。
+        </p>
+        <div class="p-3.5 rounded bg-[var(--ses-bg-subtle)] border border-[var(--ses-border-hairline)] flex items-center justify-between text-xs">
+          <span>绢本设色 · 纵 51.5 厘米 · 横 1191.5 厘米</span>
+          <span class="ses-seal-stamp">蔡京题跋</span>
+        </div>
+        <div class="flex justify-end gap-3 pt-2">
+          <button onclick="closeScrollModal()" class="ses-btn-jade !bg-none !bg-transparent !py-1.5 !px-5 text-xs">缓缓收卷</button>
+          <button onclick="triggerJadeRipple(event, this); playSealThud(); showToast('已钤盖「双龙小玺」御印'); setTimeout(closeScrollModal, 600);" class="ses-btn-jade !py-1.5 !px-5 text-xs">钤印批复</button>
+        </div>
+      </div>
+      <div class="ses-scroll-roller"></div>
+    </div>
+  </div>
+
+  <!-- 折枝屏风侧滑抽屉 -->
+  <div id="drawerBackdrop" class="ses-drawer-backdrop" onclick="closeScreenDrawer()"></div>
+  <aside id="screenDrawer" class="ses-screen-drawer" aria-label="折枝屏风侧滑栏">
+    <div class="flex items-center justify-between border-b border-[var(--ses-border-hairline)] pb-4">
+      <div class="flex items-center gap-2.5">
+        <span class="ses-seal-stamp">屏风</span>
+        <h3 class="ses-slender-gold text-lg font-semibold">藏经百宝嵌 · 器物录</h3>
+      </div>
+      <button onclick="closeScreenDrawer()" class="text-[var(--ses-ink-light)] hover:text-[var(--ses-cinnabar)] text-lg cursor-pointer">✕</button>
+    </div>
+    <div class="flex-1 overflow-y-auto py-5 space-y-5">
+      <p class="text-xs text-[var(--ses-ink-light)] leading-6">
+        宋代文人书斋常设“独扇山水屏风”以隔尘嚣。此抽屉边缘采用紫檀木榫卯收边，内置设计系统核心交互参数：
+      </p>
+      <div class="space-y-3">
+        <div class="p-3.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-subtle)]">
+          <div class="text-xs font-bold text-[var(--ses-ink-heavy)]">1. 动画缓动曲线 (Cubic Bezier)</div>
+          <div class="text-[11px] font-mono text-[var(--ses-celadon-deep)] mt-1">cubic-bezier(0.22, 1, 0.36, 1)</div>
+          <div class="text-[11px] text-[var(--ses-ink-light)] mt-1">模拟古卷在案头徐徐展开的沉稳空气阻尼。</div>
+        </div>
+        <div class="p-3.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-subtle)]">
+          <div class="text-xs font-bold text-[var(--ses-ink-heavy)]">2. 五声音阶声学合成</div>
+          <div class="text-[11px] text-[var(--ses-ink-light)] mt-1">宫(C5)、商(D5)、角(E5)、徵(G5)、羽(A5) 泛音共振，杜绝刺耳电子蜂鸣。</div>
+        </div>
+        <div class="p-3.5 rounded border border-[var(--ses-border-hairline)] bg-[var(--ses-bg-subtle)]">
+          <div class="text-xs font-bold text-[var(--ses-ink-heavy)]">3. 零图片SVG物理肌理</div>
+          <div class="text-[11px] text-[var(--ses-ink-light)] mt-1">利用 feTurbulence 实时演算生宣纤维与朱砂崩边。</div>
+        </div>
+      </div>
+    </div>
+    <div class="pt-4 border-t border-[var(--ses-border-hairline)] flex justify-end">
+      <button onclick="closeScreenDrawer()" class="ses-btn-jade w-full text-xs">合拢屏风</button>
+    </div>
+  </aside>
+
+  <!-- 消息条 -->
+  <div id="sesToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] pointer-events-none opacity-0 translate-y-3 transition-all duration-500">
+    <div class="px-5 py-2.5 rounded bg-[var(--ses-ink-heavy)] text-[var(--ses-bg-canvas)] border border-[var(--ses-gold)] shadow-xl flex items-center gap-2.5 text-xs tracking-[0.18em]">
+      <span class="text-[var(--ses-gold)]">❖</span>
+      <span id="sesToastMsg">操作已成</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JavaScript 交互引擎
+       ========================================================================== -->
+  <script>
+    /* 1. Web Audio 宋代雅音合成器 */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('audioIcon').textContent = soundEnabled ? '🎵' : '🔇';
+      document.getElementById('audioLabel').textContent = soundEnabled ? '雅音：开' : '雅音：静';
+      if (soundEnabled) {
+        playCeladonChime(784);
+        showToast('已开启汝窑瓷器与古琴泛音反馈');
+      } else {
+        showToast('已切换为静默模式');
+      }
+    }
+
+    function playCeladonChime(freq = 660) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const osc1 = audioCtx.createOscillator();
+        const gain1 = audioCtx.createGain();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(freq, now);
+        osc1.frequency.exponentialRampToValueAtTime(freq * 1.005, now + 0.35);
+        gain1.gain.setValueAtTime(0.001, now);
+        gain1.gain.linearRampToValueAtTime(0.16, now + 0.008);
+        gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(freq * 2.756, now);
+        gain2.gain.setValueAtTime(0.001, now);
+        gain2.gain.linearRampToValueAtTime(0.05, now + 0.004);
+        gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+
+        osc1.connect(gain1); gain1.connect(audioCtx.destination);
+        osc2.connect(gain2); gain2.connect(audioCtx.destination);
+        osc1.start(now); osc2.start(now);
+        osc1.stop(now + 0.48); osc2.stop(now + 0.2);
+      } catch (e) {}
+    }
+
+    function playGuqinPluck(freq = 392) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const filter = audioCtx.createBiquadFilter();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq * 0.985, now);
+        osc.frequency.exponentialRampToValueAtTime(freq, now + 0.08);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1400, now);
+        filter.frequency.exponentialRampToValueAtTime(280, now + 0.85);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.14, now + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+        osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.95);
+      } catch (e) {}
+    }
+
+    function playBronzeBell() {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        [523.25, 1046.5, 1567.98].forEach((f, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(f, now);
+          gain.gain.setValueAtTime(0.001, now);
+          gain.gain.linearRampToValueAtTime(0.14 / (idx + 1), now + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 1.65);
+        });
+      } catch (e) {}
+    }
+
+    function playSealThud() {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(140, now);
+        osc.frequency.exponentialRampToValueAtTime(52, now + 0.14);
+        gain.gain.setValueAtTime(0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.17);
+      } catch (e) {}
+    }
+
+    let lastBrushTime = 0;
+    function playBrushStroke() {
+      if (!soundEnabled) return;
+      const nowMs = Date.now();
+      if (nowMs - lastBrushTime < 85) return;
+      lastBrushTime = nowMs;
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const bufferSize = Math.floor(audioCtx.sampleRate * 0.045);
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.sin((i / bufferSize) * Math.PI);
+        }
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1150, now);
+        filter.Q.setValueAtTime(1.8, now);
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.035, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        noise.start(now);
+      } catch (e) {}
+    }
+
+    /* 2. 昼夜光影模式切换（暗夜青瓷用夜漏 <-> 澄心昼景用日晷） */
+    function updateTimepieceHeader(theme) {
+      const titleEl = document.getElementById('timepieceTitle');
+      const badgeEl = document.getElementById('timepieceModeBadge');
+      const descEl = document.getElementById('timepieceDesc');
+      const hintEl = document.getElementById('sundialSliderHint');
+      if (!titleEl) return;
+
+      if (theme === 'dark') {
+        titleEl.textContent = '浮箭莲花刻漏 (Night Clepsydra)';
+        badgeEl.textContent = '暗夜司辰';
+        descEl.textContent = '暗夜青瓷启用北宋浮箭刻漏，渴乌滴水入壶，浮箭随水位升沉报五更百刻。';
+        hintEl.textContent = '夜漏模拟（拖动观察受水壶水位与浮箭升沉）';
+      } else {
+        titleEl.textContent = '赤道式日晷时钟 (Equatorial Sundial)';
+        badgeEl.textContent = '昼景司辰';
+        descEl.textContent = '澄心昼景启用双环刻石日晷，青铜立针随日光角度投射柔和晷影。';
+        hintEl.textContent = '日照模拟（拖动观察晷影长短与偏转）';
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      const nextTheme = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', nextTheme);
+
+      document.getElementById('themeIcon').textContent = nextTheme === 'dark' ? '🌙' : '☀️';
+      document.getElementById('themeLabel').textContent = nextTheme === 'dark' ? '暗夜青瓷' : '澄心昼景';
+      updateTimepieceHeader(nextTheme);
+
+      const slider = document.getElementById('sundialSlider');
+      if (slider) updateSundialByMinutes(parseInt(slider.value, 10));
+
+      playGuqinPluck(nextTheme === 'dark' ? 293.66 : 440);
+      showToast(nextTheme === 'dark' ? '已入「暗夜青瓷」，启浮箭莲花刻漏司夜' : '已切「澄心昼景」，展赤道式日晷观日');
+    }
+
+    /* 3. 消息提示框 & 色票复制 */
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('sesToast');
+      document.getElementById('sesToastMsg').textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add('opacity-0', 'translate-y-3'), 2400);
+    }
+
+    function copyColorToken(hex, name, freq) {
+      playCeladonChime(freq);
+      const tempInput = document.createElement('input');
+      tempInput.value = hex;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast(`已复制宋韵色票「${name}」 ${hex}`);
+    }
+
+    /* 4. 玉质玲珑钮水波 & 榫卯滑闩 Switch */
+    function triggerJadeRipple(event, btn) {
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const ripple = document.createElement('span');
+      ripple.className = 'ses-ripple-ring';
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 800);
+    }
+
+    function toggleMortiseSwitch(btn, name) {
+      const isChecked = btn.getAttribute('aria-checked') === 'true';
+      const next = !isChecked;
+      btn.setAttribute('aria-checked', String(next));
+      const labelSpan = btn.nextElementSibling;
+      if (labelSpan) {
+        labelSpan.textContent = `${name} · ${next ? '已启' : '已闭'}`;
+        labelSpan.style.color = next ? 'var(--ses-ink-heavy)' : 'var(--ses-ink-medium)';
+      }
+      playCeladonChime(next ? 784 : 523.25);
+      showToast(`${name}机括${next ? '已开启' : '已合闭'}`);
+    }
+
+    /* 5. 书签切换、单选与多选 */
+    function switchArtTab(tabName, btnEl) {
+      document.querySelectorAll('.ses-bookmark-tab').forEach(tab => tab.classList.remove('active'));
+      btnEl.classList.add('active');
+      playCeladonChime(587.33);
+      const target = document.getElementById(`section-${tabName}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function selectSongRadio(labelEl, name) {
+      document.querySelectorAll('#radioGroup .ses-radio-dot').forEach(dot => {
+        dot.style.backgroundColor = 'transparent';
+        dot.style.borderColor = 'var(--ses-ink-medium)';
+        dot.firstElementChild.style.backgroundColor = 'transparent';
+      });
+      const currentDot = labelEl.querySelector('.ses-radio-dot');
+      currentDot.style.backgroundColor = 'var(--ses-cinnabar)';
+      currentDot.style.borderColor = 'var(--ses-cinnabar)';
+      currentDot.firstElementChild.style.backgroundColor = '#F7F4EC';
+      playSealThud();
+      showToast(`已择定窑口：${name}`);
+    }
+
+    function toggleTeaCheck(labelEl) {
+      const next = labelEl.getAttribute('data-checked') !== 'true';
+      labelEl.setAttribute('data-checked', next);
+      const box = labelEl.querySelector('.ses-tea-box');
+      const svg = box.querySelector('svg');
+      if (next) {
+        box.style.backgroundColor = 'rgba(143, 160, 139, 0.35)';
+        box.style.borderColor = 'var(--ses-celadon-deep)';
+        svg.style.color = 'var(--ses-ink-heavy)';
+        playCeladonChime(740);
+      } else {
+        box.style.backgroundColor = 'transparent';
+        box.style.borderColor = 'var(--ses-border-hairline)';
+        svg.style.color = 'transparent';
+        playCeladonChime(523);
+      }
+    }
+
+    /* 6. 建盏斗茶加载器 */
+    let teaInterval = null;
+    function startTeaWhisking() {
+      clearInterval(teaInterval);
+      let pct = 8;
+      const foamCircle = document.getElementById('teaFoamCircle');
+      const progressText = document.getElementById('teaProgressText');
+      const stageText = document.getElementById('teaStageText');
+      const swirlPath = document.getElementById('teaSwirlPath');
+      const stages = ['一汤·珠玑', '二汤·蟹眼', '三汤·鱼目', '四汤·乳雾', '五汤·云脚', '六汤·咬盏', '七汤·雪涛'];
+
+      teaInterval = setInterval(() => {
+        pct += 4;
+        if (pct >= 100) {
+          pct = 100;
+          clearInterval(teaInterval);
+          playCeladonChime(1046.5);
+          showToast('七汤点茶已成，乳雾咬盏不散！');
+        }
+        foamCircle.setAttribute('r', (16 + (pct / 100) * 52).toFixed(1));
+        progressText.textContent = `${pct}%`;
+        stageText.textContent = stages[Math.min(6, Math.floor((pct / 100) * 7))];
+        swirlPath.setAttribute('transform', `rotate(${pct * 3.6} 90 90)`);
+      }, 75);
+    }
+
+    /* 7. 七弦琴轸滑块 */
+    const guqinTrack = document.getElementById('guqinTrack');
+    const guqinThumb = document.getElementById('guqinThumb');
+    const guqinStringPath = document.getElementById('guqinStringPath');
+    const guqinNoteDisplay = document.getElementById('guqinNoteDisplay');
+    let isDraggingGuqin = false;
+    let lastNoteIdx = -1;
+
+    const pentatonicNotes = [
+      { name: '宫音 · 建隆元年', freq: 261.63 },
+      { name: '商音 · 景德元年', freq: 293.66 },
+      { name: '角音 · 熙宁七年', freq: 329.63 },
+      { name: '徵音 · 元祐元年', freq: 392.00 },
+      { name: '羽音 · 宣和五年', freq: 440.00 }
+    ];
+
+    function updateGuqinSlider(clientX, playNote = false) {
+      const rect = guqinTrack.getBoundingClientRect();
+      let ratio = Math.max(0.02, Math.min(0.98, (clientX - rect.left) / rect.width));
+      const pct = Math.round(ratio * 100);
+      guqinThumb.style.left = `${pct}%`;
+
+      const width = rect.width;
+      const pullX = ratio * width;
+      const bendY = isDraggingGuqin ? 27 : 18;
+      guqinStringPath.setAttribute('d', `M 0 18 Q ${pullX} ${bendY} ${width} 18`);
+
+      const noteIdx = Math.min(4, Math.floor(ratio * 5));
+      guqinNoteDisplay.textContent = `${pentatonicNotes[noteIdx].name} (${pct}%)`;
+      if (playNote && noteIdx !== lastNoteIdx) {
+        lastNoteIdx = noteIdx;
+        playGuqinPluck(pentatonicNotes[noteIdx].freq);
+      }
+    }
+
+    guqinTrack.addEventListener('mousedown', (e) => { isDraggingGuqin = true; updateGuqinSlider(e.clientX, true); });
+    window.addEventListener('mousemove', (e) => { if (isDraggingGuqin) updateGuqinSlider(e.clientX, true); });
+    window.addEventListener('mouseup', () => {
+      if (isDraggingGuqin) {
+        isDraggingGuqin = false;
+        const rect = guqinTrack.getBoundingClientRect();
+        guqinStringPath.setAttribute('d', `M 0 18 Q ${rect.width / 2} 18 ${rect.width} 18`);
+      }
+    });
+    guqinTrack.addEventListener('touchstart', (e) => { isDraggingGuqin = true; updateGuqinSlider(e.touches[0].clientX, true); }, { passive: true });
+    window.addEventListener('touchmove', (e) => { if (isDraggingGuqin) updateGuqinSlider(e.touches[0].clientX, true); }, { passive: true });
+    window.addEventListener('touchend', () => {
+      if (isDraggingGuqin) {
+        isDraggingGuqin = false;
+        const rect = guqinTrack.getBoundingClientRect();
+        guqinStringPath.setAttribute('d', `M 0 18 Q ${rect.width / 2} 18 ${rect.width} 18`);
+      }
+    });
+
+    /* 8. 赤道式日晷时钟（还原初版汉白玉/青石双环刻盘 + 十二放射分割线 + 柔和投射晷影） */
+    const earthBranches = ['午', '未', '申', '酉', '戌', '亥', '子', '丑', '寅', '卯', '辰', '巳'];
+
+    function buildSundialDial() {
+      const group = document.getElementById('sundialTicksGroup');
+      if (!group) return;
+      let svgHTML = '';
+
+      // 1. 十二放射时辰分割线与十二地支铭文（“午”居正顶 0°）
+      for (let i = 0; i < 12; i++) {
+        const deg = i * 30;
+        const rad = (deg - 90) * Math.PI / 180;
+        // 时辰主放射线（从内圈 r=56 延伸至外刻环 r=121）
+        const x1 = 140 + Math.cos(rad) * 56;
+        const y1 = 140 + Math.sin(rad) * 56;
+        const x2 = 140 + Math.cos(rad) * 121;
+        const y2 = 140 + Math.sin(rad) * 121;
+        svgHTML += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--sundial-ray)" stroke-width="0.9" />`;
+
+        // 十二地支文字（位于 r=108 环带中，正立清晰）
+        const tx = 140 + Math.cos(rad) * 108;
+        const ty = 140 + Math.sin(rad) * 108 + 4.5;
+        const isWu = i === 0;
+        svgHTML += `<text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="${isWu ? '700' : '600'}" fill="${isWu ? 'var(--ses-cinnabar)' : 'var(--sundial-text)'}">${earthBranches[i]}</text>`;
+      }
+
+      // 2. 百刻细刻度环（96刻细齿）
+      for (let k = 0; k < 96; k++) {
+        const deg = k * 3.75;
+        const rad = (deg - 90) * Math.PI / 180;
+        const isMajor = k % 8 === 0;
+        const isHalf = k % 4 === 0;
+        const rInner = isMajor ? 86 : (isHalf ? 88.5 : 90.5);
+        const rOuter = 95;
+        const x1 = 140 + Math.cos(rad) * rInner;
+        const y1 = 140 + Math.sin(rad) * rInner;
+        const x2 = 140 + Math.cos(rad) * rOuter;
+        const y2 = 140 + Math.sin(rad) * rOuter;
+        svgHTML += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${isMajor ? 'var(--ses-gold)' : 'var(--sundial-tick)'}" stroke-width="${isMajor ? '1.3' : '0.7'}" />`;
+      }
+
+      group.innerHTML = svgHTML;
+    }
+
+    function getShichenName(totalMinutes) {
+      const m = ((totalMinutes % 1440) + 1440) % 1440;
+      const idx = Math.floor(((m + 60) % 1440) / 120);
+      const half = (((m + 60) % 120) < 60) ? '初' : '正';
+      const names = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+      return `${names[idx]}${half}`;
+    }
+
+    function getNightWatchLabel(totalMinutes) {
+      // 夜间五更制：19:00(1140分)起一更，每更2小时（120分），每更分五点（每点24分），至次日05:00(300分)五更尽
+      const m = ((totalMinutes % 1440) + 1440) % 1440;
+      let nightOffset = m >= 1140 ? (m - 1140) : (m < 300 ? m + 300 : -1);
+      const watchNames = ['一更', '二更', '三更', '四更', '五更'];
+      const pointNames = ['一点', '二点', '三点', '四点', '五点'];
+      if (nightOffset >= 0 && nightOffset < 600) {
+        const wIdx = Math.floor(nightOffset / 120);
+        const pIdx = Math.floor((nightOffset % 120) / 24);
+        return {
+          isNight: true,
+          text: `${watchNames[wIdx]}${pointNames[pIdx]}`,
+          ratio: nightOffset / 600 // 0.0 (19:00一更初) -> 0.5 (00:00三更正) -> 1.0 (05:00五更尽)
+        };
+      }
+      // 白昼时段（05:00 - 19:00 共840分钟）：按昼漏百刻制换算水位，05:00初刻(0.0) -> 12:00午正五十刻(0.5) -> 19:00百刻满(1.0)
+      const dayOffset = m - 300;
+      const ke = Math.min(100, Math.max(1, Math.round((dayOffset / 840) * 100)));
+      return {
+        isNight: false,
+        text: `昼漏第${ke}刻`,
+        ratio: dayOffset / 840
+      };
+    }
+
+    function updateSundialByMinutes(totalMinutes) {
+      // 1. 更新日晷（澄心昼景）
+      const angleDeg = ((totalMinutes - 720) / 60) * 15;
+      const shadowGroup = document.getElementById('sundialShadowGroup');
+      const shadowPoly = document.getElementById('sundialShadowPoly');
+      if (shadowGroup && shadowPoly) {
+        shadowGroup.setAttribute('transform', `rotate(${angleDeg.toFixed(2)} 140 140)`);
+        const distFromNoon = Math.abs(((totalMinutes - 720 + 720) % 1440) - 720) / 720;
+        const shadowTipY = 92 - distFromNoon * 48;
+        shadowPoly.setAttribute('points', `136.5,140 143.5,140 140.9,${shadowTipY.toFixed(1)} 139.1,${shadowTipY.toFixed(1)}`);
+      }
+
+      // 2. 更新夜漏水位、侧边铭文与浮箭标尺（暗夜青瓷）
+      const watchInfo = getNightWatchLabel(totalMinutes);
+      const waterRect = document.getElementById('clepsydraWaterRect');
+      const waterLine = document.getElementById('clepsydraWaterLine');
+      const rippleEl = document.getElementById('clepsydraRippleEl');
+      const floatArrow = document.getElementById('clepsydraFloatArrow');
+      const sideLabels = document.getElementById('clepsydraSideLabels');
+
+      if (sideLabels) {
+        if (watchInfo.isNight) {
+          sideLabels.innerHTML = `
+            <text x="84" y="232" text-anchor="end">一更·戌</text>
+            <text x="84" y="206" text-anchor="end">二更·亥</text>
+            <text x="84" y="180" text-anchor="end">三更·子</text>
+            <text x="84" y="154" text-anchor="end">四更·丑</text>
+            <text x="84" y="128" text-anchor="end">五更·寅</text>
+          `;
+        } else {
+          sideLabels.innerHTML = `
+            <text x="84" y="232" text-anchor="end">初刻·卯</text>
+            <text x="84" y="206" text-anchor="end">廿五·辰</text>
+            <text x="84" y="180" text-anchor="end">五十·午</text>
+            <text x="84" y="154" text-anchor="end">七五·申</text>
+            <text x="84" y="128" text-anchor="end">百刻·酉</text>
+          `;
+        }
+      }
+
+      if (waterRect && waterLine && floatArrow) {
+        // 受水壶底 y=244，水面随 ratio 从 y=232 升至 y=126（ratio=0.5 时恰好位于 y=179，对应三更·子 或 五十·午）
+        const minWaterY = 232;
+        const maxWaterY = 126;
+        const curWaterY = minWaterY - watchInfo.ratio * (minWaterY - maxWaterY);
+        const waterHeight = 244 - curWaterY;
+
+        waterRect.setAttribute('y', curWaterY.toFixed(1));
+        waterRect.setAttribute('height', waterHeight.toFixed(1));
+        waterLine.setAttribute('y1', curWaterY.toFixed(1));
+        waterLine.setAttribute('y2', curWaterY.toFixed(1));
+        if (rippleEl) rippleEl.setAttribute('cy', curWaterY.toFixed(1));
+
+        // 浮箭基准水面在 y=180，随 curWaterY 垂直平移
+        const deltaY = curWaterY - 180;
+        floatArrow.setAttribute('transform', `translate(0, ${deltaY.toFixed(1)})`);
+      }
+
+      // 3. 右上角时辰角标随模式切换读法
+      const hh = String(Math.floor(totalMinutes / 60)).padStart(2, '0');
+      const mm = String(Math.floor(totalMinutes % 60)).padStart(2, '0');
+      const tag = document.getElementById('sundialTimeTag');
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (tag) {
+        if (isDark) {
+          tag.textContent = `${watchInfo.text} · ${getShichenName(totalMinutes)} ${hh}:${mm}`;
+        } else {
+          tag.textContent = `${getShichenName(totalMinutes)} · ${hh}:${mm}`;
+        }
+      }
+    }
+
+    let isHoveringTimepiece = false;
+    function playWaterDropSound() {
+      if (!soundEnabled || !isHoveringTimepiece) return;
+      // 仅当暗夜模式且鼠标悬停于司辰模块上时轻响水滴落壶声，彻底杜绝长时停留的听觉疲劳
+      if (document.documentElement.getAttribute('data-theme') !== 'dark') return;
+      if (!audioCtx || audioCtx.state !== 'running') return;
+      try {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(620, now);
+        osc.frequency.exponentialRampToValueAtTime(1280, now + 0.085);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.045, now + 0.012);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      } catch (e) {}
+    }
+
+    let sundialAutoTimer = null;
+    let clepsydraDropTimer = null;
+    function onSundialSliderInput(val) {
+      clearInterval(sundialAutoTimer);
+      updateSundialByMinutes(parseInt(val, 10));
+    }
+
+    function syncSundialRealtime() {
+      clearInterval(sundialAutoTimer);
+      const tickNow = () => {
+        const now = new Date();
+        const mins = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+        const slider = document.getElementById('sundialSlider');
+        if (slider) slider.value = Math.floor(mins);
+        updateSundialByMinutes(mins);
+      };
+      tickNow();
+      sundialAutoTimer = setInterval(tickNow, 1000);
+      playCeladonChime(659.25);
+    }
+
+    /* 9. 一柱香倒计时器（无香炉 + 点燃前无红点无烟 + 丝绢三次贝塞尔曲线青烟） */
+    let incenseTotalSec = 15;
+    let incenseRemainSec = 15;
+    let incenseRunning = false;
+    let incenseTimerInterval = null;
+    let smokeAnimFrame = null;
+    let smokePhase = 0;
+
+    function formatDuration(sec) {
+      const m = String(Math.floor(sec / 60)).padStart(2, '0');
+      const s = String(Math.floor(sec % 60)).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function renderIncenseVisual() {
+      const ratio = incenseTotalSec > 0 ? Math.max(0, incenseRemainSec / incenseTotalSec) : 0;
+      const baseY = 222;
+      const maxH = 128;
+      const curH = maxH * ratio;
+      const tipY = baseY - curH;
+
+      const stickBody = document.getElementById('incenseStickBody');
+      const rawTop = document.getElementById('incenseRawTop');
+      const burnHead = document.getElementById('incenseBurnHead');
+      const charBand = document.getElementById('incenseCharBand');
+      const emberCore = document.getElementById('incenseEmberCore');
+      const ashPile = document.getElementById('incenseAshPile');
+      const smokeGroup = document.getElementById('incenseSilkSmokeGroup');
+      const remainTag = document.getElementById('incenseRemainTag');
+
+      if (remainTag) remainTag.textContent = formatDuration(incenseRemainSec);
+
+      if (stickBody) {
+        stickBody.setAttribute('y', tipY.toFixed(2));
+        stickBody.setAttribute('height', curH.toFixed(2));
+      }
+      if (rawTop) {
+        rawTop.setAttribute('y', tipY.toFixed(2));
+        rawTop.style.opacity = (!incenseRunning && ratio > 0) ? '1' : '0';
+      }
+
+      // 仅在点燃燃烧且未燃尽时显示严格居中的微缩余烬（点燃前与燃尽后完全隐藏）
+      if (burnHead && charBand && emberCore) {
+        if (incenseRunning && ratio > 0.005) {
+          burnHead.style.opacity = '1';
+          charBand.setAttribute('y', tipY.toFixed(2));
+          emberCore.setAttribute('cx', '130');
+          emberCore.setAttribute('cy', tipY.toFixed(2));
+        } else {
+          burnHead.style.opacity = '0';
+        }
+      }
+
+      // 香灰随燃烧自然堆积于底部承托点旁
+      if (ashPile) {
+        const burned = 1 - ratio;
+        ashPile.setAttribute('rx', (burned * 13).toFixed(1));
+        ashPile.setAttribute('ry', (burned * 3.2).toFixed(1));
+      }
+
+      // 丝绢青烟显隐
+      if (smokeGroup) {
+        smokeGroup.style.opacity = (incenseRunning && ratio > 0.005) ? '1' : '0';
+      }
+    }
+
+    function animateSilkSmoke() {
+      if (incenseRunning && incenseRemainSec > 0) {
+        smokePhase += 0.032;
+        const ratio = Math.max(0, incenseRemainSec / incenseTotalSec);
+        const tipY = 222 - 128 * ratio;
+        const startY = tipY - 2; // 严格从当前实时香头正上方升起
+
+        const w1 = Math.sin(smokePhase) * 9;
+        const w2 = Math.cos(smokePhase * 0.85) * 12;
+        const w3 = Math.sin(smokePhase * 0.7 + 1.2) * 14;
+
+        const r1 = document.getElementById('smokeRibbon1');
+        const r2 = document.getElementById('smokeRibbon2');
+        const r3 = document.getElementById('smokeRibbon3');
+
+        if (r1) {
+          r1.setAttribute('d', `M 130 ${startY.toFixed(1)} C ${(130 + w1).toFixed(1)} ${(startY - 24).toFixed(1)}, ${(130 - w2).toFixed(1)} ${(startY - 52).toFixed(1)}, ${(130 + w3 * 0.8).toFixed(1)} ${(startY - 82).toFixed(1)}`);
+        }
+        if (r2) {
+          r2.setAttribute('d', `M 130 ${startY.toFixed(1)} C ${(130 - w2 * 0.8).toFixed(1)} ${(startY - 28).toFixed(1)}, ${(130 + w1 * 1.1).toFixed(1)} ${(startY - 58).toFixed(1)}, ${(130 - w3).toFixed(1)} ${(startY - 90).toFixed(1)}`);
+        }
+        if (r3) {
+          r3.setAttribute('d', `M 130 ${startY.toFixed(1)} C ${(130 + w3 * 0.5).toFixed(1)} ${(startY - 20).toFixed(1)}, ${(130 + w2 * 0.6).toFixed(1)} ${(startY - 46).toFixed(1)}, ${(130 - w1 * 0.7).toFixed(1)} ${(startY - 72).toFixed(1)}`);
+        }
+      }
+      smokeAnimFrame = requestAnimationFrame(animateSilkSmoke);
+    }
+
+    function selectIncenseDuration(seconds, label) {
+      clearInterval(incenseTimerInterval);
+      incenseRunning = false;
+      incenseTotalSec = seconds;
+      incenseRemainSec = seconds;
+      document.getElementById('incenseActionBtn').textContent = '🔥 引火燃香';
+      renderIncenseVisual();
+      playCeladonChime(660);
+      showToast(`已置香「${label}」`);
+    }
+
+    function toggleIncenseBurn() {
+      if (incenseRemainSec <= 0) {
+        incenseRemainSec = incenseTotalSec;
+      }
+      incenseRunning = !incenseRunning;
+      const btn = document.getElementById('incenseActionBtn');
+
+      if (incenseRunning) {
+        btn.textContent = '⏸ 暂熄留香';
+        playCeladonChime(784);
+        showToast('线香已燃，青烟袅袅升腾');
+        clearInterval(incenseTimerInterval);
+        incenseTimerInterval = setInterval(() => {
+          incenseRemainSec = Math.max(0, incenseRemainSec - 0.1);
+          renderIncenseVisual();
+          if (incenseRemainSec <= 0) {
+            clearInterval(incenseTimerInterval);
+            incenseRunning = false;
+            btn.textContent = '🔥 引火燃香';
+            renderIncenseVisual();
+            playBronzeBell();
+            showToast('一柱香尽，古刹铜磬清鸣');
+          }
+        }, 100);
+      } else {
+        btn.textContent = '🔥 续火燃香';
+        clearInterval(incenseTimerInterval);
+        renderIncenseVisual();
+        playCeladonChime(523.25);
+        showToast('已暂熄香火');
+      }
+      renderIncenseVisual();
+    }
+
+    function resetIncenseTimer() {
+      clearInterval(incenseTimerInterval);
+      incenseRunning = false;
+      incenseRemainSec = incenseTotalSec;
+      document.getElementById('incenseActionBtn').textContent = '🔥 引火燃香';
+      renderIncenseVisual();
+      playCeladonChime(587.33);
+      showToast('已换置新香，静待引火');
+    }
+
+    /* 10. 弹窗与抽屉控制 */
+    function openScrollModal() { playGuqinPluck(329.63); document.getElementById('scrollModalBackdrop').classList.add('open'); }
+    function closeScrollModal() { playCeladonChime(523.25); document.getElementById('scrollModalBackdrop').classList.remove('open'); }
+    function openScreenDrawer() { playGuqinPluck(392.00); document.getElementById('drawerBackdrop').classList.add('open'); document.getElementById('screenDrawer').classList.add('open'); }
+    function closeScreenDrawer() { playCeladonChime(587.33); document.getElementById('drawerBackdrop').classList.remove('open'); document.getElementById('screenDrawer').classList.remove('open'); }
+
+    /* 11. 高阶组件交互 */
+    function setClepsydraStep(stepIndex, title) {
+      playCeladonChime(523 + stepIndex * 90);
+      document.getElementById('clepsydraStatusText').textContent = `当前辰时：${title}`;
+      const steps = document.querySelectorAll('.clepsydra-step');
+      steps.forEach((el, idx) => {
+        const num = idx + 1;
+        const badge = el.querySelector('span:first-child');
+        const dot = el.querySelector('span:last-child');
+        el.className = 'clepsydra-step cursor-pointer p-3.5 rounded border transition';
+        if (num < stepIndex) {
+          el.classList.add('border-[var(--ses-malachite)]', 'bg-[var(--ses-malachite)]/10');
+          badge.className = 'text-xs font-bold text-[var(--ses-malachite)]';
+          badge.textContent = `${['壹','贰','叁','肆'][idx]} · 蓄水已满`;
+          dot.className = 'w-2.5 h-2.5 rounded-full bg-[var(--ses-malachite)]';
+        } else if (num === stepIndex) {
+          el.classList.add('border-[var(--ses-cinnabar)]', 'bg-[var(--ses-cinnabar)]/10');
+          badge.className = 'text-xs font-bold text-[var(--ses-cinnabar)]';
+          badge.textContent = `${['壹','贰','叁','肆'][idx]} · 滴水注壶`;
+          dot.className = 'inline-block w-2 h-2 rounded-full bg-[var(--ses-cinnabar)] ses-water-drop';
+        } else {
+          el.classList.add('border-[var(--ses-border-hairline)]', 'opacity-70', 'hover:opacity-100');
+          badge.className = 'text-xs text-[var(--ses-ink-light)]';
+          badge.textContent = `${['壹','贰','叁','肆'][idx]} · 虚壶待注`;
+          dot.className = 'w-2.5 h-2.5 rounded-full border border-[var(--ses-ink-light)]';
+        }
+      });
+    }
+
+    function updateMountainChart(type) {
+      playGuqinPluck(type === 'grain' ? 392 : 440);
+      currentMountainMode = type;
+      const btnGrain = document.getElementById('btnChartGrain');
+      const btnKiln = document.getElementById('btnChartKiln');
+      if (btnGrain && btnKiln) {
+        btnGrain.style.borderColor = type === 'grain' ? 'var(--ses-gold)' : 'var(--ses-border-hairline)';
+        btnKiln.style.borderColor = type === 'kiln' ? 'var(--ses-gold)' : 'var(--ses-border-hairline)';
+      }
+
+      renderSmoothSongMountains(type);
+    }
+
+    // Catmull-Rom 样条曲线生成函数：保证严格穿过每一个精确数据点，且极值波峰处切线水平（浑厚圆润，绝无针尖刺突）
+    function buildCatmullRomAreaPath(points, baseY = 220, tension = 0.24) {
+      if (!points || points.length === 0) return '';
+      let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+      for (let i = 0; i < points.length - 1; i++) {
+        const p0 = points[i === 0 ? 0 : i - 1];
+        const p1 = points[i];
+        const p2 = points[i + 1];
+        const p3 = points[i + 2 < points.length ? i + 2 : i + 1];
+
+        // 若 p1 或 p2 为局部波峰/波谷，锁定水平切线以还原《千里江山图》浑厚山顶
+        const isP1Extremum = (p1.y <= p0.y && p1.y <= p2.y) || (p1.y >= p0.y && p1.y >= p2.y);
+        const isP2Extremum = (p2.y <= p1.y && p2.y <= p3.y) || (p2.y >= p1.y && p2.y >= p3.y);
+
+        const cp1x = p1.x + (p2.x - p0.x) * tension;
+        const cp1y = isP1Extremum ? p1.y : p1.y + (p2.y - p0.y) * tension;
+        const cp2x = p2.x - (p3.x - p1.x) * tension;
+        const cp2y = isP2Extremum ? p2.y : p2.y - (p3.y - p1.y) * tension;
+
+        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      const last = points[points.length - 1];
+      d += ` L ${last.x.toFixed(1)} ${baseY} L ${points[0].x.toFixed(1)} ${baseY} Z`;
+      return d;
+    }
+
+    function renderSmoothSongMountains(type) {
+      const list = mountainMonthlyData[type];
+      const backPts = list.map((item, idx) => ({ x: (idx / 11) * 600, y: item.by }));
+      const frontPts = list.map((item, idx) => ({ x: (idx / 11) * 600, y: item.fy }));
+      // 远黛烟岚层根据主峰高低错落生成，营造北宋山水“三远”层次
+      const farPts = list.map((item, idx) => ({
+        x: (idx / 11) * 600,
+        y: Math.max(58, Math.min(155, item.by - 18 + Math.sin(idx * 1.15) * 16))
+      }));
+
+      const farPath = document.getElementById('mountainFarPath');
+      const backPath = document.getElementById('mountainBackPath');
+      const frontPath = document.getElementById('mountainFrontPath');
+      const marker = document.getElementById('peakSealMarker');
+
+      if (farPath) farPath.setAttribute('d', buildCatmullRomAreaPath(farPts, 220, 0.25));
+      if (backPath) backPath.setAttribute('d', buildCatmullRomAreaPath(backPts, 220, 0.23));
+      if (frontPath) frontPath.setAttribute('d', buildCatmullRomAreaPath(frontPts, 220, 0.23));
+
+      if (marker) {
+        if (type === 'grain') {
+          marker.style.left = '45.5%';
+          marker.style.top = '18px';
+          marker.textContent = '极峰 · 六百万石';
+        } else {
+          marker.style.left = '63.7%';
+          marker.style.top = '14px';
+          marker.textContent = '御窑 · 三万八千器';
+        }
+      }
+    }
+
+    let currentMountainMode = 'grain';
+    const mountainMonthlyData = {
+      grain: [
+        { month: '正月 · 立春', back: '320 万石', front: '215 万石', bx: 0, by: 165, fy: 185 },
+        { month: '二月 · 惊蛰', back: '445 万石', front: '310 万石', bx: 55, by: 130, fy: 154 },
+        { month: '三月 · 清明', back: '390 万石', front: '275 万石', bx: 109, by: 148, fy: 168 },
+        { month: '四月 · 立夏', back: '520 万石', front: '395 万石', bx: 164, by: 96, fy: 124 },
+        { month: '五月 · 芒种', back: '425 万石', front: '305 万石', bx: 218, by: 135, fy: 158 },
+        { month: '六月 · 小暑', back: '612 万石', front: '485 万石', bx: 273, by: 52, fy: 84 },
+        { month: '七月 · 立秋', back: '460 万石', front: '340 万石', bx: 327, by: 118, fy: 142 },
+        { month: '八月 · 白露', back: '568 万石', front: '432 万石', bx: 382, by: 76, fy: 106 },
+        { month: '九月 · 寒露', back: '440 万石', front: '318 万石', bx: 436, by: 124, fy: 152 },
+        { month: '十月 · 立冬', back: '515 万石', front: '405 万石', bx: 491, by: 95, fy: 116 },
+        { month: '十一月 · 大雪', back: '485 万石', front: '370 万石', bx: 545, by: 104, fy: 127 },
+        { month: '腊月 · 小寒', back: '468 万石', front: '352 万石', bx: 600, by: 112, fy: 138 }
+      ],
+      kiln: [
+        { month: '正月 · 立春', back: '1.4 万器', front: '0.9 万器', bx: 0, by: 158, fy: 180 },
+        { month: '二月 · 惊蛰', back: '2.1 万器', front: '1.5 万器', bx: 55, by: 122, fy: 146 },
+        { month: '三月 · 清明', back: '1.8 万器', front: '1.2 万器', bx: 109, by: 140, fy: 162 },
+        { month: '四月 · 立夏', back: '2.8 万器', front: '2.0 万器', bx: 164, by: 92, fy: 118 },
+        { month: '五月 · 芒种', back: '2.0 万器', front: '1.4 万器', bx: 218, by: 128, fy: 148 },
+        { month: '六月 · 小暑', back: '2.9 万器', front: '2.2 万器', bx: 273, by: 86, fy: 112 },
+        { month: '七月 · 立秋', back: '3.3 万器', front: '2.6 万器', bx: 327, by: 66, fy: 93 },
+        { month: '八月 · 白露', back: '3.8 万器', front: '3.1 万器', bx: 382, by: 46, fy: 74 },
+        { month: '九月 · 寒露', back: '2.5 万器', front: '1.8 万器', bx: 436, by: 108, fy: 134 },
+        { month: '十月 · 立冬', back: '3.1 万器', front: '2.4 万器', bx: 491, by: 82, fy: 102 },
+        { month: '十一月 · 大雪', back: '2.8 万器', front: '2.1 万器', bx: 545, by: 92, fy: 114 },
+        { month: '腊月 · 小寒', back: '2.6 万器', front: '1.9 万器', bx: 600, by: 102, fy: 126 }
+      ]
+    };
+
+    function onMountainHover(e) {
+      const container = document.getElementById('mountainChartContainer');
+      const rect = container.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      const idx = Math.min(11, Math.round(ratio * 11));
+      const list = mountainMonthlyData[currentMountainMode];
+      const item = list[idx];
+      const svgX = (idx / 11) * 600;
+
+      const cursorGroup = document.getElementById('mountainCursorGroup');
+      const cursorLine = document.getElementById('mountainCursorLine');
+      const dotBack = document.getElementById('mountainCursorDotBack');
+      const dotFront = document.getElementById('mountainCursorDotFront');
+      const tooltip = document.getElementById('mountainHoverTooltip');
+
+      cursorGroup.style.opacity = '1';
+      cursorLine.setAttribute('x1', svgX.toFixed(1));
+      cursorLine.setAttribute('x2', svgX.toFixed(1));
+      dotBack.setAttribute('cx', svgX.toFixed(1));
+      dotBack.setAttribute('cy', item.by);
+      dotFront.setAttribute('cx', svgX.toFixed(1));
+      dotFront.setAttribute('cy', item.fy);
+
+      document.getElementById('mTipMonth').textContent = item.month;
+      document.getElementById('mTipDataset').textContent = currentMountainMode === 'grain' ? '汴京漕粮岁运' : '官窑瓷器岁贡';
+      document.getElementById('mTipValBack').textContent = item.back;
+      document.getElementById('mTipValFront').textContent = item.front;
+
+      tooltip.style.opacity = '1';
+      const tipLeft = ratio > 0.65 ? (e.clientX - rect.left - 210) : (e.clientX - rect.left + 16);
+      tooltip.style.left = `${Math.max(12, tipLeft)}px`;
+    }
+
+    function hideMountainTooltip() {
+      const cursorGroup = document.getElementById('mountainCursorGroup');
+      const tooltip = document.getElementById('mountainHoverTooltip');
+      if (cursorGroup) cursorGroup.style.opacity = '0';
+      if (tooltip) tooltip.style.opacity = '0';
+    }
+
+    let sinanAngle = 42;
+    const solarTerms = [
+      { name: '谷雨 · 雅韵度 84%', deg: 42 },
+      { name: '夏至 · 雅韵度 96%', deg: 128 },
+      { name: '秋分 · 雅韵度 78%', deg: 215 },
+      { name: '冬至 · 雅韵度 91%', deg: 310 }
+    ];
+    let sinanIdx = 0;
+
+    function rotateSinanGauge() {
+      sinanIdx = (sinanIdx + 1) % solarTerms.length;
+      const item = solarTerms[sinanIdx];
+      sinanAngle += 95;
+      const needle = document.getElementById('sinanNeedle');
+      const label = document.getElementById('sinanValueLabel');
+      if (needle) needle.setAttribute('transform', `rotate(${sinanAngle} 90 90)`);
+      if (label) label.textContent = item.name;
+      playCeladonChime(740);
+    }
+
+    function toggleDougongNode(nodeId) {
+      const el = document.getElementById(nodeId);
+      const icon = document.getElementById(`${nodeId}-icon`);
+      if (!el) return;
+      const isHidden = el.classList.toggle('hidden');
+      if (icon) {
+        icon.textContent = isHidden ? '▸' : '▾';
+        icon.style.color = isHidden ? 'var(--ses-ink-light)' : 'var(--ses-cinnabar)';
+      }
+      playCeladonChime(isHidden ? 523.25 : 659.25);
+    }
+
+    let fishscaleAsc = false;
+    function sortFishscaleTable() {
+      const tbody = document.getElementById('fishscaleBody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      fishscaleAsc = !fishscaleAsc;
+      rows.sort((a, b) => {
+        const va = Number(a.getAttribute('data-val') || 0);
+        const vb = Number(b.getAttribute('data-val') || 0);
+        return fishscaleAsc ? va - vb : vb - va;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      playCeladonChime(fishscaleAsc ? 659.25 : 783.99);
+      showToast(`已按岁入贯数${fishscaleAsc ? '升序' : '降序'}重排鱼鳞图册`);
+    }
+
+    function selectBianjingLandmark(id, title, desc, era, coord, cx, cy) {
+      playGuqinPluck(392);
+      document.getElementById('landmarkTitle').textContent = title;
+      document.getElementById('landmarkDesc').textContent = desc;
+      document.getElementById('landmarkEra').textContent = era;
+      const coordEl = document.getElementById('landmarkCoord');
+      if (coordEl && coord) coordEl.textContent = coord;
+
+      // 高亮当前点击的舆图朱砂锚点
+      document.querySelectorAll('.map-pin-node').forEach(node => {
+        const isCurrent = node.getAttribute('data-id') === id;
+        const ring = node.querySelector('.pin-ring');
+        const outer = node.querySelector('.pin-outer');
+        const core = node.querySelector('.pin-core');
+        const rect = node.querySelector('rect');
+        const text = node.querySelector('text');
+
+        if (isCurrent) {
+          ring.setAttribute('opacity', '1');
+          ring.setAttribute('r', '18');
+          outer.setAttribute('fill', 'var(--ses-cinnabar)');
+          outer.setAttribute('stroke', '#F7F4EC');
+          outer.setAttribute('r', '7');
+          core.setAttribute('fill', '#F7F4EC');
+          rect.setAttribute('fill', 'var(--ses-cinnabar)');
+          rect.setAttribute('stroke', 'var(--ses-gold)');
+          text.setAttribute('fill', '#F7F4EC');
+          text.setAttribute('font-weight', '600');
+        } else {
+          ring.setAttribute('opacity', '0');
+          outer.setAttribute('fill', 'var(--ses-bg-canvas)');
+          outer.setAttribute('stroke', 'var(--ses-gold)');
+          outer.setAttribute('r', '6');
+          core.setAttribute('fill', 'var(--ses-gold)');
+          rect.setAttribute('fill', 'var(--ses-bg-sidebar)');
+          rect.setAttribute('stroke', 'var(--ses-border-gold)');
+          text.setAttribute('fill', 'var(--ses-ink-heavy)');
+          text.setAttribute('font-weight', '400');
+        }
+      });
+
+      const card = document.getElementById('landmarkDetailCard');
+      if (card) {
+        card.style.transform = 'translateY(-2px)';
+        setTimeout(() => { card.style.transform = 'translateY(0)'; }, 220);
+      }
+    }
+
+    /* 12. V2.0 新增六大宋韵组件交互逻辑 */
+    // (1) 牙签书帙下拉选择器
+    function toggleYaqianDropdown() {
+      const menu = document.getElementById('yaqianDropdownMenu');
+      const arrow = document.getElementById('yaqianArrow');
+      const isHidden = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      arrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+      playCeladonChime(isHidden ? 740 : 587);
+    }
+
+    function selectYaqianItem(title, meta) {
+      document.getElementById('yaqianSelectedText').textContent = title;
+      document.getElementById('yaqianMetaNote').textContent = meta;
+      document.getElementById('yaqianDropdownMenu').classList.add('hidden');
+      document.getElementById('yaqianArrow').style.transform = 'rotate(0deg)';
+      playCeladonChime(880);
+      showToast(`已抽选牙签书帙：《${title}》`);
+    }
+
+    document.addEventListener('click', (e) => {
+      const wrap = document.getElementById('yaqianSelectWrap');
+      if (wrap && !wrap.contains(e.target)) {
+        const menu = document.getElementById('yaqianDropdownMenu');
+        if (menu) menu.classList.add('hidden');
+        const arrow = document.getElementById('yaqianArrow');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+      }
+    });
+
+    // (2) 筹算纵横算筹步进器（北宋纵横筹策编码转换）
+    let currentRodValue = 27;
+    const verticalRodDigits = ['〇', '〡', '〢', '〣', '〤', '〥', '〦', '〧', '〨', '〩'];
+    const horizontalRodDigits = ['〇', '一', '二', '三', '肆', '五', '丄', '丅', '丌', '〩'];
+
+    function toSongCountingRods(num) {
+      const digits = String(num).split('').map(Number);
+      const len = digits.length;
+      return digits.map((d, idx) => {
+        const posFromRight = len - 1 - idx;
+        return (posFromRight % 2 === 0) ? verticalRodDigits[d] : horizontalRodDigits[d];
+      }).join(' ');
+    }
+
+    function stepCountingRods(delta) {
+      currentRodValue = Math.max(1, Math.min(99, currentRodValue + delta));
+      document.getElementById('rodNumberDisplay').textContent = currentRodValue;
+      document.getElementById('rodGlyphDisplay').textContent = toSongCountingRods(currentRodValue);
+      playCeladonChime(delta > 0 ? 784 : 659.25);
+    }
+
+    // (3) 毕昇胶泥活字分页器
+    let currentClayPage = 1;
+    const cnPageNumerals = ['壹', '贰', '叁', '肆'];
+    const clayPageMockRows = {
+      1: [
+        { name: '汝州 · 清凉寺', item: '天青釉裹足支烧瓷', tag: '御用甲等', val: '92,000', seal: '宣和御览', green: false },
+        { name: '建州 · 北苑', item: '龙凤团茶·小龙团', tag: '贡茶首品', val: '78,500', seal: '已验入库', green: true },
+        { name: '苏州 · 织造局', item: '八答晕宋锦·青绿', tag: '内府特供', val: '114,000', seal: '宣和御览', green: false },
+        { name: '歙州 · 龙尾山', item: '罗纹金星砚·徽墨', tag: '文房上品', val: '64,200', seal: '已验入库', green: true }
+      ],
+      2: [
+        { name: '定州 · 曲阳窑', item: '白釉刻花萱草纹碗', tag: '尚食局供', val: '81,300', seal: '宣和御览', green: false },
+        { name: '杭州 · 官作院', item: '澄心堂仿古生宣笺', tag: '翰林院用', val: '59,400', seal: '已验入库', green: true },
+        { name: '钧州 · 神垕镇', item: '玫瑰紫窑变海棠盆', tag: '艮岳御赏', val: '106,800', seal: '宣和御览', green: false },
+        { name: '湖州 · 善琏镇', item: '紫毫鸡距宣笔', tag: '御书院备', val: '49,000', seal: '已验入库', green: true }
+      ],
+      3: [
+        { name: '饶州 · 景德镇', item: '影青釉暗刻缠枝莲盏', tag: '内府特供', val: '97,600', seal: '宣和御览', green: false },
+        { name: '成都 · 蜀锦院', item: '雨丝锦·落花流水纹', tag: '装池上品', val: '88,200', seal: '已验入库', green: true },
+        { name: '端州 · 羚羊峡', item: '老坑水岩鸲鹆眼端砚', tag: '御书之宝', val: '73,900', seal: '宣和御览', green: false },
+        { name: '泉州 · 市舶司', item: '真腊绿奇楠沉水香', tag: '内香药库', val: '132,000', seal: '已验入库', green: true }
+      ],
+      4: [
+        { name: '处州 · 龙泉窑', item: '粉青釉摩羯耳盘口瓶', tag: '尚药局供', val: '68,400', seal: '已验入库', green: true },
+        { name: '磁州 · 观台镇', item: '白地黑花婴戏纹枕', tag: '民窑精品', val: '45,600', seal: '已验入库', green: true },
+        { name: '耀州 · 黄堡镇', item: '橄榄青釉剔花牡丹执壶', tag: '贡器乙等', val: '61,500', seal: '宣和御览', green: false },
+        { name: '吉州 · 永和镇', item: '木叶天目黑釉斗笠盏', tag: '禅林清供', val: '53,800', seal: '宣和御览', green: false }
+      ]
+    };
+
+    function switchClayPage(target) {
+      if (target === 'prev') currentClayPage = currentClayPage > 1 ? currentClayPage - 1 : 4;
+      else if (target === 'next') currentClayPage = currentClayPage < 4 ? currentClayPage + 1 : 1;
+      else currentClayPage = target;
+
+      document.querySelectorAll('#clayPaginationGroup .ses-clay-type[data-page]').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.page) === currentClayPage);
+      });
+      document.getElementById('clayPageStatus').innerHTML = `毕昇胶泥活字印版 · 当前第 <strong class="text-[var(--ses-ink-heavy)]">${cnPageNumerals[currentClayPage - 1]}</strong> 版（共肆版）`;
+
+      const tbody = document.getElementById('fishscaleBody');
+      const rows = clayPageMockRows[currentClayPage];
+      tbody.innerHTML = rows.map(r => `
+        <tr data-val="${r.val.replace(',', '')}">
+          <td class="font-semibold text-[var(--ses-ink-heavy)]">${r.name}</td>
+          <td>${r.item}</td>
+          <td><span class="ses-brocade-tag !py-0.5 !px-2 text-[11px]">${r.tag}</span></td>
+          <td class="font-mono">${r.val}</td>
+          <td><span class="ses-seal-stamp ${r.green ? '!bg-[var(--ses-malachite)]' : ''} !text-[10px]">${r.seal}</span></td>
+        </tr>
+      `).join('');
+      playSealThud();
+    }
+
+    // (4) 经折装册页折叠手风琴
+    function toggleSutraFold(index) {
+      const folds = document.querySelectorAll('#sutraAccordionGroup .ses-sutra-fold');
+      folds.forEach((fold, i) => {
+        const body = fold.querySelector('.sutra-body');
+        const icon = fold.querySelector('.sutra-icon');
+        if (i === index) {
+          const isOpen = fold.classList.contains('open');
+          fold.classList.toggle('open', !isOpen);
+          body.classList.toggle('hidden', isOpen);
+          icon.textContent = isOpen ? '▸' : '▾';
+          icon.style.color = isOpen ? 'var(--ses-ink-light)' : 'var(--ses-cinnabar)';
+        } else {
+          fold.classList.remove('open');
+          body.classList.add('hidden');
+          icon.textContent = '▸';
+          icon.style.color = 'var(--ses-ink-light)';
+        }
+      });
+      playGuqinPluck(329.63);
+    }
+
+    // (5) 宋刻善本乌丝栏竖排/横排切换
+    function toggleWoodblockOrientation() {
+      const reader = document.getElementById('woodblockReader');
+      const btn = document.getElementById('woodblockToggleBtn');
+      const isVert = reader.classList.toggle('vertical-mode');
+      btn.innerHTML = isVert ? '<span>📜 切换为现代横排</span>' : '<span>🏮 切换为宋刻竖排</span>';
+      playCeladonChime(isVert ? 880 : 659.25);
+      showToast(isVert ? '已展《宋刻善本》右起竖排乌丝栏制式' : '已切换为现代横排阅读制式');
+    }
+
+    window.addEventListener('load', () => {
+      const rect = guqinTrack.getBoundingClientRect();
+      guqinStringPath.setAttribute('d', `M 0 18 Q ${rect.width / 2} 18 ${rect.width} 18`);
+      renderSmoothSongMountains('grain');
+      buildSundialDial();
+      updateTimepieceHeader(document.documentElement.getAttribute('data-theme') || 'dark');
+      syncSundialRealtime();
+      renderIncenseVisual();
+      animateSilkSmoke();
+      // 与刻漏水滴动画周期（2.4s）同步的空灵水滴落壶声效
+      clearInterval(clepsydraDropTimer);
+      clepsydraDropTimer = setInterval(playWaterDropSound, 2400);
+    });
+  </script>
+</body>
+</html>

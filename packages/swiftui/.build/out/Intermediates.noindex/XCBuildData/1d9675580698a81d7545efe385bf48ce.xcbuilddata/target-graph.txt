@@ -1,0 +1,11 @@
+Target dependency graph (4 targets)
+Target 'AllIncludingTests' in project 'Aggregate'
+➜ Explicit dependency on target 'SongUITests-product' in project 'SongUI'
+➜ Dependency on target 'SongUITests-product' in project 'SongUI' via transitive dependency through 'SongUITests-test-runner'
+➜ Explicit dependency on target 'SongUI-product' in project 'SongUI'
+➜ Explicit dependency on target 'SongUI' in project 'SongUI'
+Target 'SongUI-product' in project 'SongUI'
+➜ Explicit dependency on target 'SongUI' in project 'SongUI'
+Target 'SongUITests-product' in project 'SongUI'
+➜ Explicit dependency on target 'SongUI' in project 'SongUI'
+Target 'SongUI' in project 'SongUI' (no dependencies)
