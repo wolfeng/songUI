@@ -2,6 +2,11 @@
 
 以宋代审美（汝窑天青、澄心生宣、泥金描边、乌丝栏、七弦琴轸、司辰刻漏、一柱燃香等）为核心视觉语言，构建的工程化 Vue 3 设计系统与组件库。
 
+## 在线体验
+
+- **交互式文档站**：https://wolfeng.github.io/songUI/
+- **大宋官网示例 Demo**：https://wolfeng.github.io/songUI/?demo=song
+
 ## 架构分层
 
 ```text
