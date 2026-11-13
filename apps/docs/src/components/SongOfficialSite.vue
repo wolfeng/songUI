@@ -851,7 +851,7 @@ function replayLoading() {
 
 .song-site-grid-2 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: var(--ses-space-6);
 }
 
@@ -920,5 +920,32 @@ function replayLoading() {
   justify-content: center;
   padding: var(--ses-space-6);
   background: var(--ses-bg-canvas);
+}
+
+@media (max-width: 720px) {
+  .song-site-header-inner {
+    padding: var(--ses-space-3) var(--ses-space-4) 0;
+  }
+  .song-site-top-row {
+    gap: var(--ses-space-2);
+  }
+  .song-site-sep,
+  .song-site-motto {
+    display: none;
+  }
+  .song-site-nav-row :deep(.ses-tabs) {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .song-site-main {
+    padding: var(--ses-space-5) var(--ses-space-4) var(--ses-space-10);
+  }
+  .song-site-grid-2 {
+    gap: var(--ses-space-4);
+  }
+  .song-site-metrics-4 {
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  }
 }
 </style>

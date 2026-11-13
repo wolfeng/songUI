@@ -1556,6 +1556,7 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
 }
 
 .docs-main {
+  min-width: 0;
   min-height: 0;
   height: 100%;
   overflow-y: auto;
@@ -1563,6 +1564,10 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
   padding-bottom: var(--ses-space-10);
   scrollbar-width: thin;
   scrollbar-color: var(--ses-border-gold) transparent;
+}
+
+.docs-section {
+  min-width: 0;
 }
 
 @media (max-width: 860px) {
@@ -1576,17 +1581,66 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
     min-height: 100vh;
     overflow: visible;
   }
+  .docs-header-inner {
+    padding: var(--ses-space-3) var(--ses-space-4);
+    gap: var(--ses-space-3);
+  }
+  .docs-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
   .docs-layout {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     overflow: visible;
-    padding-bottom: 2rem;
+    padding: var(--ses-space-4) var(--ses-space-4) 2rem;
+    gap: var(--ses-space-4);
   }
-  .docs-nav,
+  .docs-sidebar {
+    height: auto;
+    gap: var(--ses-space-2);
+  }
+  .docs-nav {
+    height: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 0;
+    padding-bottom: var(--ses-space-2);
+    gap: var(--ses-space-2);
+  }
+  .docs-nav-item {
+    flex: 0 0 auto;
+    padding: var(--ses-space-2) var(--ses-space-3);
+  }
+  .docs-nav-sub {
+    display: none;
+  }
   .docs-main {
     height: auto;
     overflow-y: visible;
     padding-right: 0;
+  }
+  .docs-panel {
+    padding: var(--ses-space-4);
+  }
+  .docs-search-backdrop {
+    padding: 4vh 0.75rem 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .docs-brand-sub {
+    display: none;
+  }
+  .docs-search-trigger kbd {
+    display: none;
+  }
+  .docs-swatch-grid {
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
   }
 }
 
