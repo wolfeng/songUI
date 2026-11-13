@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useSound } from '../composables/useSound.js';
+import SesIcon from './SesIcon.vue';
 
 export interface SesSelectOption {
   label: string;
@@ -77,15 +78,15 @@ onBeforeUnmount(() => {
         @click="toggleDropdown"
       >
         <span style="display: flex; align-items: center; gap: 0.5rem">
-          <span style="color: var(--ses-gold)" aria-hidden="true">🔖</span>
+          <SesIcon name="bookmark" :size="16" style="color: var(--ses-gold)" />
           <span>{{ selectedOption ? selectedOption.label : placeholder }}</span>
         </span>
         <span
-          style="font-size: 0.75rem; color: var(--ses-gold); transition: transform 0.3s ease"
+          style="display: inline-flex; color: var(--ses-gold); transition: transform 0.3s ease"
           :style="{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }"
           aria-hidden="true"
         >
-          ▾
+          <SesIcon name="chevron-down" :size="15" />
         </span>
       </button>
 

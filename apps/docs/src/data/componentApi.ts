@@ -32,6 +32,24 @@ export interface ComponentApiDoc {
 }
 
 export const componentApiMap: Record<string, ComponentApiDoc[]> = {
+  icons: [
+    {
+      name: 'SesIcon',
+      importCode: `import { SesIcon, SONG_ICON_NAMES, type SongIconName } from '@wolfeng/song-ui-vue';`,
+      usageCode: `<SesIcon name="jianbowl" :size="24" />
+<SesIcon name="compass" :size="20" spin />
+<SesIcon name="seal" color="var(--ses-cinnabar)" label="朱砂印章" />`,
+      props: [
+        { name: 'name', type: `SongIconName`, defaultVal: `必填`, desc: '图标名称（共 40 枚北宋风雅图标）', descEn: 'Icon identifier (40 Northern Song icons)' },
+        { name: 'size', type: `number | string`, defaultVal: `20`, desc: '图标宽高（px 或 CSS 长度）', descEn: 'Icon width & height (px or CSS length)' },
+        { name: 'color', type: `string`, defaultVal: `'currentColor'`, desc: '描边颜色', descEn: 'SVG stroke color' },
+        { name: 'strokeWidth', type: `number`, defaultVal: `1.5`, desc: '线条粗细', descEn: 'SVG stroke width' },
+        { name: 'spin', type: `boolean`, defaultVal: `false`, desc: '是否启用匀速旋转动画', descEn: 'Enable continuous rotation animation' },
+        { name: 'label', type: `string`, defaultVal: `undefined`, desc: '无障碍 aria-label（传入时自动设 role="img"）', descEn: 'Accessible aria-label (sets role="img")' }
+      ]
+    }
+  ],
+
   button: [
     {
       name: 'SesButton',

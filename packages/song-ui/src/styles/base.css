@@ -1775,5 +1775,22 @@ pre {
   background: rgba(184, 152, 92, 0.1);
 }
 
+/* 宋韵图标 */
+.ses-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+@keyframes sesIconSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ses-icon--spin {
+  animation: sesIconSpin 6s linear infinite;
+}
+
 
 

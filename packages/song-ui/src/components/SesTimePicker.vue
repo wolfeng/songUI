@@ -4,6 +4,7 @@ import { getNightWatchLabel, getShichenName, validateField, type ValidationRule 
 import { useSound } from '../composables/useSound.js';
 import { useLocale } from '../composables/useLocale.js';
 import { SONG_FORM_KEY, type SongFormFieldHandle } from '../composables/useFormContext.js';
+import SesIcon from './SesIcon.vue';
 
 export interface SesTimePickerProps {
   modelValue?: string;
@@ -280,7 +281,7 @@ function handleKeydown(event: KeyboardEvent) {
         @click="toggleOpen"
       >
         <span class="ses-picker-trigger-main">
-          <span class="ses-picker-icon" aria-hidden="true">⏳</span>
+          <SesIcon name="clock" :size="16" class="ses-picker-icon" />
           <span v-if="modelValue" class="ses-picker-value">{{ modelValue }}</span>
           <span v-else class="ses-picker-placeholder">{{ resolvedPlaceholder }}</span>
           <span v-if="selectedMeta && showShichen" class="ses-picker-badge">

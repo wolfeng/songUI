@@ -42,3 +42,11 @@ export { default as SesAvatarGroup, type SesAvatarGroupProps, type SesAvatarItem
 export { default as SesRating, type SesRatingProps, type SesRatingSymbol } from './components/SesRating.vue';
 export { default as SesDatePicker, type SesDatePickerProps } from './components/SesDatePicker.vue';
 export { default as SesTimePicker, type SesTimePickerProps } from './components/SesTimePicker.vue';
+export { default as SesIcon, type SesIconProps } from './components/SesIcon.vue';
+export {
+  SONG_ICON_DEFS,
+  SONG_ICON_NAMES,
+  type SongIconName,
+  type SongIconCategory,
+  type SongIconDef
+} from './icons/song-icons.js';

@@ -38,7 +38,12 @@ import {
   SesAvatarGroup,
   SesRating,
   SesDatePicker,
-  SesTimePicker
+  SesTimePicker,
+  SesIcon,
+  SONG_ICON_DEFS,
+  SONG_ICON_NAMES,
+  type SongIconCategory,
+  type SongIconName
 } from '@wolfeng/song-ui-vue';
 import { songTokens } from '@wolfeng/song-ui-tokens';
 import { getShichenName, getNightWatchLabel, songRules } from '@wolfeng/song-ui-core';
@@ -91,6 +96,7 @@ const navItems: { id: SectionId; title: string; subtitle: string }[] = [
   { id: 'overlays', title: '古卷与屏风', subtitle: 'Scroll Modal & Screen Drawer' },
   // 三、基础与表单控件
   { id: 'button', title: '玉质玲珑钮', subtitle: 'Button & Seal' },
+  { id: 'icons', title: '宋韵图标库', subtitle: 'Northern Song Icons' },
   { id: 'switch', title: '榫卯滑闩', subtitle: 'Switch' },
   { id: 'radio', title: '螺钿单选', subtitle: 'RadioGroup' },
   { id: 'checkbox', title: '茶百戏多选', subtitle: 'Checkbox' },
@@ -118,6 +124,26 @@ const scrollBody = ref('建盏兔毫，宜用建溪灵芽，候汤眼如蟹目�
 const selectedBook = ref('chongwen');
 const demoDate = ref('2026-11-13');
 const demoTime = ref('12:30');
+const iconSearch = ref('');
+const iconCategory = ref<'all' | SongIconCategory>('all');
+const iconSize = ref(24);
+const filteredIconNames = computed(() => {
+  const q = iconSearch.value.trim().toLowerCase();
+  return SONG_ICON_NAMES.filter((name) => {
+    const def = SONG_ICON_DEFS[name];
+    if (iconCategory.value !== 'all' && def.category !== iconCategory.value) return false;
+    if (!q) return true;
+    return name.toLowerCase().includes(q) || def.zh.includes(q) || def.en.toLowerCase().includes(q);
+  });
+});
+function copyIconTag(name: SongIconName) {
+  sound.playChime(880);
+  const code = `<SesIcon name="${name}" />`;
+  if (navigator.clipboard) {
+    void navigator.clipboard.writeText(code);
+  }
+  toast.show(isEn.value ? `Copied ${code}` : `已复制：${code}`);
+}
 const bookOptions = [
   { value: 'chongwen', label: '崇文总目 · 经部易类（秘书省校）', meta: '卷一 · 秘书省校定' },
   { value: 'yingzao', label: '营造法式 · 大木作制度（李诫编）', meta: '卷四 · 李诫奉敕编修' },
@@ -675,6 +701,74 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
               >
                 <div class="ses-text-caption">.ses-rounded-{{ key }} ({{ val }})</div>
               </div>
+            </div>
+          </SesCard>
+        </section>
+
+        <!-- 2b. SesIcon 北宋图标库 -->
+        <section v-else-if="activeSection === 'icons'" class="docs-section">
+          <SesCard class="docs-panel">
+            <h2 class="ses-slender-gold docs-h2">{{ isEn ? 'SesIcon · Northern Song Iconography' : 'SesIcon · 北宋风雅图标库' }}</h2>
+            <p class="docs-lead">
+              {{ isEn
+                ? '40 bespoke 24×24 fine-line SVG icons inspired by Song stationery, celadon & Jian-ware ceramics, astronomy, and woodblock UI. Click any icon to copy its tag.'
+                : '40 枚 24×24 宋刻细线 SVG 图标，涵盖文房雅集、器物百工、天文历法与界面通用四类，随明暗主题自动适配墨色。点击任意图标即可复制组件标签。' }}
+            </p>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-bottom: 1.15rem">
+              <div style="flex: 1 1 220px; max-width: 300px">
+                <SesInput v-model="iconSearch" :placeholder="isEn ? 'Search icons (e.g. scroll, jianbowl)…' : '检索图标（如：古卷、建盏、scroll）…'" />
+              </div>
+              <div class="docs-demo-row" style="gap: 0.4rem">
+                <SesButton
+                  v-for="cat in ([
+                    { id: 'all', zh: '全部', en: 'All' },
+                    { id: 'stationery', zh: '文房雅集', en: 'Stationery' },
+                    { id: 'crafts', zh: '器物百工', en: 'Crafts' },
+                    { id: 'astronomy', zh: '天文历法', en: 'Astronomy' },
+                    { id: 'ui', zh: '界面通用', en: 'UI' }
+                  ] as const)"
+                  :key="cat.id"
+                  size="sm"
+                  :variant="iconCategory === cat.id ? 'jade' : 'outline'"
+                  @click="iconCategory = cat.id"
+                >
+                  {{ isEn ? cat.en : cat.zh }}
+                </SesButton>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.4rem; margin-left: auto">
+                <span style="font-size: 0.78rem; color: var(--ses-ink-light)">{{ isEn ? 'Size' : '尺幅' }}: {{ iconSize }}px</span>
+                <SesButton size="sm" variant="outline" @click="iconSize = Math.max(16, iconSize - 4)">−</SesButton>
+                <SesButton size="sm" variant="outline" @click="iconSize = Math.min(40, iconSize + 4)">+</SesButton>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 0.65rem">
+              <button
+                v-for="name in filteredIconNames"
+                :key="name"
+                type="button"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 0.45rem;
+                  padding: 0.85rem 0.5rem;
+                  border-radius: var(--ses-radius-sm);
+                  border: 0.5px solid var(--ses-border-hairline);
+                  background: var(--ses-bg-canvas);
+                  color: var(--ses-ink-heavy);
+                  font-family: var(--ses-font-serif);
+                  cursor: pointer;
+                  transition: all 0.25s ease;
+                "
+                @click="copyIconTag(name)"
+              >
+                <SesIcon :name="name" :size="iconSize" />
+                <span style="font-size: 0.78rem">{{ isEn ? SONG_ICON_DEFS[name].en : SONG_ICON_DEFS[name].zh }}</span>
+                <span style="font-size: 0.68rem; color: var(--ses-ink-light); font-family: monospace">{{ name }}</span>
+              </button>
             </div>
           </SesCard>
         </section>

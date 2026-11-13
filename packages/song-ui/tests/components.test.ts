@@ -37,7 +37,9 @@ import {
   SesAvatarGroup,
   SesRating,
   SesDatePicker,
-  SesTimePicker
+  SesTimePicker,
+  SesIcon,
+  SONG_ICON_NAMES
 } from '../src/index.js';
 
 describe('@wolfeng/song-ui-vue', () => {
@@ -499,5 +501,32 @@ describe('@wolfeng/song-ui-vue', () => {
 
     await tp.get('.ses-picker-clear').trigger('click');
     expect(tp.emitted('update:modelValue')?.[2]).toEqual(['']);
+  });
+
+  it('renders Northern Song SVG icons via SesIcon', () => {
+    expect(SONG_ICON_NAMES.length).toBeGreaterThanOrEqual(35);
+
+    const icon = mount(SesIcon, {
+      props: {
+        name: 'jianbowl',
+        size: 28,
+        strokeWidth: 1.75,
+        spin: true,
+        label: '建盏'
+      }
+    });
+
+    const svg = icon.get('svg');
+    expect(svg.attributes('width')).toBe('28px');
+    expect(svg.attributes('height')).toBe('28px');
+    expect(svg.attributes('stroke-width')).toBe('1.75');
+    expect(svg.attributes('aria-label')).toBe('建盏');
+    expect(svg.classes()).toContain('ses-icon--spin');
+    expect(svg.findAll('path, circle, rect, line, polygon').length).toBeGreaterThan(0);
+
+    for (const name of SONG_ICON_NAMES) {
+      const item = mount(SesIcon, { props: { name } });
+      expect(item.findAll('path, circle, rect, line, polygon').length).toBeGreaterThan(0);
+    }
   });
 });
