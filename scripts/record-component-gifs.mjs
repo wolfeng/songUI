@@ -195,7 +195,262 @@ async function recordTimepiece(browser) {
   }
 }
 
+async function recordGuqin(browser) {
+  const frameDir = fs.mkdtempSync(path.join(os.tmpdir(), 'song-ui-guqin-'));
+  const page = await browser.newPage({
+    viewport: { width: 1120, height: 860 },
+    deviceScaleFactor: 2
+  });
+
+  try {
+    await page.goto(DOCS_URL, { waitUntil: 'networkidle' });
+    await ensureLightTheme(page);
+    await page.getByRole('button', { name: /七弦琴轸/ }).click();
+    await page.waitForSelector('.ses-guqin-track');
+    await page.waitForTimeout(300);
+
+    const panel = page.locator('.docs-section .docs-panel').first();
+    await panel.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(250);
+
+    const box = await panel.boundingBox();
+    if (!box) throw new Error('Could not measure SesGuqinSlider panel');
+    const clip = {
+      x: Math.floor(box.x),
+      y: Math.floor(box.y),
+      width: Math.ceil(box.width),
+      height: Math.ceil(box.height) + 8
+    };
+
+    const track = panel.locator('.ses-guqin-track').first();
+    const tBox = await track.boundingBox();
+    if (!tBox) throw new Error('Could not measure .ses-guqin-track');
+
+    const fps = 12;
+    let idx = 0;
+    async function snap(count = 1) {
+      for (let k = 0; k < count; k++) {
+        const file = path.join(frameDir, `frame_${String(idx++).padStart(4, '0')}.png`);
+        await page.screenshot({ clip, path: file });
+      }
+    }
+
+    const yMid = tBox.y + tBox.height / 2;
+    const xStart = tBox.x + tBox.width * 0.64;
+    await page.mouse.move(xStart, yMid);
+    await page.mouse.down();
+    await snap(3);
+
+    // Drag smoothly left to 15%, then right to 90%, then back to 64%
+    const targets = [0.5, 0.35, 0.2, 0.15, 0.3, 0.5, 0.7, 0.88, 0.76, 0.64];
+    for (const ratio of targets) {
+      await page.mouse.move(tBox.x + tBox.width * ratio, yMid, { steps: 3 });
+      await snap(2);
+    }
+    await page.mouse.up();
+    await snap(6);
+
+    const outGif = path.join(OUT_DIR, 'ses-guqin-slider.gif');
+    encodeGif(frameDir, outGif, fps, GIF_WIDTH);
+    console.log(`Generated ${outGif}`);
+  } finally {
+    await page.close();
+    fs.rmSync(frameDir, { recursive: true, force: true });
+  }
+}
+
+async function recordIncense(browser) {
+  const frameDir = fs.mkdtempSync(path.join(os.tmpdir(), 'song-ui-incense-'));
+  const page = await browser.newPage({
+    viewport: { width: 1120, height: 860 },
+    deviceScaleFactor: 2
+  });
+
+  try {
+    await page.goto(DOCS_URL, { waitUntil: 'networkidle' });
+    await ensureLightTheme(page);
+    await page.getByRole('button', { name: /一柱燃香/ }).click();
+    await page.waitForSelector('.docs-section .docs-panel');
+    await page.waitForTimeout(300);
+
+    const panel = page.locator('.docs-section .docs-panel').first();
+    await panel.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(250);
+
+    const box = await panel.boundingBox();
+    if (!box) throw new Error('Could not measure SesIncenseTimer panel');
+    const clip = {
+      x: Math.floor(box.x),
+      y: Math.floor(box.y),
+      width: Math.ceil(box.width),
+      height: Math.ceil(box.height) + 8
+    };
+
+    // Select 15s preset and ignite via SesSeal
+    await panel.getByRole('button', { name: /十息/ }).click();
+    await page.waitForTimeout(150);
+    await panel.getByText(/引火燃香/).click();
+
+    const fps = 12;
+    const intervalMs = Math.round(1000 / fps);
+    const totalFrames = 48; // 4 seconds of burning embers & rising smoke
+    for (let i = 0; i < totalFrames; i++) {
+      const start = Date.now();
+      const file = path.join(frameDir, `frame_${String(i).padStart(4, '0')}.png`);
+      await page.screenshot({ clip, path: file });
+      const elapsed = Date.now() - start;
+      if (elapsed < intervalMs) {
+        await new Promise((r) => setTimeout(r, intervalMs - elapsed));
+      }
+    }
+
+    const outGif = path.join(OUT_DIR, 'ses-incense-timer.gif');
+    encodeGif(frameDir, outGif, fps, GIF_WIDTH);
+    console.log(`Generated ${outGif}`);
+  } finally {
+    await page.close();
+    fs.rmSync(frameDir, { recursive: true, force: true });
+  }
+}
+
+async function recordMountain(browser) {
+  const frameDir = fs.mkdtempSync(path.join(os.tmpdir(), 'song-ui-mountain-'));
+  const page = await browser.newPage({
+    viewport: { width: 1120, height: 860 },
+    deviceScaleFactor: 2
+  });
+
+  try {
+    await page.goto(DOCS_URL, { waitUntil: 'networkidle' });
+    await ensureLightTheme(page);
+    await page.getByRole('button', { name: /青绿叠嶂/ }).click();
+    await page.waitForSelector('.docs-section .docs-panel svg');
+    await page.waitForTimeout(350);
+
+    const panel = page.locator('.docs-section .docs-panel').first();
+    await panel.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(250);
+
+    const box = await panel.boundingBox();
+    if (!box) throw new Error('Could not measure SesMountainChart panel');
+    const clip = {
+      x: Math.floor(box.x),
+      y: Math.floor(box.y),
+      width: Math.ceil(box.width),
+      height: Math.ceil(box.height) + 8
+    };
+
+    const svg = panel.locator('svg').first();
+    const sBox = await svg.boundingBox();
+    if (!sBox) throw new Error('Could not measure MountainChart SVG');
+
+    const fps = 12;
+    let idx = 0;
+    async function snap(count = 1) {
+      for (let k = 0; k < count; k++) {
+        const file = path.join(frameDir, `frame_${String(idx++).padStart(4, '0')}.png`);
+        await page.screenshot({ clip, path: file });
+        await new Promise((r) => setTimeout(r, 75));
+      }
+    }
+
+    await snap(4);
+    // Hover across ridge points in grain mode
+    for (const rx of [0.22, 0.38, 0.56, 0.74, 0.88]) {
+      await page.mouse.move(sBox.x + sBox.width * rx, sBox.y + sBox.height * 0.45);
+      await snap(4);
+    }
+
+    // Switch to Imperial Kiln series
+    await panel.getByRole('button', { name: /官窑岁贡|Imperial Kiln/ }).click();
+    await snap(8);
+    for (const rx of [0.72, 0.48, 0.28]) {
+      await page.mouse.move(sBox.x + sBox.width * rx, sBox.y + sBox.height * 0.45);
+      await snap(4);
+    }
+
+    // Switch back to Grain for clean loop
+    await panel.getByRole('button', { name: /汴京漕粮|Bianjing Grain/ }).click();
+    await page.mouse.move(box.x + 10, box.y + 10);
+    await snap(6);
+
+    const outGif = path.join(OUT_DIR, 'ses-mountain-chart.gif');
+    encodeGif(frameDir, outGif, fps, GIF_WIDTH);
+    console.log(`Generated ${outGif}`);
+  } finally {
+    await page.close();
+    fs.rmSync(frameDir, { recursive: true, force: true });
+  }
+}
+
+async function recordWoodblock(browser) {
+  const frameDir = fs.mkdtempSync(path.join(os.tmpdir(), 'song-ui-woodblock-'));
+  const page = await browser.newPage({
+    viewport: { width: 1120, height: 860 },
+    deviceScaleFactor: 2
+  });
+
+  try {
+    await page.goto(DOCS_URL, { waitUntil: 'networkidle' });
+    await ensureLightTheme(page);
+    await page.getByRole('button', { name: /乌丝栏善本/ }).click();
+    await page.waitForSelector('.docs-section .docs-panel');
+    await page.waitForTimeout(350);
+
+    const panel = page.locator('.docs-section .docs-panel').first();
+    await panel.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(250);
+
+    const box = await panel.boundingBox();
+    if (!box) throw new Error('Could not measure SesWoodblockReader panel');
+    const clip = {
+      x: Math.floor(box.x),
+      y: Math.floor(box.y),
+      width: Math.ceil(box.width),
+      height: Math.ceil(box.height) + 12
+    };
+
+    const toggleBtn = panel.locator('button').first();
+    const fps = 10;
+    let idx = 0;
+    async function snap(count = 1) {
+      for (let k = 0; k < count; k++) {
+        const file = path.join(frameDir, `frame_${String(idx++).padStart(4, '0')}.png`);
+        await page.screenshot({ clip, path: file });
+        await new Promise((r) => setTimeout(r, 90));
+      }
+    }
+
+    // Vertical mode hold
+    await snap(10);
+    // Toggle to Horizontal mode
+    await toggleBtn.click();
+    await snap(14);
+    // Toggle back to Vertical mode
+    await toggleBtn.click();
+    await snap(10);
+
+    const outGif = path.join(OUT_DIR, 'ses-woodblock-reader.gif');
+    encodeGif(frameDir, outGif, fps, GIF_WIDTH);
+    console.log(`Generated ${outGif}`);
+  } finally {
+    await page.close();
+    fs.rmSync(frameDir, { recursive: true, force: true });
+  }
+}
+
 async function main() {
+  const onlyArg = process.argv.find((a) => a.startsWith('--only='))?.slice(7);
+  const selected = onlyArg ? new Set(onlyArg.split(',')) : null;
+  const tasks = {
+    diancha: recordDiancha,
+    timepiece: recordTimepiece,
+    guqin: recordGuqin,
+    incense: recordIncense,
+    mountain: recordMountain,
+    woodblock: recordWoodblock
+  };
+
   const browser = await chromium.launch({
     executablePath: CHROME_PATH,
     headless: true,
@@ -203,8 +458,11 @@ async function main() {
   });
 
   try {
-    await recordDiancha(browser);
-    await recordTimepiece(browser);
+    for (const [key, fn] of Object.entries(tasks)) {
+      if (!selected || selected.has(key)) {
+        await fn(browser);
+      }
+    }
   } finally {
     await browser.close();
   }
