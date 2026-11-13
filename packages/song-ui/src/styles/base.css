@@ -1347,8 +1347,40 @@ pre {
   font-size: 0.74rem;
 }
 
+@keyframes sesDianchaSteamRise {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scaleX(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-6px) translateX(2px) scaleX(1.08);
+    opacity: 0.55;
+  }
+}
 
+.ses-diancha-steam-1 {
+  animation: sesDianchaSteamRise 3.2s ease-in-out infinite;
+}
 
+.ses-diancha-steam-2 {
+  animation: sesDianchaSteamRise 3.6s ease-in-out 0.6s infinite;
+}
 
+.ses-diancha-steam-3 {
+  animation: sesDianchaSteamRise 3s ease-in-out 1.2s infinite;
+}
+
+@keyframes sesDianchaRimShimmer {
+  0%, 100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.ses-diancha-rim-done {
+  animation: sesDianchaRimShimmer 2.4s ease-in-out infinite;
+}
 
 
