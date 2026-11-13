@@ -55,6 +55,19 @@ async function captureFrames(locator, frameDir, durationMs, fps) {
   return totalFrames;
 }
 
+async function ensureLightTheme(page) {
+  const isLight = await page.evaluate(
+    () => document.documentElement.getAttribute('data-theme') === 'light'
+  );
+  if (!isLight) {
+    const headerToggle = page
+      .locator('header button', { hasText: /暗夜洒金|澄心昼景|Dark|Light/ })
+      .first();
+    await headerToggle.click();
+    await page.waitForTimeout(800);
+  }
+}
+
 async function recordDiancha(browser) {
   const frameDir = fs.mkdtempSync(path.join(os.tmpdir(), 'song-ui-diancha-'));
   const page = await browser.newPage({
@@ -64,6 +77,7 @@ async function recordDiancha(browser) {
 
   try {
     await page.goto(DOCS_URL, { waitUntil: 'networkidle' });
+    await ensureLightTheme(page);
     await page.getByRole('button', { name: /点茶与进度/ }).click();
     await page.waitForSelector('.ses-diancha-loader');
     await page.waitForTimeout(300);
@@ -111,6 +125,7 @@ async function recordTimepiece(browser) {
 
   try {
     await page.goto(DOCS_URL, { waitUntil: 'networkidle' });
+    await ensureLightTheme(page);
     await page.getByRole('button', { name: /司辰日晷/ }).click();
     await page.waitForSelector('.docs-panel');
     await page.waitForTimeout(350);
@@ -129,13 +144,6 @@ async function recordTimepiece(browser) {
     };
 
     const toggleBtn = panel.locator('button').first();
-    const isNightInitially = await page.evaluate(
-      () => document.documentElement.dataset.theme === 'night'
-    );
-    if (isNightInitially) {
-      await toggleBtn.click();
-      await page.waitForTimeout(350);
-    }
 
     const fps = 12;
     const intervalMs = Math.round(1000 / fps);
