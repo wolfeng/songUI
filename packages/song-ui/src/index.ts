@@ -40,3 +40,5 @@ export { default as SesBreadcrumbs, type SesBreadcrumbsProps, type SesBreadcrumb
 export { default as SesUpload, type SesUploadProps } from './components/SesUpload.vue';
 export { default as SesAvatarGroup, type SesAvatarGroupProps, type SesAvatarItem } from './components/SesAvatarGroup.vue';
 export { default as SesRating, type SesRatingProps, type SesRatingSymbol } from './components/SesRating.vue';
+export { default as SesDatePicker, type SesDatePickerProps } from './components/SesDatePicker.vue';
+export { default as SesTimePicker, type SesTimePickerProps } from './components/SesTimePicker.vue';

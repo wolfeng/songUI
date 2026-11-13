@@ -36,7 +36,9 @@ import {
   SesGuqinSlider,
   SesUpload,
   SesAvatarGroup,
-  SesRating
+  SesRating,
+  SesDatePicker,
+  SesTimePicker
 } from '@wolfeng/song-ui-vue';
 import { songTokens } from '@wolfeng/song-ui-tokens';
 import { getShichenName, getNightWatchLabel, songRules } from '@wolfeng/song-ui-core';
@@ -94,6 +96,7 @@ const navItems: { id: SectionId; title: string; subtitle: string }[] = [
   { id: 'checkbox', title: '茶百戏多选', subtitle: 'Checkbox' },
   { id: 'input', title: '素笺与奏疏校验', subtitle: 'Input & Form Validation' },
   { id: 'select', title: '牙签书帙', subtitle: 'Ivory Tag Select' },
+  { id: 'datetime', title: '宋历择日与司辰', subtitle: 'DatePicker & TimePicker' },
   { id: 'stepper', title: '筹算步进', subtitle: 'Counting Rods Stepper' },
   { id: 'upload', title: '素笺入画', subtitle: 'File Upload' },
   { id: 'avatarGroup', title: '雅集头像组', subtitle: 'Avatar Group' },
@@ -113,6 +116,8 @@ const scrollTitle = ref('宣和丙午岁清明上河图跋');
 const scrollBody = ref('建盏兔毫，宜用建溪灵芽，候汤眼如蟹目鱼眼，七汤点拂，盏面乳雾汹涌。');
 
 const selectedBook = ref('chongwen');
+const demoDate = ref('2026-11-13');
+const demoTime = ref('12:30');
 const bookOptions = [
   { value: 'chongwen', label: '崇文总目 · 经部易类（秘书省校）', meta: '卷一 · 秘书省校定' },
   { value: 'yingzao', label: '营造法式 · 大木作制度（李诫编）', meta: '卷四 · 李诫奉敕编修' },
@@ -763,6 +768,32 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
 
             <div class="docs-demo-col" style="max-width: 480px">
               <SesSelect v-model="selectedBook" :options="bookOptions" @change="(opt) => toast.show(isEn ? `Selected: ${opt.label}` : `已抽选：《${opt.label}》`)" />
+            </div>
+          </SesCard>
+        </section>
+
+        <!-- 5.5a2 SesDatePicker & SesTimePicker -->
+        <section v-else-if="activeSection === 'datetime'" class="docs-section">
+          <SesCard class="docs-panel">
+            <h2 class="ses-slender-gold docs-h2">{{ isEn ? 'SesDatePicker & SesTimePicker' : 'SesDatePicker · 宋历择日 与 SesTimePicker · 司辰择时' }}</h2>
+            <p class="docs-lead">
+              {{ isEn
+                ? 'Calendar date picker with Heavenly Stems & Earthly Branches year badge, paired with a dual-column time picker displaying traditional Song Shichen and night-watch clepsydra marks.'
+                : '「宋历择日」支持干支纪年徽章、月份速切与最小/最大日期约束；「司辰择时」联动十二时辰与五更昼漏刻数，支持步进与快捷时辰预设。' }}
+            </p>
+
+            <div class="docs-demo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; max-width: 680px">
+              <SesDatePicker
+                v-model="demoDate"
+                :label="isEn ? 'Imperial Audience Date' : '奏对择日'"
+                @change="(v) => toast.show(isEn ? `Date: ${v || 'Cleared'}` : `已择日期：${v || '已清除'}`)"
+              />
+              <SesTimePicker
+                v-model="demoTime"
+                :label="isEn ? 'Shichen & Time' : '司辰择时'"
+                :minute-step="5"
+                @change="(v) => toast.show(isEn ? `Time: ${v || 'Cleared'}` : `已定时刻：${v || '已清除'}`)"
+              />
             </div>
           </SesCard>
         </section>

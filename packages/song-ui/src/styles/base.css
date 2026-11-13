@@ -89,6 +89,7 @@ pre {
   z-index: 1;
 }
 .ses-card:has(.ses-yaqian-menu),
+.ses-card:has(.ses-picker-popover),
 .ses-card:focus-within {
   z-index: 30;
 }
@@ -1382,5 +1383,397 @@ pre {
 .ses-diancha-rim-done {
   animation: sesDianchaRimShimmer 2.4s ease-in-out infinite;
 }
+
+/* 宋历择日 · 司辰择时选择器 */
+.ses-picker-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ses-picker-trigger {
+  gap: 0.5rem;
+}
+
+.ses-picker-trigger.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ses-picker-trigger.has-error {
+  border-color: var(--ses-cinnabar);
+}
+
+.ses-picker-trigger-main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.ses-picker-icon {
+  color: var(--ses-gold);
+  flex-shrink: 0;
+}
+
+.ses-picker-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--ses-ink-heavy);
+}
+
+.ses-picker-placeholder {
+  color: var(--ses-ink-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ses-picker-badge {
+  font-size: 0.72rem;
+  color: var(--ses-cinnabar);
+  background: rgba(168, 50, 45, 0.08);
+  border: 0.5px solid rgba(168, 50, 45, 0.25);
+  border-radius: 999px;
+  padding: 0.08rem 0.48rem;
+  white-space: nowrap;
+}
+
+.ses-picker-trigger-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.ses-picker-clear {
+  font-size: 0.72rem;
+  color: var(--ses-ink-light);
+  padding: 0.1rem 0.25rem;
+  border-radius: 999px;
+  line-height: 1;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.ses-picker-clear:hover {
+  color: var(--ses-cinnabar);
+  background: rgba(168, 50, 45, 0.08);
+}
+
+.ses-picker-caret {
+  font-size: 0.75rem;
+  color: var(--ses-gold);
+  transition: transform 0.3s ease;
+}
+
+.ses-picker-popover {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: var(--ses-space-1);
+  z-index: 40;
+  width: min(312px, 92vw);
+  border-radius: var(--ses-radius-sm);
+  background: var(--ses-bg-sidebar);
+  border: 1px solid var(--ses-gold);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+  padding: 0.75rem;
+  font-family: var(--ses-font-serif);
+}
+
+.ses-datepicker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  padding-bottom: 0.55rem;
+  margin-bottom: 0.45rem;
+  border-bottom: 0.5px solid var(--ses-border-hairline);
+}
+
+.ses-datepicker-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.ses-datepicker-nav-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--ses-radius-sm);
+  border: 0.5px solid transparent;
+  background: transparent;
+  color: var(--ses-ink-medium);
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.ses-datepicker-nav-btn:hover {
+  border-color: var(--ses-border-gold);
+  color: var(--ses-ink-heavy);
+  background: rgba(184, 152, 92, 0.1);
+}
+
+.ses-datepicker-title-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--ses-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--ses-ink-heavy);
+  font-family: var(--ses-font-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ses-datepicker-title-btn:hover {
+  background: rgba(184, 152, 92, 0.12);
+}
+
+.ses-datepicker-ganzhi {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--ses-cinnabar);
+}
+
+.ses-datepicker-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.ses-datepicker-wd {
+  font-size: 0.72rem;
+  color: var(--ses-ink-light);
+  padding: 0.2rem 0;
+}
+
+.ses-datepicker-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.ses-datepicker-cell {
+  height: 32px;
+  border-radius: var(--ses-radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ses-ink-heavy);
+  font-family: var(--ses-font-serif);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ses-datepicker-cell:hover:not(:disabled) {
+  background: rgba(184, 152, 92, 0.15);
+  border-color: var(--ses-border-gold);
+}
+
+.ses-datepicker-cell.is-outside {
+  color: var(--ses-ink-light);
+  opacity: 0.5;
+}
+
+.ses-datepicker-cell.is-today {
+  border-color: var(--ses-cinnabar);
+  color: var(--ses-cinnabar);
+  font-weight: 600;
+}
+
+.ses-datepicker-cell.is-selected {
+  background: var(--ses-cinnabar);
+  border-color: var(--ses-cinnabar);
+  color: #fdf8ef;
+  font-weight: 600;
+}
+
+.ses-datepicker-cell.is-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.ses-datepicker-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  padding: 0.35rem 0;
+}
+
+.ses-datepicker-month-btn {
+  padding: 0.55rem 0.4rem;
+  border-radius: var(--ses-radius-sm);
+  border: 0.5px solid var(--ses-border-hairline);
+  background: transparent;
+  color: var(--ses-ink-heavy);
+  font-family: var(--ses-font-serif);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ses-datepicker-month-btn:hover {
+  border-color: var(--ses-gold);
+  background: rgba(184, 152, 92, 0.12);
+}
+
+.ses-datepicker-month-btn.is-selected {
+  background: var(--ses-cinnabar);
+  border-color: var(--ses-cinnabar);
+  color: #fdf8ef;
+}
+
+.ses-picker-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 0.5px solid var(--ses-border-hairline);
+}
+
+.ses-picker-foot-btn {
+  background: transparent;
+  border: 0.5px solid var(--ses-border-gold);
+  border-radius: var(--ses-radius-sm);
+  padding: 0.2rem 0.6rem;
+  font-family: var(--ses-font-serif);
+  font-size: 0.74rem;
+  color: var(--ses-ink-heavy);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ses-picker-foot-btn:hover:not(:disabled) {
+  border-color: var(--ses-gold);
+  background: rgba(184, 152, 92, 0.12);
+}
+
+.ses-picker-foot-btn.is-muted {
+  color: var(--ses-ink-light);
+  border-color: var(--ses-border-hairline);
+}
+
+.ses-picker-foot-btn.is-confirm {
+  background: var(--ses-cinnabar);
+  border-color: var(--ses-cinnabar);
+  color: #fdf8ef;
+}
+
+.ses-picker-foot-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 司辰择时面板 */
+.ses-timepicker-popover {
+  width: min(276px, 90vw);
+}
+
+.ses-timepicker-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 0.5px solid var(--ses-border-hairline);
+}
+
+.ses-timepicker-clock {
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ses-ink-heavy);
+}
+
+.ses-timepicker-shichen {
+  font-size: 0.74rem;
+  color: var(--ses-cinnabar);
+}
+
+.ses-timepicker-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+  height: 176px;
+}
+
+.ses-timepicker-col {
+  overflow-y: auto;
+  border: 0.5px solid var(--ses-border-hairline);
+  border-radius: var(--ses-radius-sm);
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ses-timepicker-item {
+  width: 100%;
+  padding: 0.34rem 0.5rem;
+  border: none;
+  border-radius: var(--ses-radius-sm);
+  background: transparent;
+  color: var(--ses-ink-medium);
+  font-family: var(--ses-font-serif);
+  font-size: 0.84rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ses-timepicker-item:hover:not(:disabled) {
+  background: rgba(184, 152, 92, 0.14);
+  color: var(--ses-ink-heavy);
+}
+
+.ses-timepicker-item.is-selected {
+  background: var(--ses-cinnabar);
+  color: #fdf8ef;
+  font-weight: 600;
+}
+
+.ses-timepicker-item.is-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.ses-timepicker-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.55rem;
+}
+
+.ses-timepicker-preset-btn {
+  flex: 1 1 auto;
+  padding: 0.18rem 0.35rem;
+  border-radius: var(--ses-radius-sm);
+  border: 0.5px solid var(--ses-border-hairline);
+  background: transparent;
+  color: var(--ses-ink-medium);
+  font-family: var(--ses-font-serif);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ses-timepicker-preset-btn:hover:not(:disabled) {
+  border-color: var(--ses-gold);
+  color: var(--ses-ink-heavy);
+  background: rgba(184, 152, 92, 0.1);
+}
+
 
 

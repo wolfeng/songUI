@@ -156,6 +156,50 @@ import { songRules } from '@wolfeng/song-ui-core';`,
     }
   ],
 
+  datetime: [
+    {
+      name: 'SesDatePicker',
+      importCode: `import { SesDatePicker } from '@wolfeng/song-ui-vue';`,
+      usageCode: `<SesDatePicker v-model="dateVal" label="奏对择日" min="2026-01-01" max="2026-12-31" />`,
+      props: [
+        { name: 'modelValue', type: `string`, defaultVal: `''`, desc: '当前日期（YYYY-MM-DD）', descEn: 'Selected date in YYYY-MM-DD format' },
+        { name: 'label', type: `string`, defaultVal: `undefined`, desc: '字段标题', descEn: 'Field label' },
+        { name: 'placeholder', type: `string`, defaultVal: `'择日 · 请选择日期……'`, desc: '未选时的占位文辞', descEn: 'Placeholder text' },
+        { name: 'min', type: `string`, defaultVal: `undefined`, desc: '可选最早日期（YYYY-MM-DD）', descEn: 'Minimum selectable date' },
+        { name: 'max', type: `string`, defaultVal: `undefined`, desc: '可选最晚日期（YYYY-MM-DD）', descEn: 'Maximum selectable date' },
+        { name: 'clearable', type: `boolean`, defaultVal: `true`, desc: '是否允许清除已选日期', descEn: 'Allow clearing the selected date' },
+        { name: 'showGanZhi', type: `boolean`, defaultVal: `true`, desc: '是否显示干支纪年徽章', descEn: 'Show Heavenly Stem & Earthly Branch year badge' },
+        { name: 'disabled', type: `boolean`, defaultVal: `false`, desc: '是否禁用', descEn: 'Disable interaction' },
+        { name: 'rules', type: `ValidationRule<string>[]`, defaultVal: `[]`, desc: '搭配 SesForm 的校验规则', descEn: 'Validation rules for SesForm' }
+      ],
+      events: [
+        { name: 'update:modelValue', payload: `string`, desc: '日期变更时触发', descEn: 'Emitted when date changes' },
+        { name: 'change', payload: `string`, desc: '日期确认或清除时触发', descEn: 'Emitted on date selection or clear' }
+      ]
+    },
+    {
+      name: 'SesTimePicker',
+      importCode: `import { SesTimePicker } from '@wolfeng/song-ui-vue';`,
+      usageCode: `<SesTimePicker v-model="timeVal" label="司辰择时" :minute-step="5" />`,
+      props: [
+        { name: 'modelValue', type: `string`, defaultVal: `''`, desc: '当前时间（HH:mm）', descEn: 'Selected time in HH:mm format' },
+        { name: 'label', type: `string`, defaultVal: `undefined`, desc: '字段标题', descEn: 'Field label' },
+        { name: 'placeholder', type: `string`, defaultVal: `'司辰 · 请选择时分……'`, desc: '未选时的占位文辞', descEn: 'Placeholder text' },
+        { name: 'minuteStep', type: `number`, defaultVal: `1`, desc: '分钟列表步进间隔（1-30）', descEn: 'Minute column step (1-30)' },
+        { name: 'min', type: `string`, defaultVal: `undefined`, desc: '可选最早时刻（HH:mm）', descEn: 'Minimum selectable time' },
+        { name: 'max', type: `string`, defaultVal: `undefined`, desc: '可选最晚时刻（HH:mm）', descEn: 'Maximum selectable time' },
+        { name: 'clearable', type: `boolean`, defaultVal: `true`, desc: '是否允许清除已选时刻', descEn: 'Allow clearing the selected time' },
+        { name: 'showShichen', type: `boolean`, defaultVal: `true`, desc: '是否显示十二时辰与昼夜刻漏', descEn: 'Show Song Shichen & clepsydra watch metadata' },
+        { name: 'disabled', type: `boolean`, defaultVal: `false`, desc: '是否禁用', descEn: 'Disable interaction' },
+        { name: 'rules', type: `ValidationRule<string>[]`, defaultVal: `[]`, desc: '搭配 SesForm 的校验规则', descEn: 'Validation rules for SesForm' }
+      ],
+      events: [
+        { name: 'update:modelValue', payload: `string`, desc: '时刻变更时触发', descEn: 'Emitted when time changes' },
+        { name: 'change', payload: `string`, desc: '时刻选定或清除时触发', descEn: 'Emitted on time selection or clear' }
+      ]
+    }
+  ],
+
   stepper: [
     {
       name: 'SesStepper',

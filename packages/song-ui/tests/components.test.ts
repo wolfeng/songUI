@@ -35,7 +35,9 @@ import {
   SesGuqinSlider,
   SesUpload,
   SesAvatarGroup,
-  SesRating
+  SesRating,
+  SesDatePicker,
+  SesTimePicker
 } from '../src/index.js';
 
 describe('@wolfeng/song-ui-vue', () => {
@@ -443,5 +445,59 @@ describe('@wolfeng/song-ui-vue', () => {
     await wrapper.get('.toggle-locale').trigger('click');
     expect(wrapper.text()).toContain('已启');
     expect(wrapper.text()).toContain('神品');
+  });
+
+  it('selects and clears dates in SesDatePicker and respects min/max bounds', async () => {
+    const dp = mount(SesDatePicker, {
+      props: {
+        modelValue: '2026-11-13',
+        min: '2026-11-10',
+        max: '2026-11-20'
+      }
+    });
+
+    expect(dp.text()).toContain('2026-11-13');
+    expect(dp.text()).toContain('丙午年');
+
+    await dp.get('.ses-picker-trigger').trigger('click');
+    expect(dp.find('[role="dialog"]').exists()).toBe(true);
+
+    const cells = dp.findAll('.ses-datepicker-cell');
+    const day5 = cells.find((c) => c.text() === '5' && !c.classes().includes('is-outside'));
+    expect(day5?.attributes('disabled')).toBeDefined();
+
+    const day15 = cells.find((c) => c.text() === '15' && !c.classes().includes('is-outside'));
+    await day15?.trigger('click');
+    expect(dp.emitted('update:modelValue')?.[0]).toEqual(['2026-11-15']);
+
+    await dp.get('.ses-picker-clear').trigger('click');
+    expect(dp.emitted('update:modelValue')?.[1]).toEqual(['']);
+  });
+
+  it('selects time and displays Song Shichen metadata in SesTimePicker', async () => {
+    const tp = mount(SesTimePicker, {
+      props: {
+        modelValue: '12:00',
+        minuteStep: 15
+      }
+    });
+
+    expect(tp.text()).toContain('12:00');
+    expect(tp.text()).toContain('午正');
+
+    await tp.get('.ses-picker-trigger').trigger('click');
+    expect(tp.find('[role="dialog"]').exists()).toBe(true);
+
+    const hourBtns = tp.findAll('.ses-timepicker-col')[0].findAll('.ses-timepicker-item');
+    await hourBtns[18].trigger('click');
+    expect(tp.emitted('update:modelValue')?.[0]).toEqual(['18:00']);
+
+    const minBtns = tp.findAll('.ses-timepicker-col')[1].findAll('.ses-timepicker-item');
+    expect(minBtns.length).toBe(4);
+    await minBtns[2].trigger('click');
+    expect(tp.emitted('update:modelValue')?.[1]).toEqual(['18:30']);
+
+    await tp.get('.ses-picker-clear').trigger('click');
+    expect(tp.emitted('update:modelValue')?.[2]).toEqual(['']);
   });
 });
