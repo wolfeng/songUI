@@ -1580,8 +1580,11 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
   .docs-shell {
     height: auto;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: clip;
     overflow-y: visible;
+  }
+  .docs-header {
+    position: static;
   }
   .docs-header-inner {
     padding: var(--ses-space-3) var(--ses-space-4);
@@ -1596,14 +1599,21 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto;
     overflow: visible;
-    padding: var(--ses-space-4) var(--ses-space-4) 2rem;
-    gap: var(--ses-space-4);
+    padding: var(--ses-space-2) var(--ses-space-4) 2rem;
+    gap: var(--ses-space-3);
   }
   .docs-sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 35;
     min-width: 0;
     max-width: 100%;
     height: auto;
     gap: var(--ses-space-2);
+    padding: var(--ses-space-2) 0 var(--ses-space-1);
+    background-color: color-mix(in srgb, var(--ses-bg-canvas) 94%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 0.5px solid var(--ses-border-hairline);
   }
   .docs-nav {
     min-width: 0;
