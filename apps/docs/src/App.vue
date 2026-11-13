@@ -78,13 +78,16 @@ type SectionId =
   | 'tags'
   | 'radio'
   | 'checkbox'
-  | 'widgets';
+  | 'widgets'
+  | 'icons'
+  | 'datetime';
 const activeSection = ref<SectionId>('overview');
 
 const navItems: { id: SectionId; title: string; subtitle: string }[] = [
   // 一、总纲与设计基石
   { id: 'overview', title: '总纲 · 架构与接入', subtitle: 'createSongUI & Core' },
   { id: 'tokens', title: '样式库与规范', subtitle: 'Colors, Spacing & Type' },
+  { id: 'icons', title: '宋韵图标库', subtitle: 'Northern Song Icons' },
   // 二、宋韵特色器物与交互（优先展示）
   { id: 'slider', title: '七弦琴轸', subtitle: 'Guqin String Slider' },
   { id: 'timepiece', title: '司辰日晷', subtitle: 'Sundial & Clepsydra' },
@@ -96,7 +99,6 @@ const navItems: { id: SectionId; title: string; subtitle: string }[] = [
   { id: 'overlays', title: '古卷与屏风', subtitle: 'Scroll Modal & Screen Drawer' },
   // 三、基础与表单控件
   { id: 'button', title: '玉质玲珑钮', subtitle: 'Button & Seal' },
-  { id: 'icons', title: '宋韵图标库', subtitle: 'Northern Song Icons' },
   { id: 'switch', title: '榫卯滑闩', subtitle: 'Switch' },
   { id: 'radio', title: '螺钿单选', subtitle: 'RadioGroup' },
   { id: 'checkbox', title: '茶百戏多选', subtitle: 'Checkbox' },
