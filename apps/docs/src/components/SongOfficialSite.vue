@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { getShichenName, getNightWatchLabel, songRules } from '@wolfeng/song-ui-core';
 import {
   useTheme,
@@ -46,12 +46,37 @@ const toast = useToast();
 const activePage = ref<PageId>('home');
 const siteLoading = ref(true);
 const loadPct = ref(8);
-const pageTabs = [
-  { value: 'home', label: '国朝首页' },
-  { value: 'governance', label: '政务民生' },
-  { value: 'culture', label: '文教典籍' },
-  { value: 'crafts', label: '百工名窑' }
-];
+const isMobile = ref(typeof window !== 'undefined' ? window.innerWidth <= 720 : false);
+let mobileMq: MediaQueryList | null = null;
+function onMobileMqChange(e: MediaQueryListEvent) {
+  isMobile.value = e.matches;
+}
+onMounted(() => {
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    mobileMq = window.matchMedia('(max-width: 720px)');
+    isMobile.value = mobileMq.matches;
+    mobileMq.addEventListener('change', onMobileMqChange);
+  }
+});
+onBeforeUnmount(() => {
+  mobileMq?.removeEventListener('change', onMobileMqChange);
+});
+
+const pageTabs = computed(() =>
+  isMobile.value
+    ? [
+        { value: 'home', label: '首页' },
+        { value: 'governance', label: '民生' },
+        { value: 'culture', label: '典籍' },
+        { value: 'crafts', label: '百工' }
+      ]
+    : [
+        { value: 'home', label: '国朝首页' },
+        { value: 'governance', label: '政务民生' },
+        { value: 'culture', label: '文教典籍' },
+        { value: 'crafts', label: '百工名窑' }
+      ]
+);
 
 const nowMins = new Date().getHours() * 60 + new Date().getMinutes();
 const shichenNow = getShichenName(nowMins);
