@@ -6,6 +6,7 @@ import path from 'node:path';
 
 const DOCS_URL = process.env.DOCS_URL || 'http://localhost:5173/';
 const OUT_DIR = path.resolve(process.cwd(), 'docs/gifs');
+const GIF_WIDTH = 720;
 const CHROME_PATH =
   process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
@@ -95,7 +96,7 @@ async function recordDiancha(browser) {
     await captureFrames(wrap, frameDir, 3400, fps);
 
     const outGif = path.join(OUT_DIR, 'ses-diancha-loader.gif');
-    encodeGif(frameDir, outGif, fps, 480);
+    encodeGif(frameDir, outGif, fps, GIF_WIDTH);
     console.log(`Generated ${outGif}`);
   } finally {
     await page.close();
@@ -186,7 +187,7 @@ async function recordTimepiece(browser) {
     await snap(8);
 
     const outGif = path.join(OUT_DIR, 'ses-timepiece.gif');
-    encodeGif(frameDir, outGif, fps, 760);
+    encodeGif(frameDir, outGif, fps, GIF_WIDTH);
     console.log(`Generated ${outGif}`);
   } finally {
     await page.close();
