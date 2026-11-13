@@ -1580,8 +1580,11 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
   :global(html),
   :global(body) {
     height: auto;
+    max-width: 100vw;
     overflow-x: clip;
     overflow-y: visible;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
   }
   .docs-shell {
     height: auto;

@@ -801,9 +801,14 @@ function replayLoading() {
 
 <style scoped>
 .song-site-shell {
-  min-height: 100vh;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background-color: var(--ses-bg-canvas);
   color: var(--ses-ink-medium);
 }
@@ -880,6 +885,7 @@ function replayLoading() {
 }
 
 .song-site-main {
+  min-width: 0;
   max-width: var(--ses-bp-xl);
   margin: 0 auto;
   padding: var(--ses-space-8) var(--ses-space-6) var(--ses-space-12);
@@ -889,6 +895,10 @@ function replayLoading() {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: var(--ses-space-6);
+}
+
+.song-site-grid-2 > * {
+  min-width: 0;
 }
 
 .song-site-toolbar {
