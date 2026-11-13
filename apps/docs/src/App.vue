@@ -403,7 +403,9 @@ const mainRef = ref<HTMLElement | null>(null);
 function selectSection(id: SectionId) {
   activeSection.value = id;
   sound.playChime(587.33);
-  if (mainRef.value && mainRef.value.scrollHeight > mainRef.value.clientHeight) {
+  if (typeof window !== 'undefined' && window.innerWidth <= 860) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (mainRef.value && mainRef.value.scrollHeight > mainRef.value.clientHeight) {
     mainRef.value.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
     window.scrollTo({ top: 0, behavior: 'smooth' });

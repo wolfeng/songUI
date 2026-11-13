@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { getShichenName, getNightWatchLabel, songRules } from '@wolfeng/song-ui-core';
 import {
   useTheme,
@@ -314,8 +314,11 @@ function inspectArtifact(item: typeof craftArtifacts[0]) {
 function goPage(id: PageId) {
   activePage.value = id;
   sound.playChime(587.33);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+watch(activePage, () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 function replayLoading() {
   loadPct.value = 8;
