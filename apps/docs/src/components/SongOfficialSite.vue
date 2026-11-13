@@ -316,9 +316,15 @@ function goPage(id: PageId) {
   sound.playChime(587.33);
 }
 
-watch(activePage, () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+watch(
+  activePage,
+  () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  },
+  { flush: 'post' }
+);
 
 function replayLoading() {
   loadPct.value = 8;

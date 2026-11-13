@@ -400,15 +400,18 @@ function copySwatch(hex: string, name: string, freq: number) {
 
 const mainRef = ref<HTMLElement | null>(null);
 
-function selectSection(id: SectionId) {
+async function selectSection(id: SectionId) {
   activeSection.value = id;
   sound.playChime(587.33);
+  await nextTick();
   if (typeof window !== 'undefined' && window.innerWidth <= 860) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   } else if (mainRef.value && mainRef.value.scrollHeight > mainRef.value.clientHeight) {
-    mainRef.value.scrollTo({ top: 0, behavior: 'smooth' });
+    mainRef.value.scrollTo({ top: 0, behavior: 'auto' });
   } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }
 }
 </script>
