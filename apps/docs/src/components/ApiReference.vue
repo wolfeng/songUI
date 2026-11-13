@@ -117,12 +117,16 @@ function copySnippet(text: string, label: string) {
 
 <style scoped>
 .api-ref-wrap {
+  min-width: 0;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
 .api-ref-block {
+  min-width: 0;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;

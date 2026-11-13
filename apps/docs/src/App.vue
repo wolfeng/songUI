@@ -1389,6 +1389,7 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
 }
 
 .docs-sidebar {
+  min-width: 0;
   min-height: 0;
   height: 100%;
   display: flex;
@@ -1579,7 +1580,8 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
   .docs-shell {
     height: auto;
     min-height: 100vh;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
   .docs-header-inner {
     padding: var(--ses-space-3) var(--ses-space-4);
@@ -1591,17 +1593,21 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
     justify-content: flex-start;
   }
   .docs-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto;
     overflow: visible;
     padding: var(--ses-space-4) var(--ses-space-4) 2rem;
     gap: var(--ses-space-4);
   }
   .docs-sidebar {
+    min-width: 0;
+    max-width: 100%;
     height: auto;
     gap: var(--ses-space-2);
   }
   .docs-nav {
+    min-width: 0;
+    max-width: 100%;
     height: auto;
     flex-direction: row;
     flex-wrap: nowrap;
