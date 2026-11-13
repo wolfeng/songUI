@@ -465,8 +465,14 @@ function selectSection(id: SectionId) {
 
             <h3 class="ses-slender-gold" style="margin: 1.15rem 0 0.5rem; font-size: 0.95rem">一、安装组件库（GitHub Packages）</h3>
             <SesAlert variant="jade" style="margin-bottom: 0.75rem">
-              组件库通过 GitHub Packages（<code>https://npm.pkg.github.com</code>）分发。外部项目安装前，请先在项目根目录 <code>.npmrc</code> 中添加 <code>@wolfeng:registry=https://npm.pkg.github.com</code>（并配置具有 <code>read:packages</code> 权限的 GitHub Token），再运行下方命令；也可按第三节方式克隆源码本地引入。
+              组件库已发布至 GitHub Packages（<code>https://npm.pkg.github.com</code>）。首次安装前，请先配置 <code>.npmrc</code> 或使用具有 <code>read:packages</code> 权限的 GitHub Token 登录一次，再执行下方安装命令。
             </SesAlert>
+            <pre class="docs-code" style="margin-bottom: 0.75rem"><code># 方式 A：在项目 .npmrc 或全局 ~/.npmrc 中配置源与 Token
+@wolfeng:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=你的_GITHUB_TOKEN
+
+# 方式 B：或通过 npm CLI 登录一次
+npm login --scope=@wolfeng --auth-type=legacy --registry=https://npm.pkg.github.com</code></pre>
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem">
               <div class="docs-demo-row">
                 <SesButton

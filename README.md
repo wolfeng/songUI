@@ -13,7 +13,23 @@ apps/
 └── docs/       # @wolfeng/song-ui-docs   — 交互式文档站与 API 参考
 ```
 
-## 快速上手
+## 安装与快速上手
+
+组件库通过 **GitHub Packages** 分发。首次安装前请先配置 `.npmrc`（需具备 `read:packages` 权限的 GitHub Token）：
+
+```ini
+# 项目根目录 .npmrc 或 ~/.npmrc
+@wolfeng:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=你的_GITHUB_TOKEN
+```
+
+然后安装组件库：
+
+```bash
+npm install @wolfeng/song-ui-vue
+```
+
+在 `main.ts` 中注册插件与样式：
 
 ```ts
 import { createApp } from 'vue';
