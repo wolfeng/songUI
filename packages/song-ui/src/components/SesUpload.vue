@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useSound } from '../composables/useSound.js';
+import { useLocale } from '../composables/useLocale.js';
 import SesButton from './SesButton.vue';
 
 export interface SesUploadProps {
@@ -18,8 +19,8 @@ const props = withDefaults(defineProps<SesUploadProps>(), {
   multiple: true,
   maxSizeMb: 10,
   disabled: false,
-  title: '素笺入画 · 呈卷上传',
-  hint: '点击择取或拖拽文书、画卷至此'
+  title: undefined,
+  hint: undefined
 });
 
 const emit = defineEmits<{
@@ -29,6 +30,11 @@ const emit = defineEmits<{
 }>();
 
 const sound = useSound();
+const locale = useLocale();
+const resolvedTitle = computed(() => props.title ?? (locale.isEn.value ? 'Scroll Upload' : '素笺入画 · 呈卷上传'));
+const resolvedHint = computed(() =>
+  props.hint ?? (locale.isEn.value ? 'Click or drag & drop files here' : '点击择取或拖拽文书、画卷至此')
+);
 const inputRef = ref<HTMLInputElement | null>(null);
 const isDragging = ref(false);
 
@@ -117,11 +123,11 @@ function removeFile(idx: number) {
       @drop.prevent="onDrop"
     >
       <div class="ses-upload-emblem" aria-hidden="true">卷</div>
-      <div class="ses-upload-title ses-slender-gold">{{ title }}</div>
-      <div class="ses-upload-hint">{{ hint }}</div>
+      <div class="ses-upload-title ses-slender-gold">{{ resolvedTitle }}</div>
+      <div class="ses-upload-hint">{{ resolvedHint }}</div>
       <div class="ses-upload-meta">
-        <span>单卷上限 {{ maxSizeMb }} MB</span>
-        <span v-if="accept">· 制式：{{ accept }}</span>
+        <span>{{ locale.isEn.value ? `Max ${maxSizeMb} MB` : `单卷上限 ${maxSizeMb} MB` }}</span>
+        <span v-if="accept">· {{ locale.isEn.value ? `Accept: ${accept}` : `制式：${accept}` }}</span>
       </div>
     </div>
 
@@ -141,7 +147,7 @@ function removeFile(idx: number) {
           :sound-freq="0"
           @click="removeFile(idx)"
         >
-          撤回
+          {{ locale.isEn.value ? 'Remove' : '撤回' }}
         </SesButton>
       </li>
     </ul>

@@ -5,6 +5,7 @@ import { songRules } from '@wolfeng/song-ui-core';
 import {
   createSongUI,
   useTheme,
+  useLocale,
   SesButton,
   SesSeal,
   SesSwitch,
@@ -406,5 +407,35 @@ describe('@wolfeng/song-ui-vue', () => {
     const stars = rating.findAll('button[role="radio"]');
     await stars[4].trigger('click');
     expect(rating.emitted('update:modelValue')?.[0]).toEqual([5]);
+  });
+
+  it('supports bilingual locale switching via createSongUI and useLocale', async () => {
+    const Host = defineComponent({
+      components: { SesSwitch, SesRating },
+      setup() {
+        const { locale, toggle } = useLocale();
+        return { locale, toggle };
+      },
+      template: `
+        <div>
+          <SesSwitch :model-value="true" label="Mode" />
+          <SesRating :model-value="5" />
+          <button class="toggle-locale" @click="toggle">toggle</button>
+        </div>
+      `
+    });
+
+    const wrapper = mount(Host, {
+      global: {
+        plugins: [createSongUI({ locale: 'en', sound: false, persistLocale: false })]
+      }
+    });
+
+    expect(wrapper.text()).toContain('On');
+    expect(wrapper.text()).toContain('Masterpiece');
+
+    await wrapper.get('.toggle-locale').trigger('click');
+    expect(wrapper.text()).toContain('已启');
+    expect(wrapper.text()).toContain('神品');
   });
 });

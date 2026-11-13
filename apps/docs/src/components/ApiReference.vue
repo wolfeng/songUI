@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToast } from '@wolfeng/song-ui-vue';
+import { useToast, useLocale } from '@wolfeng/song-ui-vue';
 import type { ComponentApiDoc } from '../data/componentApi';
 
 defineProps<{
@@ -7,12 +7,13 @@ defineProps<{
 }>();
 
 const toast = useToast();
+const locale = useLocale();
 
 function copySnippet(text: string, label: string) {
   if (navigator.clipboard) {
     void navigator.clipboard.writeText(text);
   }
-  toast.show(`已复制「${label}」示例代码`);
+  toast.show(locale.isEn.value ? `Copied "${label}" snippet` : `已复制「${label}」示例代码`);
 }
 </script>
 
@@ -20,13 +21,15 @@ function copySnippet(text: string, label: string) {
   <div v-if="entries?.length" class="api-ref-wrap">
     <div v-for="doc in entries" :key="doc.name" class="api-ref-block">
       <div class="api-ref-header">
-        <h3 class="api-ref-title">{{ doc.name }} · 引用与参数配置</h3>
+        <h3 class="api-ref-title">
+          {{ doc.name }} · {{ locale.isEn.value ? 'Import & API Reference' : '引用与参数配置' }}
+        </h3>
         <button
           type="button"
           class="api-copy-btn"
           @click="copySnippet(`${doc.importCode}\n\n${doc.usageCode}`, doc.name)"
         >
-          复制代码
+          {{ locale.isEn.value ? 'Copy Code' : '复制代码' }}
         </button>
       </div>
 
@@ -35,23 +38,23 @@ function copySnippet(text: string, label: string) {
 {{ doc.usageCode }}</code></pre>
 
       <div v-if="doc.props?.length" class="api-table-block">
-        <div class="api-sub-label">Props 参数</div>
+        <div class="api-sub-label">Props</div>
         <div class="api-table-scroll">
           <table class="docs-api-table">
             <thead>
               <tr>
-                <th>属性名</th>
-                <th>类型</th>
-                <th>默认值</th>
-                <th>说明</th>
+                <th>{{ locale.isEn.value ? 'Name' : '属性名' }}</th>
+                <th>{{ locale.isEn.value ? 'Type' : '类型' }}</th>
+                <th>{{ locale.isEn.value ? 'Default' : '默认值' }}</th>
+                <th>{{ locale.isEn.value ? 'Description' : '说明' }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="p in doc.props" :key="p.name">
                 <td><code>{{ p.name }}</code></td>
                 <td><code>{{ p.type }}</code></td>
-                <td><code>{{ p.defaultVal }}</code></td>
-                <td>{{ p.desc }}</td>
+                <td><code>{{ locale.isEn.value ? (p.defaultVal === '必填' ? 'Required' : (p.defaultValEn || p.defaultVal)) : p.defaultVal }}</code></td>
+                <td>{{ locale.isEn.value && p.descEn ? p.descEn : p.desc }}</td>
               </tr>
             </tbody>
           </table>
@@ -59,21 +62,21 @@ function copySnippet(text: string, label: string) {
       </div>
 
       <div v-if="doc.events?.length" class="api-table-block">
-        <div class="api-sub-label">Events 事件</div>
+        <div class="api-sub-label">Events</div>
         <div class="api-table-scroll">
           <table class="docs-api-table">
             <thead>
               <tr>
-                <th>事件名</th>
-                <th>回调参数</th>
-                <th>说明</th>
+                <th>{{ locale.isEn.value ? 'Event' : '事件名' }}</th>
+                <th>{{ locale.isEn.value ? 'Payload' : '回调参数' }}</th>
+                <th>{{ locale.isEn.value ? 'Description' : '说明' }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="e in doc.events" :key="e.name">
                 <td><code>{{ e.name }}</code></td>
                 <td><code>{{ e.payload }}</code></td>
-                <td>{{ e.desc }}</td>
+                <td>{{ locale.isEn.value && e.descEn ? e.descEn : e.desc }}</td>
               </tr>
             </tbody>
           </table>
@@ -81,21 +84,21 @@ function copySnippet(text: string, label: string) {
       </div>
 
       <div v-if="doc.slots?.length" class="api-table-block">
-        <div class="api-sub-label">Slots 插槽</div>
+        <div class="api-sub-label">Slots</div>
         <div class="api-table-scroll">
           <table class="docs-api-table">
             <thead>
               <tr>
-                <th>插槽名</th>
-                <th>作用域参数</th>
-                <th>说明</th>
+                <th>{{ locale.isEn.value ? 'Slot' : '插槽名' }}</th>
+                <th>{{ locale.isEn.value ? 'Scoped Props' : '作用域参数' }}</th>
+                <th>{{ locale.isEn.value ? 'Description' : '说明' }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="s in doc.slots" :key="s.name">
                 <td><code>{{ s.name }}</code></td>
                 <td><code>{{ s.props }}</code></td>
-                <td>{{ s.desc }}</td>
+                <td>{{ locale.isEn.value && s.descEn ? s.descEn : s.desc }}</td>
               </tr>
             </tbody>
           </table>
@@ -103,7 +106,7 @@ function copySnippet(text: string, label: string) {
       </div>
 
       <div v-if="doc.expose?.length" class="api-table-block">
-        <div class="api-sub-label">Expose / 组合式 API</div>
+        <div class="api-sub-label">{{ locale.isEn.value ? 'Expose / Composables' : 'Expose / 组合式 API' }}</div>
         <div class="api-expose-list">
           <code v-for="fn in doc.expose" :key="fn" class="api-expose-chip">{{ fn }}</code>
         </div>

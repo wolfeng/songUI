@@ -2,6 +2,7 @@ import './styles/base.css';
 
 export { createSongUI, type SongUIOptions } from './framework.js';
 export { useTheme, type SongThemeName, type SongThemeInstance } from './composables/useTheme.js';
+export { useLocale, type SongLocale, type SongLocaleInstance } from './composables/useLocale.js';
 export { useSound, type SongSoundInstance } from './composables/useSound.js';
 export { useToast, type SongToastInstance } from './composables/useToast.js';
 export { ensureSongSvgFilters } from './core/svg-filters.js';

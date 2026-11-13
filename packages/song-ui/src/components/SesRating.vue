@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useSound } from '../composables/useSound.js';
+import { useLocale } from '../composables/useLocale.js';
 
 export interface SesRatingProps {
   modelValue: number;
@@ -15,7 +16,7 @@ const props = withDefaults(defineProps<SesRatingProps>(), {
   max: 5,
   readonly: false,
   showLabel: true,
-  labels: () => ['凡品', '中品', '佳品', '妙品', '神品'],
+  labels: undefined,
   size: 'md'
 });
 
@@ -25,15 +26,23 @@ const emit = defineEmits<{
 }>();
 
 const sound = useSound();
+const locale = useLocale();
 const hoverVal = ref<number | null>(null);
 const pentatonic = [523.25, 587.33, 659.25, 783.99, 880];
+
+const activeLabels = computed(() =>
+  props.labels ??
+  (locale.isEn.value
+    ? ['Fair', 'Good', 'Fine', 'Exquisite', 'Masterpiece']
+    : ['凡品', '中品', '佳品', '妙品', '神品'])
+);
 
 const displayValue = computed(() => hoverVal.value ?? props.modelValue);
 
 const currentLabel = computed(() => {
   const val = Math.round(displayValue.value);
-  if (val <= 0) return '未品评';
-  return props.labels[val - 1] ?? `${val} / ${props.max}`;
+  if (val <= 0) return locale.isEn.value ? 'Unrated' : '未品评';
+  return activeLabels.value[val - 1] ?? `${val} / ${props.max}`;
 });
 
 function selectRating(val: number) {
@@ -73,7 +82,7 @@ function onKeydown(e: KeyboardEvent) {
         class="ses-rating-star"
         :class="{ 'is-active': n <= displayValue }"
         :aria-checked="modelValue === n"
-        :aria-label="`${n} 星（${labels[n - 1] ?? `${n}级`}）`"
+        :aria-label="`${n} ★ (${activeLabels[n - 1] ?? n})`"
         :disabled="readonly"
         @mouseenter="!readonly && (hoverVal = n)"
         @click="selectRating(n)"

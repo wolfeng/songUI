@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSound } from '../composables/useSound.js';
+import { useLocale } from '../composables/useLocale.js';
 
 export interface SesSwitchProps {
   modelValue: boolean;
@@ -20,6 +21,7 @@ const emit = defineEmits<{
 }>();
 
 const sound = useSound();
+const locale = useLocale();
 
 function toggle() {
   if (props.disabled) return;
@@ -49,7 +51,7 @@ function toggle() {
       style="font-size: 0.78rem"
       :style="{ color: modelValue ? 'var(--ses-ink-heavy)' : 'var(--ses-ink-medium)' }"
     >
-      <slot>{{ label }} · {{ modelValue ? '已启' : '已闭' }}</slot>
+      <slot>{{ label }} · {{ locale.isEn.value ? (modelValue ? 'On' : 'Off') : (modelValue ? '已启' : '已闭') }}</slot>
     </span>
   </div>
 </template>
