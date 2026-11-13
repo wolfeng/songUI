@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { toSongCountingRods } from '@song-ui/core';
+import { toSongCountingRods } from '@wolfeng/song-ui-core';
 import { useSound } from '../composables/useSound.js';
 import SesButton from './SesButton.vue';
 

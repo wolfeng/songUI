@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
-import { PENTATONIC_NOTES } from '@song-ui/core';
+import { PENTATONIC_NOTES } from '@wolfeng/song-ui-core';
 import { useSound } from '../composables/useSound.js';
 
 export interface SesGuqinMark {

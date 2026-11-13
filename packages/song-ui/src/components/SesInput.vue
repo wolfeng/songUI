@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue';
-import { validateField, type ValidationRule } from '@song-ui/core';
+import { validateField, type ValidationRule } from '@wolfeng/song-ui-core';
 import { useSound } from '../composables/useSound.js';
 import { SONG_FORM_KEY, type SongFormFieldHandle } from '../composables/useFormContext.js';
 

@@ -5,7 +5,7 @@ import {
   getShichenName,
   getNightWatchLabel,
   getSundialShadowAngle
-} from '@song-ui/core';
+} from '@wolfeng/song-ui-core';
 import { useTheme } from '../composables/useTheme.js';
 import { useSound } from '../composables/useSound.js';
 

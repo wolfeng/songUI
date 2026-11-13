@@ -1,5 +1,5 @@
 {
-  "name": "@song-ui/docs",
+  "name": "@wolfeng/song-ui-docs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,9 +8,9 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@song-ui/core": "0.1.0",
-    "@song-ui/tokens": "0.1.0",
-    "@song-ui/vue": "0.1.0",
+    "@wolfeng/song-ui-core": "0.1.0",
+    "@wolfeng/song-ui-tokens": "0.1.0",
+    "@wolfeng/song-ui-vue": "0.1.0",
     "vue": "^3.5.12"
   },
   "devDependencies": {

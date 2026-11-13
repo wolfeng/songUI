@@ -36,9 +36,9 @@ import {
   SesUpload,
   SesAvatarGroup,
   SesRating
-} from '@song-ui/vue';
-import { songTokens } from '@song-ui/tokens';
-import { getShichenName, getNightWatchLabel, songRules } from '@song-ui/core';
+} from '@wolfeng/song-ui-vue';
+import { songTokens } from '@wolfeng/song-ui-tokens';
+import { getShichenName, getNightWatchLabel, songRules } from '@wolfeng/song-ui-core';
 import ApiReference from './components/ApiReference.vue';
 import { componentApiMap } from './data/componentApi';
 
@@ -229,9 +229,9 @@ const ratingScore = ref(4);
 // 安装指引
 const installPkgMgr = ref<'npm' | 'pnpm' | 'yarn'>('npm');
 const installCmd = computed(() => {
-  if (installPkgMgr.value === 'pnpm') return 'pnpm add @song-ui/vue';
-  if (installPkgMgr.value === 'yarn') return 'yarn add @song-ui/vue';
-  return 'npm install @song-ui/vue';
+  if (installPkgMgr.value === 'pnpm') return 'pnpm add @wolfeng/song-ui-vue';
+  if (installPkgMgr.value === 'yarn') return 'yarn add @wolfeng/song-ui-vue';
+  return 'npm install @wolfeng/song-ui-vue';
 });
 function copyInstallCmd() {
   sound.playChime(784);
@@ -457,15 +457,15 @@ function selectSection(id: SectionId) {
             <h2 class="ses-slender-gold docs-h2">分层内核 × 样式规范 × Vue 3 组件库</h2>
             <p class="docs-lead">
               <code>@song-ui</code> 采用 Monorepo 分层设计：
-              <strong>@song-ui/tokens</strong>（单一数据源，同步生成 CSS 变量与 TypeScript 类型）、
-              <strong>@song-ui/core</strong>（框架无关的时辰、算筹、音律与校验算法）、
-              <strong>@song-ui/vue</strong>（Vue 3 插件、样式库、Composables 与完整类型化组件）。
+              <strong>@wolfeng/song-ui-tokens</strong>（单一数据源，同步生成 CSS 变量与 TypeScript 类型）、
+              <strong>@wolfeng/song-ui-core</strong>（框架无关的时辰、算筹、音律与校验算法）、
+              <strong>@wolfeng/song-ui-vue</strong>（Vue 3 插件、样式库、Composables 与完整类型化组件）。
               前置要求：<code>Vue &gt;= 3.4.0</code>。
             </p>
 
-            <h3 class="ses-slender-gold" style="margin: 1.15rem 0 0.5rem; font-size: 0.95rem">一、安装组件库</h3>
+            <h3 class="ses-slender-gold" style="margin: 1.15rem 0 0.5rem; font-size: 0.95rem">一、安装组件库（GitHub Packages）</h3>
             <SesAlert variant="jade" style="margin-bottom: 0.75rem">
-              源码已托管至 GitHub（<code>https://github.com/wolfeng/songUI</code>），目前 <code>@song-ui/vue</code> 尚未发布至 npm 公共仓库。外部项目若需立即使用，建议先克隆仓库并执行 <code>npm run build</code>，再在 <code>package.json</code> 中通过本地路径引入（例如 <code>"@song-ui/vue": "file:../songUI/packages/song-ui"</code>）；待后续发布 npm 后可直接使用下方包管理器命令安装。
+              组件库通过 GitHub Packages（<code>https://npm.pkg.github.com</code>）分发。外部项目安装前，请先在项目根目录 <code>.npmrc</code> 中添加 <code>@wolfeng:registry=https://npm.pkg.github.com</code>（并配置具有 <code>read:packages</code> 权限的 GitHub Token），再运行下方命令；也可按第三节方式克隆源码本地引入。
             </SesAlert>
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem">
               <div class="docs-demo-row">
@@ -488,16 +488,16 @@ function selectSection(id: SectionId) {
             <h3 class="ses-slender-gold" style="margin: 1.25rem 0 0.5rem; font-size: 0.95rem">二、全局注册与按需引入</h3>
             <pre class="docs-code"><code>// 1. 全局安装插件（注入主题、声律与 SVG 宣纸滤镜）
 import { createApp } from 'vue'
-import { createSongUI } from '@song-ui/vue'
-import '@song-ui/vue/styles'
+import { createSongUI } from '@wolfeng/song-ui-vue'
+import '@wolfeng/song-ui-vue/styles'
 
 createApp(App)
   .use(createSongUI({ theme: 'dark', sound: true }))
   .mount('#app')
 
 // 2. 在业务组件中按需引入组件与组合式 API
-import { SesButton, SesInput, SesForm, useTheme, useToast } from '@song-ui/vue'
-import { songRules } from '@song-ui/core'</code></pre>
+import { SesButton, SesInput, SesForm, useTheme, useToast } from '@wolfeng/song-ui-vue'
+import { songRules } from '@wolfeng/song-ui-core'</code></pre>
 
             <h3 class="ses-slender-gold" style="margin: 1.25rem 0 0.5rem; font-size: 0.95rem">三、从 GitHub 克隆并本地构建</h3>
             <pre class="docs-code"><code>git clone https://github.com/wolfeng/songUI.git
@@ -511,7 +511,7 @@ npm run dev:docs     # 启动文档与大宋官网示例站</code></pre>
         <!-- 2. Tokens & Style Library -->
         <section v-else-if="activeSection === 'tokens'" class="docs-section">
           <SesCard class="docs-panel">
-            <h2 class="ses-slender-gold docs-h2">Tokens &amp; 宋韵样式库 (<code>@song-ui/tokens</code> + <code>@song-ui/vue/styles</code>)</h2>
+            <h2 class="ses-slender-gold docs-h2">Tokens &amp; 宋韵样式库 (<code>@wolfeng/song-ui-tokens</code> + <code>@wolfeng/song-ui-vue/styles</code>)</h2>
             <p class="docs-lead">不仅定义暗夜洒金与澄心昼景两套矿物色谱，还内置 4px 基准间距比例尺、文字排版层级、圆角与布局工具类，并同步导出 CSS 变量与 TypeScript 类型。</p>
 
             <h3 class="docs-h3">一、矿物色谱（点击色票复制并触发五声音阶共振）</h3>
@@ -624,7 +624,7 @@ npm run dev:docs     # 启动文档与大宋官网示例站</code></pre>
           <SesCard class="docs-panel">
             <h2 class="ses-slender-gold docs-h2">SesInput · 素笺留痕与 SesForm · 奏疏校验</h2>
             <p class="docs-lead">
-              支持单行题跋与多行手札，内置 32px 乌丝栏竖向水印网格与毫端落纸声效；配合 <code>SesForm</code> 与 <code>@song-ui/core</code> 的 <code>songRules</code> 规则引擎，可在失焦或呈递时自动呈现朱砂批注。
+              支持单行题跋与多行手札，内置 32px 乌丝栏竖向水印网格与毫端落纸声效；配合 <code>SesForm</code> 与 <code>@wolfeng/song-ui-core</code> 的 <code>songRules</code> 规则引擎，可在失焦或呈递时自动呈现朱砂批注。
             </p>
 
             <SesForm ref="formRef" v-model="formValid" style="max-width: 560px" @submit="onMemorialSubmit">
@@ -671,7 +671,7 @@ npm run dev:docs     # 启动文档与大宋官网示例站</code></pre>
         <section v-else-if="activeSection === 'stepper'" class="docs-section">
           <SesCard class="docs-panel">
             <h2 class="ses-slender-gold docs-h2">SesStepper · 筹算纵横步进器</h2>
-            <p class="docs-lead">实时调用 <code>@song-ui/core</code> 中的秦九韶《数书九章》纵横筹策算法（个位纵式、十位横式交替）。</p>
+            <p class="docs-lead">实时调用 <code>@wolfeng/song-ui-core</code> 中的秦九韶《数书九章》纵横筹策算法（个位纵式、十位横式交替）。</p>
 
             <div class="docs-demo-col" style="max-width: 480px">
               <SesStepper v-model="stepperCount" :min="1" :max="99" />

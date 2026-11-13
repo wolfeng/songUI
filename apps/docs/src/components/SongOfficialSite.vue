@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { getShichenName, getNightWatchLabel, songRules } from '@song-ui/core';
+import { getShichenName, getNightWatchLabel, songRules } from '@wolfeng/song-ui-core';
 import {
   useTheme,
   useSound,
@@ -35,7 +35,7 @@ import {
   SesTooltip,
   SesUpload,
   SesWoodblockReader
-} from '@song-ui/vue';
+} from '@wolfeng/song-ui-vue';
 
 type PageId = 'home' | 'governance' | 'culture' | 'crafts';
 

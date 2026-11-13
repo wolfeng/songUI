@@ -8,13 +8,13 @@
     "apps/*"
   ],
   "scripts": {
-    "build:tokens": "npm run build --workspace=@song-ui/tokens",
-    "build:core": "npm run build --workspace=@song-ui/core",
-    "build:ui": "npm run build --workspace=@song-ui/vue",
+    "build:tokens": "npm run build --workspace=@wolfeng/song-ui-tokens",
+    "build:core": "npm run build --workspace=@wolfeng/song-ui-core",
+    "build:ui": "npm run build --workspace=@wolfeng/song-ui-vue",
     "build": "npm run build:tokens && npm run build:core && npm run build:ui",
     "test": "npm run test --workspaces --if-present",
-    "dev:docs": "npm run dev --workspace=@song-ui/docs",
-    "build:docs": "npm run build --workspace=@song-ui/docs"
+    "dev:docs": "npm run dev --workspace=@wolfeng/song-ui-docs",
+    "build:docs": "npm run build --workspace=@wolfeng/song-ui-docs"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

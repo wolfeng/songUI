@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onBeforeUnmount } from 'vue';
-import { formatIncenseDuration, type IncenseStatus } from '@song-ui/core';
+import { formatIncenseDuration, type IncenseStatus } from '@wolfeng/song-ui-core';
 import { useSound } from '../composables/useSound.js';
 import SesButton from './SesButton.vue';
 import SesSeal from './SesSeal.vue';

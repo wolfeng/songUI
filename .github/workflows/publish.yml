@@ -1,0 +1,49 @@
+name: Publish to GitHub Packages
+
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: '@wolfeng'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and test
+        run: npm run build && npm test
+
+      - name: Publish @wolfeng/song-ui-tokens
+        run: npm publish --workspace=@wolfeng/song-ui-tokens
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish @wolfeng/song-ui-core
+        run: npm publish --workspace=@wolfeng/song-ui-core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish @wolfeng/song-ui-vue
+        run: npm publish --workspace=@wolfeng/song-ui-vue
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

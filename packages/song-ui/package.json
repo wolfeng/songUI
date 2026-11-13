@@ -1,7 +1,15 @@
 {
-  "name": "@song-ui/vue",
+  "name": "@wolfeng/song-ui-vue",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wolfeng/songUI.git",
+    "directory": "packages/song-ui"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "./dist/song-ui.cjs",
   "module": "./dist/song-ui.js",
   "types": "./dist/index.d.ts",
@@ -24,8 +32,8 @@
     "vue": "^3.4.0"
   },
   "dependencies": {
-    "@song-ui/core": "0.1.0",
-    "@song-ui/tokens": "0.1.0"
+    "@wolfeng/song-ui-core": "0.1.0",
+    "@wolfeng/song-ui-tokens": "0.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",

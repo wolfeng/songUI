@@ -1,7 +1,15 @@
 {
-  "name": "@song-ui/tokens",
+  "name": "@wolfeng/song-ui-tokens",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wolfeng/songUI.git",
+    "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

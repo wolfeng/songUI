@@ -6,19 +6,19 @@
 
 ```text
 packages/
-├── tokens/     # @song-ui/tokens — 单一数据源 (colors, spacing, typography, radius, breakpoints)
-├── core/       # @song-ui/core   — 框架无关算法（十二时辰、夜漏水比、日晷角度、算筹编码、五声音阶、校验规则）
-└── song-ui/    # @song-ui/vue    — Vue 3 插件、Composables、25+ 宋韵组件与 CSS 样式库
+├── tokens/     # @wolfeng/song-ui-tokens — 单一数据源 (colors, spacing, typography, radius, breakpoints)
+├── core/       # @wolfeng/song-ui-core   — 框架无关算法（十二时辰、夜漏水比、日晷角度、算筹编码、五声音阶、校验规则）
+└── song-ui/    # @wolfeng/song-ui-vue    — Vue 3 插件、Composables、25+ 宋韵组件与 CSS 样式库
 apps/
-└── docs/       # @song-ui/docs   — 交互式文档站与 API 参考
+└── docs/       # @wolfeng/song-ui-docs   — 交互式文档站与 API 参考
 ```
 
 ## 快速上手
 
 ```ts
 import { createApp } from 'vue';
-import { createSongUI } from '@song-ui/vue';
-import '@song-ui/vue/styles';
+import { createSongUI } from '@wolfeng/song-ui-vue';
+import '@wolfeng/song-ui-vue/styles';
 import App from './App.vue';
 
 createApp(App)
@@ -31,7 +31,7 @@ createApp(App)
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { SesButton, SesCard, SesGuqinSlider, useToast } from '@song-ui/vue';
+import { SesButton, SesCard, SesGuqinSlider, useToast } from '@wolfeng/song-ui-vue';
 
 const tension = ref(50);
 const toast = useToast();
@@ -46,7 +46,7 @@ const toast = useToast();
 </template>
 ```
 
-## 样式库与设计令牌 (`@song-ui/tokens` & `@song-ui/vue/styles`)
+## 样式库与设计令牌 (`@wolfeng/song-ui-tokens` & `@wolfeng/song-ui-vue/styles`)
 
 - **颜色与主题**：`data-theme="dark"`（暗夜青瓷）与 `data-theme="light"`（澄心昼景）。
 - **文字层级**：`.ses-text-display`、`.ses-text-h1` – `.ses-text-h3`、`.ses-text-body`、`.ses-text-caption`、`.ses-text-mono`。

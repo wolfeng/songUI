@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { defineComponent, ref } from 'vue';
-import { songRules } from '@song-ui/core';
+import { songRules } from '@wolfeng/song-ui-core';
 import {
   createSongUI,
   useTheme,
@@ -37,7 +37,7 @@ import {
   SesRating
 } from '../src/index.js';
 
-describe('@song-ui/vue', () => {
+describe('@wolfeng/song-ui-vue', () => {
   it('installs createSongUI, injects SVG filters, and toggles theme', () => {
     const TestHost = defineComponent({
       setup() {

@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
-import { createSongUI } from '@song-ui/vue';
-import '@song-ui/vue/styles';
+import { createSongUI } from '@wolfeng/song-ui-vue';
+import '@wolfeng/song-ui-vue/styles';
 import App from './App.vue';
 import SongOfficialSite from './components/SongOfficialSite.vue';
 

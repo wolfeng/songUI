@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToast } from '@song-ui/vue';
+import { useToast } from '@wolfeng/song-ui-vue';
 import type { ComponentApiDoc } from '../data/componentApi';
 
 defineProps<{

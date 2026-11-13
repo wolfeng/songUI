@@ -31,7 +31,7 @@ export const componentApiMap: Record<string, ComponentApiDoc[]> = {
   button: [
     {
       name: 'SesButton',
-      importCode: `import { SesButton } from '@song-ui/vue';`,
+      importCode: `import { SesButton } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesButton variant="jade" @click="onSubmit">天青主钮</SesButton>
 <SesButton variant="gold" :sound-freq="784">描金御赐</SesButton>
 <SesButton variant="outline">素宣线框</SesButton>`,
@@ -48,7 +48,7 @@ export const componentApiMap: Record<string, ComponentApiDoc[]> = {
     },
     {
       name: 'SesSeal',
-      importCode: `import { SesSeal } from '@song-ui/vue';`,
+      importCode: `import { SesSeal } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesSeal interactive @click="onSeal">钤印确认</SesSeal>
 <SesSeal color="malachite">已验入库</SesSeal>`,
       props: [
@@ -60,7 +60,7 @@ export const componentApiMap: Record<string, ComponentApiDoc[]> = {
     },
     {
       name: 'SesCard',
-      importCode: `import { SesCard } from '@song-ui/vue';`,
+      importCode: `import { SesCard } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesCard :hoverable="true" :corners="true">
   卡片正文内容……
 </SesCard>`,
@@ -75,7 +75,7 @@ export const componentApiMap: Record<string, ComponentApiDoc[]> = {
   switch: [
     {
       name: 'SesSwitch',
-      importCode: `import { SesSwitch } from '@song-ui/vue';`,
+      importCode: `import { SesSwitch } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesSwitch v-model="enabled" label="澄心静谧模式" />`,
       props: [
         { name: 'modelValue', type: `boolean`, defaultVal: `必填`, desc: '绑定开关状态（支持 v-model）' },
@@ -92,7 +92,7 @@ export const componentApiMap: Record<string, ComponentApiDoc[]> = {
   input: [
     {
       name: 'SesInput',
-      importCode: `import { SesInput } from '@song-ui/vue';`,
+      importCode: `import { SesInput } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesInput
   v-model="title"
   label="题跋卷名"
@@ -113,8 +113,8 @@ export const componentApiMap: Record<string, ComponentApiDoc[]> = {
     },
     {
       name: 'SesForm',
-      importCode: `import { SesForm } from '@song-ui/vue';
-import { songRules } from '@song-ui/core';`,
+      importCode: `import { SesForm } from '@wolfeng/song-ui-vue';
+import { songRules } from '@wolfeng/song-ui-core';`,
       usageCode: `<SesForm ref="formRef" v-model="valid" @submit="onSubmit">
   <SesInput v-model="title" label="题跋" :rules="[songRules.required()]" />
   <SesButton type="submit" variant="gold">钤印呈递</SesButton>
@@ -132,7 +132,7 @@ import { songRules } from '@song-ui/core';`,
   select: [
     {
       name: 'SesSelect',
-      importCode: `import { SesSelect, type SesSelectOption } from '@song-ui/vue';`,
+      importCode: `import { SesSelect, type SesSelectOption } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesSelect
   v-model="bookId"
   :options="bookOptions"
@@ -155,7 +155,7 @@ import { songRules } from '@song-ui/core';`,
   stepper: [
     {
       name: 'SesStepper',
-      importCode: `import { SesStepper } from '@song-ui/vue';`,
+      importCode: `import { SesStepper } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesStepper v-model="count" :min="1" :max="99" label="大衍筹策" unit="策" />`,
       props: [
         { name: 'modelValue', type: `number`, defaultVal: `必填`, desc: '当前数值（支持 v-model）' },
@@ -172,7 +172,7 @@ import { songRules } from '@song-ui/core';`,
   slider: [
     {
       name: 'SesGuqinSlider',
-      importCode: `import { SesGuqinSlider, type SesGuqinMark } from '@song-ui/vue';`,
+      importCode: `import { SesGuqinSlider, type SesGuqinMark } from '@wolfeng/song-ui-vue';`,
       usageCode: `// 1. 默认宋代年号五音刻度
 <SesGuqinSlider v-model="tension" label="琴弦张力" />
 
@@ -202,7 +202,7 @@ import { songRules } from '@song-ui/core';`,
   table: [
     {
       name: 'SesTable',
-      importCode: `import { SesTable, type SesTableColumn } from '@song-ui/vue';`,
+      importCode: `import { SesTable, type SesTableColumn } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesTable :columns="columns" :rows="rows" row-key="id">
   <template #cell-seal="{ value, row }">
     <SesSeal :color="row.green ? 'malachite' : 'cinnabar'">{{ value }}</SesSeal>
@@ -217,7 +217,7 @@ import { songRules } from '@song-ui/core';`,
     },
     {
       name: 'SesPagination',
-      importCode: `import { SesPagination } from '@song-ui/vue';`,
+      importCode: `import { SesPagination } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesPagination v-model="page" :total-pages="4" :use-chinese-numerals="true" />`,
       props: [
         { name: 'modelValue', type: `number`, defaultVal: `必填`, desc: '当前页码（从 1 开始）' },
@@ -231,7 +231,7 @@ import { songRules } from '@song-ui/core';`,
   accordion: [
     {
       name: 'SesAccordion',
-      importCode: `import { SesAccordion, type SesAccordionItem } from '@song-ui/vue';`,
+      importCode: `import { SesAccordion, type SesAccordionItem } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesAccordion :items="folds" />`,
       props: [
         { name: 'items', type: `SesAccordionItem[]`, defaultVal: `必填`, desc: '折页列表（{ id, title, content? }）' },
@@ -245,7 +245,7 @@ import { songRules } from '@song-ui/core';`,
   woodblock: [
     {
       name: 'SesWoodblockReader',
-      importCode: `import { SesWoodblockReader } from '@song-ui/vue';`,
+      importCode: `import { SesWoodblockReader } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesWoodblockReader title="宣和博古图录" :vertical="true">
   <p>汝州新窑器，天青为上……</p>
 </SesWoodblockReader>`,
@@ -262,7 +262,7 @@ import { songRules } from '@song-ui/core';`,
   timepiece: [
     {
       name: 'SesTimepiece',
-      importCode: `import { SesTimepiece } from '@song-ui/vue';`,
+      importCode: `import { SesTimepiece } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesTimepiece v-model:minutes="mins" />`,
       props: [{ name: 'minutes', type: `number`, defaultVal: `当前系统时辰`, desc: '自子正 00:00 起的分钟数 [0, 1439]' }],
       events: [{ name: 'update:minutes', payload: `number`, desc: '拨动日晷指针或滑块时更新' }]
@@ -272,7 +272,7 @@ import { songRules } from '@song-ui/core';`,
   incense: [
     {
       name: 'SesIncenseTimer',
-      importCode: `import { SesIncenseTimer } from '@song-ui/vue';`,
+      importCode: `import { SesIncenseTimer } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesIncenseTimer :initial-seconds="15" @finish="onBurnComplete" />`,
       props: [{ name: 'initialSeconds', type: `number`, defaultVal: `15`, desc: '一柱香初始计时秒数' }],
       events: [{ name: 'finish', payload: `—`, desc: '香尽鸣磬时触发' }]
@@ -282,7 +282,7 @@ import { songRules } from '@song-ui/core';`,
   mountain: [
     {
       name: 'SesMountainChart',
-      importCode: `import { SesMountainChart, type SesMountainPoint } from '@song-ui/vue';`,
+      importCode: `import { SesMountainChart, type SesMountainPoint } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesMountainChart
   :data="series"
   series-back-name="主峰"
@@ -301,7 +301,7 @@ import { songRules } from '@song-ui/core';`,
   astrolabe: [
     {
       name: 'SesAstrolabeGauge',
-      importCode: `import { SesAstrolabeGauge, type SesAstrolabeTerm } from '@song-ui/vue';`,
+      importCode: `import { SesAstrolabeGauge, type SesAstrolabeTerm } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesAstrolabeGauge
   :terms="solarTerms"
   metric-label="雅韵度"
@@ -320,7 +320,7 @@ import { songRules } from '@song-ui/core';`,
   overlays: [
     {
       name: 'SesScrollModal',
-      importCode: `import { SesScrollModal } from '@song-ui/vue';`,
+      importCode: `import { SesScrollModal } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesScrollModal v-model="open" title="《千里江山图》卷跋" subtitle="宣和御览">
   卷跋正文……
   <template #footer="{ close }">
@@ -340,7 +340,7 @@ import { songRules } from '@song-ui/core';`,
     },
     {
       name: 'SesScreenDrawer',
-      importCode: `import { SesScreenDrawer } from '@song-ui/vue';`,
+      importCode: `import { SesScreenDrawer } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesScreenDrawer v-model="drawerOpen" title="藏经百宝嵌" badge="屏风">
   屏风抽屉内容……
 </SesScreenDrawer>`,
@@ -360,7 +360,7 @@ import { songRules } from '@song-ui/core';`,
   alert: [
     {
       name: 'SesAlert',
-      importCode: `import { SesAlert } from '@song-ui/vue';`,
+      importCode: `import { SesAlert } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesAlert variant="jinzipai" title="御前急脚递" badge="日行五百里">
   汴河水位已逾岸标三尺……
 </SesAlert>`,
@@ -373,7 +373,7 @@ import { songRules } from '@song-ui/core';`,
     },
     {
       name: 'SesToast & useToast',
-      importCode: `import { SesToast, useToast } from '@song-ui/vue';`,
+      importCode: `import { SesToast, useToast } from '@wolfeng/song-ui-vue';`,
       usageCode: `const toast = useToast();
 toast.show('已钤盖「双龙小玺」御印');
 // 需在根组件挂载 <SesToast />`,
@@ -384,7 +384,7 @@ toast.show('已钤盖「双龙小玺」御印');
   tabs: [
     {
       name: 'SesTabs',
-      importCode: `import { SesTabs, type SesTabItem } from '@song-ui/vue';`,
+      importCode: `import { SesTabs, type SesTabItem } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesTabs v-model="activeTab" :items="tabItems" />`,
       props: [
         { name: 'modelValue', type: `string`, defaultVal: `必填`, desc: '当前激活页签 value（支持 v-model）' },
@@ -397,7 +397,7 @@ toast.show('已钤盖「双龙小玺」御印');
   tags: [
     {
       name: 'SesTag',
-      importCode: `import { SesTag } from '@song-ui/vue';`,
+      importCode: `import { SesTag } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesTag variant="cinnabar" closable @close="onRemove">宣和御览</SesTag>`,
       props: [
         { name: 'variant', type: `'celadon' | 'cinnabar' | 'gold' | 'ink'`, defaultVal: `'celadon'`, desc: '牙牌釉色' },
@@ -412,7 +412,7 @@ toast.show('已钤盖「双龙小玺」御印');
   checkbox: [
     {
       name: 'SesCheckbox',
-      importCode: `import { SesCheckbox } from '@song-ui/vue';`,
+      importCode: `import { SesCheckbox } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesCheckbox v-model="agreed" label="汤花拂面(水丹青)" />
 <SesCheckbox :model-value="false" indeterminate label="部分入库" />`,
       props: [
@@ -430,7 +430,7 @@ toast.show('已钤盖「双龙小玺」御印');
   radio: [
     {
       name: 'SesRadioGroup',
-      importCode: `import { SesRadioGroup, type SesRadioOption } from '@song-ui/vue';`,
+      importCode: `import { SesRadioGroup, type SesRadioOption } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesRadioGroup v-model="kiln" label="螺钿印章单选" direction="vertical" :options="kilnOptions" />`,
       props: [
         { name: 'modelValue', type: `string | number`, defaultVal: `必填`, desc: '当前选中项 value' },
@@ -446,7 +446,7 @@ toast.show('已钤盖「双龙小玺」御印');
   widgets: [
     {
       name: 'SesDianchaLoader',
-      importCode: `import { SesDianchaLoader } from '@song-ui/vue';`,
+      importCode: `import { SesDianchaLoader } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesDianchaLoader v-model="teaPct" @complete="onTeaReady" />`,
       props: [
         { name: 'modelValue', type: `number`, defaultVal: `68`, desc: '点茶进度百分比 [0, 100]' },
@@ -462,7 +462,7 @@ toast.show('已钤盖「双龙小玺」御印');
     },
     {
       name: 'SesProgress',
-      importCode: `import { SesProgress } from '@song-ui/vue';`,
+      importCode: `import { SesProgress } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesProgress :value="72" label="秘阁校勘进度" variant="celadon" />
 <SesProgress indeterminate label="漕运调拨中" variant="gold" />`,
       props: [
@@ -476,7 +476,7 @@ toast.show('已钤盖「双龙小玺」御印');
     },
     {
       name: 'SesTooltip',
-      importCode: `import { SesTooltip } from '@song-ui/vue';`,
+      importCode: `import { SesTooltip } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesTooltip text="天青为上，粉青次之" placement="top">
   <SesButton size="sm">悬停观注</SesButton>
 </SesTooltip>`,
@@ -489,7 +489,7 @@ toast.show('已钤盖「双龙小玺」御印');
     },
     {
       name: 'SesBreadcrumbs',
-      importCode: `import { SesBreadcrumbs, type SesBreadcrumbItem } from '@song-ui/vue';`,
+      importCode: `import { SesBreadcrumbs, type SesBreadcrumbItem } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesBreadcrumbs :items="crumbs" @navigate="(item) => console.log(item)" />`,
       props: [
         { name: 'items', type: `SesBreadcrumbItem[]`, defaultVal: `必填`, desc: '路径节点（{ label, href?, value? }）' },
@@ -501,7 +501,7 @@ toast.show('已钤盖「双龙小玺」御印');
   upload: [
     {
       name: 'SesUpload',
-      importCode: `import { SesUpload } from '@song-ui/vue';`,
+      importCode: `import { SesUpload } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesUpload v-model="files" accept=".png,.jpg,.pdf" :max-size-mb="10" @reject="(msg) => toast.show(msg)" />`,
       props: [
         { name: 'modelValue', type: `File[]`, defaultVal: `[]`, desc: '已选文件列表（v-model）' },
@@ -522,7 +522,7 @@ toast.show('已钤盖「双龙小玺」御印');
   avatarGroup: [
     {
       name: 'SesAvatarGroup',
-      importCode: `import { SesAvatarGroup, type SesAvatarItem } from '@song-ui/vue';`,
+      importCode: `import { SesAvatarGroup, type SesAvatarItem } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesAvatarGroup :items="scholars" :max="4" @select="(item) => toast.show(item.name)" />`,
       props: [
         { name: 'items', type: `SesAvatarItem[]`, defaultVal: `必填`, desc: '名士列表（{ name, title?, src?, tone? }）' },
@@ -536,7 +536,7 @@ toast.show('已钤盖「双龙小玺」御印');
   rating: [
     {
       name: 'SesRating',
-      importCode: `import { SesRating } from '@song-ui/vue';`,
+      importCode: `import { SesRating } from '@wolfeng/song-ui-vue';`,
       usageCode: `<SesRating v-model="score" :max="5" />`,
       props: [
         { name: 'modelValue', type: `number`, defaultVal: `必填`, desc: '当前品鉴星等（v-model）' },

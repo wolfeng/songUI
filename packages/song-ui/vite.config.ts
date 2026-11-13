@@ -19,7 +19,7 @@ export default defineConfig({
       formats: ['es', 'cjs']
     },
     rollupOptions: {
-      external: ['vue', '@song-ui/core', '@song-ui/tokens'],
+      external: ['vue', '@wolfeng/song-ui-core', '@wolfeng/song-ui-tokens'],
       output: {
         globals: {
           vue: 'Vue'

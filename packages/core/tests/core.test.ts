@@ -10,7 +10,7 @@ import {
   songRules
 } from '../src/index.js';
 
-describe('@song-ui/core', () => {
+describe('@wolfeng/song-ui-core', () => {
   it('computes traditional Shichen names accurately', () => {
     expect(getShichenName(0)).toBe('子正');
     expect(getShichenName(720)).toBe('午正');
