@@ -465,7 +465,7 @@ function selectSection(id: SectionId) {
 
             <h3 class="ses-slender-gold" style="margin: 1.15rem 0 0.5rem; font-size: 0.95rem">一、安装组件库</h3>
             <SesAlert variant="jade" style="margin-bottom: 0.75rem">
-              当前处于本地 Monorepo 开发阶段，<code>@song-ui/vue</code> 尚未发布至 npm 公共仓库。外部项目若需立即试用，可在 <code>package.json</code> 中通过本地路径引入（例如 <code>"@song-ui/vue": "file:../songUI/packages/song-ui"</code>，需先执行 <code>npm run build</code> 构建产物），待发布 npm 后可直接使用下方包管理器命令安装。
+              源码已托管至 GitHub（<code>https://github.com/wolfeng/songUI</code>），目前 <code>@song-ui/vue</code> 尚未发布至 npm 公共仓库。外部项目若需立即使用，建议先克隆仓库并执行 <code>npm run build</code>，再在 <code>package.json</code> 中通过本地路径引入（例如 <code>"@song-ui/vue": "file:../songUI/packages/song-ui"</code>）；待后续发布 npm 后可直接使用下方包管理器命令安装。
             </SesAlert>
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem">
               <div class="docs-demo-row">
@@ -499,8 +499,10 @@ createApp(App)
 import { SesButton, SesInput, SesForm, useTheme, useToast } from '@song-ui/vue'
 import { songRules } from '@song-ui/core'</code></pre>
 
-            <h3 class="ses-slender-gold" style="margin: 1.25rem 0 0.5rem; font-size: 0.95rem">三、本地源码仓库开发</h3>
-            <pre class="docs-code"><code>npm install
+            <h3 class="ses-slender-gold" style="margin: 1.25rem 0 0.5rem; font-size: 0.95rem">三、从 GitHub 克隆并本地构建</h3>
+            <pre class="docs-code"><code>git clone https://github.com/wolfeng/songUI.git
+cd songUI
+npm install
 npm run build        # 依次构建 tokens / core / vue
 npm run dev:docs     # 启动文档与大宋官网示例站</code></pre>
           </SesCard>
