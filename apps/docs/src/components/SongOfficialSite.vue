@@ -61,6 +61,10 @@ onMounted(() => {
 });
 onBeforeUnmount(() => {
   mobileMq?.removeEventListener('change', onMobileMqChange);
+  if (finishTimer) {
+    clearTimeout(finishTimer);
+    finishTimer = null;
+  }
 });
 
 const pageTabs = computed(() =>
@@ -328,7 +332,30 @@ watch(
   { flush: 'post' }
 );
 
+let finishTimer: ReturnType<typeof setTimeout> | null = null;
+
+function clearFinishTimer() {
+  if (finishTimer) {
+    clearTimeout(finishTimer);
+    finishTimer = null;
+  }
+}
+
+function enterSiteNow() {
+  clearFinishTimer();
+  siteLoading.value = false;
+}
+
+function onLoadingComplete() {
+  clearFinishTimer();
+  finishTimer = setTimeout(() => {
+    siteLoading.value = false;
+    finishTimer = null;
+  }, 1200);
+}
+
 function replayLoading() {
+  clearFinishTimer();
   loadPct.value = 8;
   siteLoading.value = true;
 }
@@ -346,11 +373,11 @@ function replayLoading() {
         <SesDianchaLoader
           v-model="loadPct"
           auto-start
-          :interval-ms="28"
+          :interval-ms="60"
           :show-action="false"
-          @complete="siteLoading = false"
+          @complete="onLoadingComplete"
         />
-        <SesButton size="sm" variant="outline" @click="siteLoading = false">立即进入</SesButton>
+        <SesButton size="sm" variant="outline" @click="enterSiteNow">立即进入</SesButton>
       </SesCard>
     </div>
 
