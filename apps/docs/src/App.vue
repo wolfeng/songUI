@@ -1584,9 +1584,7 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
     overflow: visible;
   }
   .docs-header {
-    position: sticky;
-    top: 0;
-    z-index: 40;
+    position: static;
   }
   .docs-header-inner {
     padding: var(--ses-space-2) var(--ses-space-4);
@@ -1605,13 +1603,12 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
     gap: var(--ses-space-3);
   }
   .docs-sidebar {
-    position: static;
-    min-width: 0;
-    max-width: 100%;
-    height: auto;
-    gap: var(--ses-space-2);
+    display: contents;
   }
   .docs-nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
     min-width: 0;
     max-width: 100%;
     height: auto;
@@ -1620,9 +1617,11 @@ npm run dev:docs     # Start docs &amp; showcase site</code></pre>
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    padding-right: 0;
-    padding-bottom: var(--ses-space-2);
+    padding: var(--ses-space-2) 0;
     gap: var(--ses-space-2);
+    background-color: color-mix(in srgb, var(--ses-bg-canvas) 95%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 0.5px solid var(--ses-border-hairline);
   }
   .docs-nav-item {
     flex: 0 0 auto;
